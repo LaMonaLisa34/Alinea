@@ -1,7 +1,10 @@
 <div align="center">
 
-# Alinea
+<img src="docs/ui/logo-alinea.png" alt="Logo Alinea" width="180">
 
+# Alinea
+  
+  
 **Application de production de contenus structurés assistée par intelligence artificielle.**
 
 </div>
