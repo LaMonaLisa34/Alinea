@@ -120,3 +120,13 @@ Le projet cherchera ainsi à déterminer dans quelle mesure ce fonctionnement pe
 ![MCD Alinea](docs/modelisation/mcd.png)
 
 Le modèle conceptuel de données représente les principales entités nécessaires au fonctionnement d’Alinea et leurs relations. Un utilisateur peut créer et partager des projets. Chaque projet regroupe ses sources, ses modèles de contenu et les sujets à traiter. Les modèles sont composés de blocs configurables à l’aide de paramètres. Un sujet peut ensuite faire l’objet d’un ou plusieurs traitements, dont l’exécution peut produire une génération structurée.
+
+## MLD - Modèle Logique de Données
+
+![MLD Alinea](docs/modelisation/mld.png)
+
+Le modèle logique de données traduit le MCD d’Alinea en une structure relationnelle et prépare l’organisation de la future base de données.
+
+Il couvre la gestion des utilisateurs et des informations nécessaires au respect du RGPD, ainsi que la création, la propriété et le partage des projets. Chaque projet peut regrouper ses propres sources, modèles de contenu et sujets à traiter.
+
+Les modèles sont composés de blocs configurables à l’aide de paramètres. Les sujets sont ensuite associés à un modèle et peuvent être placés dans la file de traitement. Chaque traitement conserve son état et les informations liées à son exécution, puis peut aboutir à une génération structurée soumise à une validation humaine.
