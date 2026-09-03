@@ -114,3 +114,9 @@ Le projet prévoit notamment de permettre à l'utilisateur de :
 Le projet cherchera ainsi à déterminer dans quelle mesure ce fonctionnement peut **réduire les tâches répétitives liées à la production de contenus**, sans supprimer le contrôle de l'utilisateur.
 
 ---
+
+## MCD - Modèle Conceptuel de Données
+
+![MCD Alinea](docs/modelisation/mcd.png)
+
+Le modèle conceptuel de données représente les principales entités nécessaires au fonctionnement d’Alinea et leurs relations. Un utilisateur peut créer et partager des projets. Chaque projet regroupe ses sources, ses modèles de contenu et les sujets à traiter. Les modèles sont composés de blocs configurables à l’aide de paramètres. Un sujet peut ensuite faire l’objet d’un ou plusieurs traitements, dont l’exécution peut produire une génération structurée.
