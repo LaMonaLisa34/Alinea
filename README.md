@@ -130,3 +130,12 @@ Le modèle logique de données traduit le MCD d’Alinea en une structure relati
 Il couvre la gestion des utilisateurs et des informations nécessaires au respect du RGPD, ainsi que la création, la propriété et le partage des projets. Chaque projet peut regrouper ses propres sources, modèles de contenu et sujets à traiter.
 
 Les modèles sont composés de blocs configurables à l’aide de paramètres. Les sujets sont ensuite associés à un modèle et peuvent être placés dans la file de traitement. Chaque traitement conserve son état et les informations liées à son exécution, puis peut aboutir à une génération structurée soumise à une validation humaine.
+
+
+## MPD - Modèle Physique de Données
+
+![MPD Alinea](docs/modelisation/mpd.png)
+
+Le modèle physique de données traduit le MLD en une structure adaptée à la future base de données de l'application.
+
+Il précise les types de données, les clés primaires et étrangères ainsi que les principales contraintes nécessaires à l'implémentation.
