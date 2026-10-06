@@ -139,3 +139,87 @@ Les modèles sont composés de blocs configurables à l’aide de paramètres. L
 Le modèle physique de données traduit le MLD en une structure adaptée à la future base de données de l'application.
 
 Il précise les types de données, les clés primaires et étrangères ainsi que les principales contraintes nécessaires à l'implémentation.
+
+## Conception des interfaces
+
+Les interfaces d’Alinea ont été conçues en trois étapes : le zoning pour répartir les grandes zones, les wireframes pour organiser les éléments et les mockups pour définir leur apparence.
+
+Les exemples suivants présentent une sélection d’écrans dans leurs versions desktop et mobile.
+
+### Zoning — Accueil
+
+Le zoning définit les principales zones de la page d’accueil : navigation, présentation du produit et mise en avant de ses fonctionnalités.
+
+<table>
+  <tr>
+    <th width="75%">Desktop</th>
+    <th width="25%">Mobile</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="docs/maquettes/zoning/Zoning%20·%20Accueil%20·%20Desktop.png" alt="Zoning de la page d’accueil sur desktop" width="700">
+    </td>
+    <td valign="top">
+      <img src="docs/maquettes/zoning/Zoning%20·%20Accueil%20·%20Mobile.png" alt="Zoning de la page d’accueil sur mobile" width="220">
+    </td>
+  </tr>
+</table>
+
+### Wireframe — Éditeur de modèle
+
+Le wireframe précise l’organisation de l’éditeur, notamment la composition du modèle, l’ajout de blocs typés et la configuration de leurs paramètres.
+
+<table>
+  <tr>
+    <th width="75%">Desktop</th>
+    <th width="25%">Mobile</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="docs/maquettes/wireframe/Wireframe%20·%20Éditeur%20de%20modèle%20·%20Desktop.png" alt="Wireframe de l’éditeur de modèle sur desktop" width="700">
+    </td>
+    <td valign="top">
+      <img src="docs/maquettes/wireframe/Wireframe%20·%20Éditeur%20de%20modèle%20·%20Mobile.png" alt="Wireframe de l’éditeur de modèle sur mobile" width="220">
+    </td>
+  </tr>
+</table>
+
+### Mockup — Accueil
+
+La maquette de la page d’accueil applique la charte graphique et présente la proposition de valeur d’Alinea.
+
+<table>
+  <tr>
+    <th width="75%">Desktop</th>
+    <th width="25%">Mobile</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="docs/maquettes/mockup/Mockup%20·%20Accueil%20·%20Desktop.png" alt="Maquette de la page d’accueil sur desktop" width="700">
+    </td>
+    <td valign="top">
+      <img src="docs/maquettes/mockup/Mockup%20·%20Accueil%20·%20Mobile.png" alt="Maquette de la page d’accueil sur mobile" width="220">
+    </td>
+  </tr>
+</table>
+
+### Mockup — Résultat et relecture
+
+Cet écran présente le contenu généré, les sources et les indicateurs associés. Il permet à l’utilisateur de relire et de modifier le résultat avant sa validation et son export.
+
+<table>
+  <tr>
+    <th width="75%">Desktop</th>
+    <th width="25%">Mobile</th>
+  </tr>
+  <tr>
+    <td valign="top">
+      <img src="docs/maquettes/mockup/Mockup%20·%20Résultat%20et%20relecture%20·%20Desktop.png" alt="Maquette de l’écran de résultat et de relecture sur desktop" width="700">
+    </td>
+    <td valign="top">
+      <img src="docs/maquettes/mockup/Mockup%20·%20Résultat%20et%20relecture%20·%20Mobile.png" alt="Maquette de l’écran de résultat et de relecture sur mobile" width="220">
+    </td>
+  </tr>
+</table>
+
+L’ensemble des écrans est disponible dans le dossier [Maquettes](docs/maquettes).
