@@ -13,3 +13,13 @@ indent-style = "space"
 DJANGO_SETTINGS_MODULE = "config.settings"
 pythonpath = ["app"]
 testpaths = ["app/tests"]
+
+[tool.coverage.run]
+source = ["app"]
+relative_files = true
+branch = true
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "app/manage.py",
+]
