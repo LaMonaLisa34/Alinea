@@ -1,0 +1,1028 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="DS01-configuration" name="1 — Configurer un projet et son modèle">
+    <mxGraphModel grid="1" gridSize="10" page="0" background="#FFFFFF" pageWidth="1240" pageHeight="1650">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DS01-configuration_1" value="1 — Configurer un projet et son modèle" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=25;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="24" width="1160" height="42" />
+        </mxCell>
+        <mxCell id="DS01-configuration_2" value="Précondition : utilisateur authentifié. La création du projet, puis de son modèle, prépare les futurs sujets de rédaction." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=15;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="76" width="1160" height="54" />
+        </mxCell>
+        <mxCell id="DS01-configuration_3" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="31.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS01-configuration_4" value="Utilisateur" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="35.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS01-configuration_5" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="200" />
+            <mxPoint as="targetPoint" x="130.0" y="1315" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_6" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="357.6666666666667" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS01-configuration_7" value="Interface web" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="361.6666666666667" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS01-configuration_8" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="200" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1315" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_9" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="684.3333333333334" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS01-configuration_10" value="Application Alinea" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="688.3333333333334" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS01-configuration_11" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="200" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="1315" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_12" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1011.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS01-configuration_13" value="Base de données" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1015.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS01-configuration_14" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="200" />
+            <mxPoint as="targetPoint" x="1110.0" y="1315" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_15" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="265" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="265" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_16" value="1. Saisir le projet et ses consignes" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="220" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_17" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="333" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="333" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_18" value="2. Demander la création du projet" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="288" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_19" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="401" />
+            <mxPoint as="targetPoint" x="1110.0" y="401" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_20" value="3. Créer le projet lié à son propriétaire" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="356" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_21" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="469" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="469" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_22" value="4. Projet enregistré" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="424" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_23" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="537" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="537" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_24" value="5. Retourner le projet créé" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="492" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_25" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="607" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="607" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_26" value="6. Ajouter les sources communes&lt;br&gt;et définir le modèle et ses blocs" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="560" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS01-configuration_27" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="675" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="675" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_28" value="7. Envoyer la configuration du projet" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="630" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_29" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="745" />
+            <mxPoint as="targetPoint" x="1110.0" y="745" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_30" value="8. Vérifier le propriétaire ou le rôle de partage" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="698" width="310.66666666666663" height="42" />
+        </mxCell>
+        <mxCell id="DS01-configuration_31" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="813" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="813" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_32" value="9. Droits associés au projet" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="768" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_33" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="840" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS01-configuration_34" value="L’application vérifie les droits d’écriture et la configuration : types de blocs, positions et paramètres. Un modèle exploitable contient au moins un bloc." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="845" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS01-configuration_35" value="alt" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="44" y="912" width="55" height="25" />
+        </mxCell>
+        <mxCell id="DS01-configuration_36" value="[Droits et configuration valides]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="912" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS01-configuration_37" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="994" />
+            <mxPoint as="targetPoint" x="1110.0" y="994" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_38" value="10. Enregistrer les sources du projet,&lt;br&gt;le modèle, les blocs et les paramètres" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="947" width="310.66666666666663" height="42" />
+        </mxCell>
+        <mxCell id="DS01-configuration_39" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="1062" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="1062" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_40" value="11. Configuration enregistrée" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="1017" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_41" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="1130" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1130" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_42" value="12. Confirmer l’enregistrement" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="1085" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS01-configuration_43" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1156" />
+            <mxPoint as="targetPoint" x="1200" y="1156" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_44" value="[Accès refusé ou configuration invalide]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="1160" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS01-configuration_45" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="1242" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1242" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_46" value="13. Retourner le refus ou les erreurs de saisie" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="1195" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS01-configuration_47" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="912" />
+            <mxPoint as="targetPoint" x="1200" y="912" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_48" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1270" />
+            <mxPoint as="targetPoint" x="1200" y="1270" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_49" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="912" />
+            <mxPoint as="targetPoint" x="40" y="1270" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_50" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1200" y="912" />
+            <mxPoint as="targetPoint" x="1200" y="1270" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS01-configuration_51" value="Légende : flèche pleine = appel ; flèche ouverte = message asynchrone ; trait pointillé = réponse.&lt;br&gt;alt = alternatives ; opt = option. Lecture de haut en bas." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=13;fontColor=#64748B;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="1335" width="1160" height="52" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="DS02-generation" name="2 — Générer un contenu avec une file d’attente">
+    <mxGraphModel grid="1" gridSize="10" page="0" background="#FFFFFF" pageWidth="1240" pageHeight="2170">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DS02-generation_1" value="2 — Générer un contenu avec une file d’attente" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=25;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="24" width="1160" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_2" value="Préconditions : sujet et modèle configurés ; utilisateur autorisé. Le worker traite les demandes en attente indépendamment de la requête web." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=15;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="76" width="1160" height="54" />
+        </mxCell>
+        <mxCell id="DS02-generation_3" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="31.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS02-generation_4" value="Utilisateur" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="35.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS02-generation_5" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="200" />
+            <mxPoint as="targetPoint" x="130.0" y="1869" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_6" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="276.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS02-generation_7" value="Application Alinea" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="280.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS02-generation_8" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="375.0" y="200" />
+            <mxPoint as="targetPoint" x="375.0" y="1869" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_9" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="521.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS02-generation_10" value="Base de données" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="525.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS02-generation_11" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="620.0" y="200" />
+            <mxPoint as="targetPoint" x="620.0" y="1869" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_12" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="766.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS02-generation_13" value="Worker de traitement" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS02-generation_14" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="865.0" y="200" />
+            <mxPoint as="targetPoint" x="865.0" y="1869" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_15" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1011.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS02-generation_16" value="Service IA&lt;br&gt;local ou distant" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1015.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS02-generation_17" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="200" />
+            <mxPoint as="targetPoint" x="1110.0" y="1869" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_18" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="267" />
+            <mxPoint as="targetPoint" x="375.0" y="267" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_19" value="1. Demander la rédaction d’un sujet" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="220" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_20" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="375.0" y="356" />
+            <mxPoint as="targetPoint" x="620.0" y="356" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_21" value="2. Lire le sujet, le modèle, les consignes,&lt;br&gt;les sources et les droits d’accès" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="383.0" y="290" width="229.0" height="61" />
+        </mxCell>
+        <mxCell id="DS02-generation_22" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="620.0" y="424" />
+            <mxPoint as="targetPoint" x="375.0" y="424" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_23" value="3. Configuration et droits" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="383.0" y="379" width="229.0" height="40" />
+        </mxCell>
+        <mxCell id="DS02-generation_24" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="451" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS02-generation_25" value="L’application contrôle les droits et la cohérence sujet / modèle / projet, puis fige les consignes, blocs et références dans context_snapshot." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="456" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS02-generation_26" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="375.0" y="589" />
+            <mxPoint as="targetPoint" x="620.0" y="589" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_27" value="4. Créer WritingJob : queued,&lt;br&gt;date de demande et contexte figé" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="383.0" y="523" width="229.0" height="61" />
+        </mxCell>
+        <mxCell id="DS02-generation_28" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="620.0" y="657" />
+            <mxPoint as="targetPoint" x="375.0" y="657" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_29" value="5. Identifiant du traitement" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="383.0" y="612" width="229.0" height="40" />
+        </mxCell>
+        <mxCell id="DS02-generation_30" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="375.0" y="725" />
+            <mxPoint as="targetPoint" x="130.0" y="725" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_31" value="6. Confirmer la mise en attente" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="680" width="229.0" height="40" />
+        </mxCell>
+        <mxCell id="DS02-generation_32" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="752" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS02-generation_33" value="Lorsque le worker est disponible, il réserve atomiquement le prochain traitement pour éviter une double exécution. La position dans la file évolue avec les tâches en attente." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="757" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS02-generation_34" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="865.0" y="871" />
+            <mxPoint as="targetPoint" x="620.0" y="871" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_35" value="7. Réserver le prochain traitement queued" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="628.0" y="824" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_36" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="620.0" y="939" />
+            <mxPoint as="targetPoint" x="865.0" y="939" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_37" value="8. Traitement et contexte figé" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="628.0" y="894" width="229.0" height="40" />
+        </mxCell>
+        <mxCell id="DS02-generation_38" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="865.0" y="1009" />
+            <mxPoint as="targetPoint" x="620.0" y="1009" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_39" value="9. Passer à running ; renseigner date_debut" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="628.0" y="962" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_40" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="865.0" y="1079" />
+            <mxPoint as="targetPoint" x="1110.0" y="1079" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_41" value="10. Demander la génération structurée" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="873.0" y="1032" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_42" value="alt" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="44" y="1102" width="55" height="25" />
+        </mxCell>
+        <mxCell id="DS02-generation_43" value="[Réponse IA reçue et structure valide]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="1102" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS02-generation_44" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="1184" />
+            <mxPoint as="targetPoint" x="865.0" y="1184" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_45" value="11. Retourner le contenu généré" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="873.0" y="1137" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_46" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="1211" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS02-generation_47" value="Le worker vérifie les champs et leurs types par rapport au modèle avant de conserver le résultat." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="1216" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS02-generation_48" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="865.0" y="1368" />
+            <mxPoint as="targetPoint" x="620.0" y="1368" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_49" value="12. Créer GeneratedContent, version 1, to_review ;&lt;br&gt;terminer le traitement : completed, date_fin" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="628.0" y="1283" width="229.0" height="80" />
+        </mxCell>
+        <mxCell id="DS02-generation_50" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1394" />
+            <mxPoint as="targetPoint" x="1200" y="1394" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_51" value="[Erreur IA, délai dépassé ou structure invalide]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="1398" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS02-generation_52" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="865.0" y="1518" />
+            <mxPoint as="targetPoint" x="620.0" y="1518" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_53" value="13. Terminer le traitement : failed, date_fin, erreur ;&lt;br&gt;aucun contenu généré enregistré" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="628.0" y="1433" width="229.0" height="80" />
+        </mxCell>
+        <mxCell id="DS02-generation_54" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1102" />
+            <mxPoint as="targetPoint" x="1200" y="1102" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_55" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1546" />
+            <mxPoint as="targetPoint" x="1200" y="1546" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_56" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1102" />
+            <mxPoint as="targetPoint" x="40" y="1546" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_57" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1200" y="1102" />
+            <mxPoint as="targetPoint" x="1200" y="1546" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_58" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="1613" />
+            <mxPoint as="targetPoint" x="375.0" y="1613" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_59" value="14. Consulter l’état du traitement" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="1566" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_60" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="375.0" y="1683" />
+            <mxPoint as="targetPoint" x="620.0" y="1683" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_61" value="15. Lire le statut et le résultat éventuel" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="383.0" y="1636" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_62" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="620.0" y="1751" />
+            <mxPoint as="targetPoint" x="375.0" y="1751" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_63" value="16. Statut, contenu ou erreur" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="383.0" y="1706" width="229.0" height="40" />
+        </mxCell>
+        <mxCell id="DS02-generation_64" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="375.0" y="1821" />
+            <mxPoint as="targetPoint" x="130.0" y="1821" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS02-generation_65" value="17. Afficher le résultat ou l’erreur" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="1774" width="229.0" height="42" />
+        </mxCell>
+        <mxCell id="DS02-generation_66" value="Légende : flèche pleine = appel ; flèche ouverte = message asynchrone ; trait pointillé = réponse.&lt;br&gt;alt = alternatives ; opt = option. Lecture de haut en bas." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=13;fontColor=#64748B;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="1889" width="1160" height="52" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="DS03-analyse" name="3 — Analyser une version du contenu">
+    <mxGraphModel grid="1" gridSize="10" page="0" background="#FFFFFF" pageWidth="1240" pageHeight="1660">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DS03-analyse_1" value="3 — Analyser une version du contenu" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=25;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="24" width="1160" height="42" />
+        </mxCell>
+        <mxCell id="DS03-analyse_2" value="Préconditions : contenu généré disponible ; utilisateur autorisé. Le service d’analyse est une responsabilité logique, dont l’implémentation reste à choisir." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=15;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="76" width="1160" height="54" />
+        </mxCell>
+        <mxCell id="DS03-analyse_3" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="31.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS03-analyse_4" value="Utilisateur" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="35.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS03-analyse_5" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="200" />
+            <mxPoint as="targetPoint" x="130.0" y="1280" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_6" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="357.6666666666667" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS03-analyse_7" value="Application Alinea" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="361.6666666666667" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS03-analyse_8" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="200" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1280" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_9" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="684.3333333333334" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS03-analyse_10" value="Base de données" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="688.3333333333334" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS03-analyse_11" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="200" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="1280" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_12" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1011.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS03-analyse_13" value="Service d’analyse" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1015.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS03-analyse_14" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="200" />
+            <mxPoint as="targetPoint" x="1110.0" y="1280" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_15" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="265" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="265" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_16" value="1. Demander l’analyse du contenu" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="220" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS03-analyse_17" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="335" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="335" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_18" value="2. Lire les droits, le contenu, sa version&lt;br&gt;et le contexte du traitement" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="288" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS03-analyse_19" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="405" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="405" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_20" value="3. Contenu version N et références disponibles" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="358" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS03-analyse_21" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="432" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS03-analyse_22" value="Après contrôle d’accès, l’application fournit une copie du contenu à analyser et les textes sources effectivement disponibles dans le contexte conservé." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="437" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS03-analyse_23" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="549" />
+            <mxPoint as="targetPoint" x="1110.0" y="549" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_24" value="4. Analyser le contenu de la version N" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="504" width="637.3333333333333" height="40" />
+        </mxCell>
+        <mxCell id="DS03-analyse_25" value="opt" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="44" y="572" width="55" height="25" />
+        </mxCell>
+        <mxCell id="DS03-analyse_26" value="[Textes sources exploitables et méthode de comparaison disponible]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="572" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS03-analyse_27" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="611" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS03-analyse_28" value="Le service calcule la similarité et la fidélité aux sources selon une méthode à définir. Il conserve les détails et les limites de l’évaluation." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="616" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS03-analyse_29" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="572" />
+            <mxPoint as="targetPoint" x="1200" y="572" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_30" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="688" />
+            <mxPoint as="targetPoint" x="1200" y="688" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_31" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="572" />
+            <mxPoint as="targetPoint" x="40" y="688" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_32" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1200" y="572" />
+            <mxPoint as="targetPoint" x="1200" y="688" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_33" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="755" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="755" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_34" value="5. Retourner caractères, mots, temps de lecture estimé,&lt;br&gt;scores disponibles et détails" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="708" width="637.3333333333333" height="42" />
+        </mxCell>
+        <mxCell id="DS03-analyse_35" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="782" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS03-analyse_36" value="Un score non calculable reste NULL. La similarité ne garantit pas le respect du droit d’auteur ; la fidélité aux sources ne garantit pas la véracité des sources." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="787" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS03-analyse_37" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="920" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="920" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_38" value="6. Enregistrer ContentAnalysis : date, version N,&lt;br&gt;indicateurs, scores et détails" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="854" width="310.6666666666667" height="61" />
+        </mxCell>
+        <mxCell id="DS03-analyse_39" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="990" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="990" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_40" value="7. Analyse enregistrée et version actuelle du contenu" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="943" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS03-analyse_41" value="alt" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="44" y="1013" width="55" height="25" />
+        </mxCell>
+        <mxCell id="DS03-analyse_42" value="[Version actuelle = version analysée N]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="1013" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS03-analyse_43" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="1095" />
+            <mxPoint as="targetPoint" x="130.0" y="1095" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_44" value="8. Afficher les indicateurs de la version actuelle" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="1048" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS03-analyse_45" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1121" />
+            <mxPoint as="targetPoint" x="1200" y="1121" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_46" value="[Contenu modifié depuis le début de l’analyse]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="1125" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS03-analyse_47" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="1207" />
+            <mxPoint as="targetPoint" x="130.0" y="1207" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_48" value="9. Afficher l’analyse comme ancienne&lt;br&gt;et permettre une nouvelle analyse" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="1160" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS03-analyse_49" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1013" />
+            <mxPoint as="targetPoint" x="1200" y="1013" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_50" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1235" />
+            <mxPoint as="targetPoint" x="1200" y="1235" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_51" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1013" />
+            <mxPoint as="targetPoint" x="40" y="1235" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_52" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1200" y="1013" />
+            <mxPoint as="targetPoint" x="1200" y="1235" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS03-analyse_53" value="Légende : flèche pleine = appel ; flèche ouverte = message asynchrone ; trait pointillé = réponse.&lt;br&gt;alt = alternatives ; opt = option. Lecture de haut en bas." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=13;fontColor=#64748B;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="1300" width="1160" height="52" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="DS04-validation" name="4 — Modifier, valider et exporter le contenu">
+    <mxGraphModel grid="1" gridSize="10" page="0" background="#FFFFFF" pageWidth="1240" pageHeight="1900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DS04-validation_1" value="4 — Modifier, valider et exporter le contenu" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=25;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="24" width="1160" height="42" />
+        </mxCell>
+        <mxCell id="DS04-validation_2" value="Préconditions : contenu généré disponible ; utilisateur autorisé à modifier le projet. Les actions de modification, validation et export sont distinctes." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=15;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="76" width="1160" height="54" />
+        </mxCell>
+        <mxCell id="DS04-validation_3" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="31.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS04-validation_4" value="Utilisateur" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="35.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS04-validation_5" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="200" />
+            <mxPoint as="targetPoint" x="130.0" y="1797" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_6" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="357.6666666666667" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS04-validation_7" value="Interface web" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="361.6666666666667" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS04-validation_8" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="200" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1797" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_9" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="684.3333333333334" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS04-validation_10" value="Application Alinea" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="688.3333333333334" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS04-validation_11" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="200" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="1797" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_12" value="" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1011.0" y="145" width="198" height="55" />
+        </mxCell>
+        <mxCell id="DS04-validation_13" value="Base de données" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=16;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1015.0" y="149" width="190" height="46" />
+        </mxCell>
+        <mxCell id="DS04-validation_14" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#94A3B8;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="200" />
+            <mxPoint as="targetPoint" x="1110.0" y="1797" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_15" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="265" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="265" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_16" value="1. Corriger un ou plusieurs blocs" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="220" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_17" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="333" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="333" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_18" value="2. Envoyer les modifications" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="288" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_19" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="401" />
+            <mxPoint as="targetPoint" x="1110.0" y="401" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_20" value="3. Lire le contenu, son modèle et les droits" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="356" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_21" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="469" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="469" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_22" value="4. Contenu et droits du projet" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="424" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_23" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="496" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS04-validation_24" value="L’application vérifie les droits d’écriture et les types des valeurs modifiées. En cas de refus ou de saisie invalide, elle retourne une erreur sans enregistrer." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="501" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS04-validation_25" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="653" />
+            <mxPoint as="targetPoint" x="1110.0" y="653" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_26" value="5. Enregistrer les modifications ; incrémenter version_number ;&lt;br&gt;passer à to_review ; effacer validateur et date de validation" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="568" width="310.66666666666663" height="80" />
+        </mxCell>
+        <mxCell id="DS04-validation_27" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="721" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="721" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_28" value="6. Nouvelle version enregistrée" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="676" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_29" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="791" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="791" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_30" value="7. Afficher la nouvelle version ; signaler&lt;br&gt;les analyses des anciennes versions" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="744" width="310.6666666666667" height="42" />
+        </mxCell>
+        <mxCell id="DS04-validation_31" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="859" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="859" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_32" value="8. Valider le contenu relu" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="814" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_33" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="927" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="927" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_34" value="9. Demander la validation" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="882" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_35" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="997" />
+            <mxPoint as="targetPoint" x="1110.0" y="997" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_36" value="10. Relire le contenu et vérifier les droits d’écriture" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="950" width="310.66666666666663" height="42" />
+        </mxCell>
+        <mxCell id="DS04-validation_37" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="1065" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="1065" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_38" value="11. Contenu et droits actuels" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="1020" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_39" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="1135" />
+            <mxPoint as="targetPoint" x="1110.0" y="1135" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_40" value="12. Enregistrer validated, validator_id&lt;br&gt;et date de validation" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="1088" width="310.66666666666663" height="42" />
+        </mxCell>
+        <mxCell id="DS04-validation_41" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="1203" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1203" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_42" value="13. Confirmer la validation humaine" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="1158" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_43" value="opt" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#0050A4;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="44" y="1226" width="55" height="25" />
+        </mxCell>
+        <mxCell id="DS04-validation_44" value="[L’utilisateur demande un export Markdown ou JSON]" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110" y="1226" width="1075" height="25" />
+        </mxCell>
+        <mxCell id="DS04-validation_45" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="130.0" y="1306" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1306" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_46" value="14. Choisir le format d’export" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="1261" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_47" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="1374" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="1374" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_48" value="15. Demander l’export du contenu" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="1329" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_49" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=0;endArrow=block;endFill=1;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="1444" />
+            <mxPoint as="targetPoint" x="1110.0" y="1444" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_50" value="16. Vérifier l’accès et lire le contenu structuré" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="1397" width="310.66666666666663" height="42" />
+        </mxCell>
+        <mxCell id="DS04-validation_51" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1110.0" y="1512" />
+            <mxPoint as="targetPoint" x="783.3333333333334" y="1512" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_52" value="17. Contenu à exporter" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="791.3333333333334" y="1467" width="310.66666666666663" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_53" value="" style="rounded=0;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="1539" width="1160" height="62" />
+        </mxCell>
+        <mxCell id="DS04-validation_54" value="L’application transforme le contenu structuré dans le format demandé. Cette séquence illustre un export après validation, sans imposer ici une restriction aux seuls contenus validés." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=14;fontColor=#475569;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="54" y="1544" width="1132" height="52" />
+        </mxCell>
+        <mxCell id="DS04-validation_55" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="783.3333333333334" y="1656" />
+            <mxPoint as="targetPoint" x="456.6666666666667" y="1656" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_56" value="18. Retourner le fichier Markdown ou JSON" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="464.6666666666667" y="1611" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_57" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#334155;dashed=1;endArrow=open;endFill=0;endSize=9;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="456.6666666666667" y="1724" />
+            <mxPoint as="targetPoint" x="130.0" y="1724" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_58" value="19. Proposer le téléchargement" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontFamily=Helvetica;fontSize=14;fontColor=#334155;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="138.0" y="1679" width="310.6666666666667" height="40" />
+        </mxCell>
+        <mxCell id="DS04-validation_59" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1226" />
+            <mxPoint as="targetPoint" x="1200" y="1226" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_60" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1752" />
+            <mxPoint as="targetPoint" x="1200" y="1752" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_61" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="40" y="1226" />
+            <mxPoint as="targetPoint" x="40" y="1752" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_62" edge="1" parent="1" style="edgeStyle=none;endArrow=none;strokeColor=#6C8EBF;dashed=0;">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1200" y="1226" />
+            <mxPoint as="targetPoint" x="1200" y="1752" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="DS04-validation_63" value="Légende : flèche pleine = appel ; flèche ouverte = message asynchrone ; trait pointillé = réponse.&lt;br&gt;alt = alternatives ; opt = option. Lecture de haut en bas." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=13;fontColor=#64748B;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="1817" width="1160" height="52" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -158,6 +158,38 @@ Chaque classe décrit les informations qu’elle contient (attributs) et les act
 
 Ce diagramme complète la modélisation des données en préparant l’organisation du code en programmation orientée objet. Les méthodes représentent les responsabilités envisagées et pourront être ajustées lors du développement.
 
+## UML - Diagrammes de séquence
+
+Les diagrammes de séquence présentent les échanges entre l’utilisateur, l’application et les services impliqués dans les principaux parcours d’Alinea. Ils décrivent l’ordre des actions, les réponses et les principaux cas d’erreur.
+
+### Configuration du projet et du modèle
+
+![Séquence de configuration Alinea](docs/uml/DS01-configuration.png)
+
+Ce diagramme décrit la création d’un projet, puis l’enregistrement de ses sources et de son modèle de contenu, avec vérification des droits et des données.
+
+### Génération d’un contenu
+
+![Séquence de génération Alinea](docs/uml/DS02-generation.png)
+
+Ce diagramme présente la mise en attente d’une rédaction, sa prise en charge par le worker et les échanges avec le service IA local ou distant, jusqu’à l’enregistrement du contenu ou d’une erreur.
+
+### Analyse du contenu
+
+![Séquence d’analyse Alinea](docs/uml/DS03-analyse.png)
+
+Ce diagramme décrit l’analyse d’une version du contenu, l’enregistrement des indicateurs et la distinction entre une analyse actuelle et une analyse devenue ancienne après modification du texte.
+
+### Modification, validation et export
+
+![Séquence de validation Alinea](docs/uml/DS04-validation.png)
+
+Ce diagramme présente la correction du contenu, la mise à jour de sa version, sa validation humaine et son export en Markdown ou JSON.
+
+Les diagrammes se lisent de haut en bas. Les cadres `alt` représentent les alternatives et les cadres `opt` les étapes facultatives.
+
+Le fichier [DS.drawio](docs/uml/DS.drawio) regroupe les quatre diagrammes dans des onglets distincts.
+
 ## Conception des interfaces
 
 Les interfaces d’Alinea ont été conçues en trois étapes : le zoning pour répartir les grandes zones, les wireframes pour organiser les éléments et les mockups pour définir leur apparence.
