@@ -273,3 +273,97 @@ Cet écran présente le contenu généré, les sources et les indicateurs associ
 </table>
 
 L’ensemble des écrans est disponible dans le dossier [Maquettes](docs/maquettes).
+
+
+## Architecture et choix techniques
+
+### Technologies retenues
+
+Les choix techniques d’Alinea répondent aux besoins du projet : gérer des comptes et des projets éditoriaux, produire des contenus structurés avec une IA, conserver les résultats et permettre leur validation humaine.
+
+| Technologie | Utilisation |
+|---|---|
+| **Python et Django** | Fonctionnalités serveur, authentification, formulaires, ORM et migrations. |
+| **Templates Django, HTML, CSS et JavaScript** | Construction des pages, présentation responsive et interactions utilisateur. |
+| **PostgreSQL** | Stockage des données relationnelles et des contenus structurés en JSONB. |
+| **Docker et Docker Compose** | Configuration et exécution des services dans des conteneurs. |
+| **pytest, pytest-django et coverage** | Tests des règles métier, des données et des autorisations, avec mesure de couverture. |
+| **Ruff et pre-commit** | Contrôle du code Python, formatage et vérifications avant les commits. |
+| **SonarQube** | Analyse complémentaire de la maintenabilité, des duplications et de certains problèmes de sécurité. |
+| **Git, GitHub et GitHub Actions** | Versionnement, suivi du travail et automatisation des contrôles, des tests et des étapes de livraison. |
+
+### Comparaison des solutions possibles
+
+**Framework serveur : Django et Symfony**
+
+Symfony constitue une alternative pour développer Alinea en PHP, avec des composants pour l’authentification, les formulaires et la gestion des données avec Doctrine. Je retiens Django pour développer l’application en Python et disposer de l’authentification, des formulaires, de l’ORM et des migrations dans un même framework. Ce choix correspond à l’organisation retenue pour les fonctionnalités web et les traitements de rédaction.
+
+**Interface : templates Django et frontend React séparé**
+
+Un frontend React séparé permet de construire une interface communiquant avec le serveur par une API. Pour le MVP, je retiens les templates Django afin de conserver les pages et leurs traitements dans un même projet. HTML, CSS et JavaScript couvrent les interactions nécessaires sans ajouter une application frontend distincte et ses échanges avec une API à maintenir.
+
+**Base de données : PostgreSQL et MySQL**
+
+PostgreSQL et MySQL permettent tous deux de représenter les relations entre les données, d’appliquer des contraintes d’intégrité et de stocker du JSON. Je retiens PostgreSQL pour associer le modèle relationnel d’Alinea au stockage des contenus structurés en JSONB. Le MPD est établi pour cette base et la même technologie est retenue en développement et en production.
+
+**Environnement : installation directe et Docker Compose**
+
+Une installation directe dans WSL permet de lancer l’application et PostgreSQL. Je retiens Docker Compose pour décrire les services, leurs dépendances, leurs réseaux et leurs volumes dans une configuration versionnée. Cette organisation facilite la reproduction de l’environnement et l’ajout du worker de rédaction.
+
+### Architecture générale
+
+Alinea repose sur une architecture monolithique modulaire. Les pages web, l’authentification et les fonctionnalités métier sont regroupées dans un même projet Django, organisé en modules selon leurs responsabilités : comptes, projets éditoriaux, modèles de contenu, rédaction et analyses.
+
+Cette organisation permet de développer chaque fonctionnalité de bout en bout dans une même application : interface, traitement serveur et accès aux données. Elle convient à un développement individuel et limite le nombre de composants à maintenir indépendamment.
+
+Les générations sont exécutées par un worker distinct du processus web. L’application et le worker partagent le code métier et la base de données PostgreSQL. Une file persistante conserve les demandes et permet leur exécution successive sans bloquer la navigation.
+
+### Organisation du dépôt : monorepo
+
+Je retiens une organisation en monorepo : un dépôt Git unique regroupe le code de l’application, celui du worker, les tests, la documentation, les fichiers Docker et les workflows GitHub Actions.
+
+Une même pull request peut ainsi réunir les modifications nécessaires à une fonctionnalité : code métier, interface, migrations, tests et documentation.
+
+Des dépôts séparés permettent de gérer des composants ayant des cycles de livraison indépendants. Pour Alinea, les composants partagent les mêmes règles métier et évoluent ensemble. Le dépôt unique facilite donc le suivi des changements et la cohérence des versions.
+
+Le monorepo décrit l’organisation du code source, tandis que l’architecture monolithique modulaire décrit l’organisation de l’application.
+
+### Organisation du code
+
+L’application suit l’organisation MVT de Django : Model, View, Template.
+
+| Élément | Responsabilité |
+|---|---|
+| **Modèles** | Représenter les données, leurs relations et leurs contraintes. |
+| **Vues** | Recevoir les requêtes, contrôler les autorisations, appeler les traitements nécessaires et préparer les réponses. |
+| **Templates** | Construire les pages HTML à partir des données fournies par les vues. |
+
+Le routage associe les URL aux vues. Les formulaires contrôlent les données saisies côté serveur. L’ORM assure les échanges avec PostgreSQL et les migrations font évoluer la structure de la base.
+
+Les traitements métier complexes sont regroupés dans des services dédiés, notamment pour préparer le contexte de rédaction, communiquer avec le service IA et analyser les contenus. Ces services sont réutilisables par les vues et par le worker.
+
+Cette séparation garde les vues centrées sur les requêtes et les réponses et facilite les tests des règles métier indépendamment de l’interface.
+
+### Intégration de l’intelligence artificielle
+
+Alinea utilise un modèle existant accessible par un service local ou distant. L’utilisateur configure et teste sa connexion depuis une page dédiée. Le service proposé par Alinea possède sa propre configuration côté serveur, notamment pour l’essai sans compte.
+
+Les appels au service IA sont regroupés dans une couche dédiée pour séparer les particularités de connexion des règles métier. Les secrets de connexion ne sont pas inclus dans les contextes consultables des traitements.
+
+Pour chaque rédaction, l’application rassemble les consignes du projet, la structure du modèle, les informations du sujet et les sources disponibles. Les textes fournis sont intégrés au contexte ; le contenu des pages web est récupéré avant de pouvoir être transmis au modèle.
+
+Le worker prend en charge la demande, transmet le contexte au service IA, contrôle la structure et les types de la réponse, puis enregistre le contenu ou l’erreur.
+
+Le traitement conserve son état, ses dates d’exécution et le contexte transmis. Le contenu généré reste soumis à une relecture et à une validation humaine explicite.
+
+### Environnement de développement et hébergement
+
+Le développement s’effectue sous Windows avec WSL. Le dépôt est placé dans le système de fichiers Linux de WSL.
+
+Docker Compose définit des services distincts pour l’application web, PostgreSQL et le worker. Le code est monté dans les conteneurs de développement pour permettre les modifications sans reconstruire l’image à chaque changement de code. Un volume persistant conserve les données de PostgreSQL entre les redémarrages ordinaires.
+
+Les paramètres de configuration sont fournis par des variables d’environnement. Les secrets sont conservés dans un fichier local exclu du dépôt Git. Un fichier d’exemple documente les variables nécessaires sans exposer leurs valeurs confidentielles.
+
+La cible de déploiement est une machine virtuelle sur mon serveur personnel, avec un reverse proxy pour exposer l’application en HTTPS. Les configurations de développement et de production sont distinctes, notamment pour les secrets, les accès réseau et les paramètres de sécurité.
+
+Ce choix permet de réutiliser mon infrastructure et implique la prise en charge des mises à jour, des sauvegardes et de la supervision.
