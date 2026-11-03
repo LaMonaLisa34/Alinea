@@ -33,3 +33,6 @@ jobs:
 
       - name: Check Python code
         run: python -m ruff check --output-format=github app/
+
+      - name: Check Python formatting
+        run: python -m ruff format --check app/
