@@ -140,6 +140,14 @@ Le modèle physique de données traduit le MLD en une structure adaptée à la f
 
 Il précise les types de données, les clés primaires et étrangères ainsi que les principales contraintes nécessaires à l'implémentation.
 
+## UML - Diagramme de cas d’utilisation
+
+![Diagramme de cas d’utilisation Alinea](docs/uml/DCU.png)
+
+Le diagramme de cas d’utilisation présente les principales fonctionnalités d’Alinea et les acteurs qui interagissent avec l’application : visiteur, utilisateur authentifié, propriétaire de projet et service d’IA.
+
+Il couvre l’essai sans compte, la configuration des projets et des modèles, la rédaction assistée, le suivi des traitements, l’analyse, la relecture, la validation et l’export des contenus.
+
 ## Conception des interfaces
 
 Les interfaces d’Alinea ont été conçues en trois étapes : le zoning pour répartir les grandes zones, les wireframes pour organiser les éléments et les mockups pour définir leur apparence.
