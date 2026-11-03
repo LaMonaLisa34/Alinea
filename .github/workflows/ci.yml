@@ -184,6 +184,9 @@ jobs:
       - name: Build Docker image
         run: docker build --pull -t alinea:ci .
 
+      - name: List installed Python packages
+        run: docker run --rm alinea:ci python -m pip list
+
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@v0.36.0
         with:
