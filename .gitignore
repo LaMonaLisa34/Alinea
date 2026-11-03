@@ -1,0 +1,50 @@
+# Environnements virtuels Python
+.venv/
+venv/
+env/
+
+# Caches et fichiers Python générés
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Secrets et configuration locale
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Rapports de tests et couverture
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+junit.xml
+.scannerwork/
+
+# Fichiers générés et données locales Django
+*.log
+logs/
+media/
+staticfiles/
+
+# Données locales Docker
+postgres_data/
+
+# Paramètres personnels des éditeurs
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Fichiers système et temporaires
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Métadonnées Windows transférées dans WSL
+*Zone.Identifier*
