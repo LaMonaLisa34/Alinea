@@ -148,6 +148,16 @@ Le diagramme de cas d’utilisation présente les principales fonctionnalités d
 
 Il couvre l’essai sans compte, la configuration des projets et des modèles, la rédaction assistée, le suivi des traitements, l’analyse, la relecture, la validation et l’export des contenus.
 
+## UML - Diagramme de classes
+
+![Diagramme de classes Alinea](docs/uml/DCL.png)
+
+Le diagramme de classes présente la structure métier d’Alinea : utilisateurs, projets éditoriaux, modèles de contenu, sujets de rédaction, traitements, contenus générés et analyses.
+
+Chaque classe décrit les informations qu’elle contient (attributs) et les actions qu’elle propose (méthodes). Les associations et leurs multiplicités précisent les relations entre les objets : un utilisateur peut posséder plusieurs projets, tandis que chaque projet possède un seul propriétaire.
+
+Ce diagramme complète la modélisation des données en préparant l’organisation du code en programmation orientée objet. Les méthodes représentent les responsabilités envisagées et pourront être ajustées lors du développement.
+
 ## Conception des interfaces
 
 Les interfaces d’Alinea ont été conçues en trois étapes : le zoning pour répartir les grandes zones, les wireframes pour organiser les éléments et les mockups pour définir leur apparence.
