@@ -115,6 +115,154 @@ Le projet cherchera ainsi à déterminer dans quelle mesure ce fonctionnement pe
 
 ---
 
+## Installation et lancement en développement
+
+### Versions utilisées
+
+| Composant | Version |
+|---|---|
+| Python | 3.13 |
+| Django | 5.2.18 LTS |
+| PostgreSQL | 18 |
+| Psycopg | 3.3.7 |
+| Docker Engine | 28.5.1 |
+| Docker Compose | 2.40.3-desktop.1 |
+
+Python et PostgreSQL sont définis dans les images Docker. Leurs versions correctives peuvent évoluer au sein des séries retenues.
+
+Les versions de Django et Psycopg sont fixées dans `requirements.txt`. Toute modification de ce fichier nécessite de reconstruire l’image de l’application.
+
+### Prérequis
+
+- Git.
+- Docker Desktop démarré, avec Docker Compose.
+
+### Récupérer le projet
+
+Depuis un terminal WSL :
+
+```bash
+git clone https://github.com/LaMonaLisa34/Alinea.git
+cd Alinea
+```
+
+### Configurer l’environnement
+
+Créer le fichier de configuration local :
+
+```bash
+cp .env.example .env
+```
+
+Renseigner les variables suivantes dans `.env` :
+
+| Variable | Utilisation |
+|---|---|
+| `POSTGRES_DB` | Nom de la base de données |
+| `POSTGRES_USER` | Utilisateur PostgreSQL |
+| `POSTGRES_PASSWORD` | Mot de passe PostgreSQL |
+| `POSTGRES_HOST` | Nom du service Docker : `db` |
+| `POSTGRES_PORT` | Port interne PostgreSQL : `5432` |
+| `DJANGO_SECRET_KEY` | Clé secrète propre à l’environnement Django |
+
+Remplacer le mot de passe d’exemple par une valeur locale.
+
+Construire l’image de l’application :
+
+```bash
+docker compose build
+```
+
+Générer ensuite une clé Django :
+
+```bash
+docker compose run --rm --no-deps web python -c "import secrets; print(secrets.token_urlsafe(50))"
+```
+
+Copier la valeur obtenue dans `DJANGO_SECRET_KEY` dans `.env`.
+
+Le fichier `.env` contient les secrets et reste exclu de Git. Seul `.env.example`, sans secret réel, est versionné.
+
+### Lancer l’application
+
+```bash
+docker compose up -d
+```
+
+Docker démarre PostgreSQL, attend que son état soit sain, puis démarre le serveur de développement Django.
+
+L’application est accessible à l’adresse :
+
+**http://localhost:18000**
+
+Le port `18000` de l’ordinateur est relié au port `8000` du conteneur Django. PostgreSQL est accessible depuis l’application sur le réseau Docker, sans publication de son port sur l’ordinateur.
+
+### Vérifier le fonctionnement
+
+Afficher l’état des services :
+
+```bash
+docker compose ps
+```
+
+Vérifier la configuration Django :
+
+```bash
+docker compose exec web python manage.py check
+```
+
+Vérifier la connexion à PostgreSQL :
+
+```bash
+docker compose exec web python manage.py shell -c "from django.db import connection; connection.ensure_connection(); print('Connexion PostgreSQL OK')"
+```
+
+La dernière commande doit afficher :
+
+```text
+Connexion PostgreSQL OK
+```
+
+À ce stade de l’initialisation, les migrations ne sont pas encore appliquées : le modèle utilisateur personnalisé doit être configuré avant leur première exécution. Un avertissement concernant les migrations non appliquées est donc attendu.
+
+### Développer et consulter les logs
+
+Le code Django se trouve dans `app/`. Ce dossier est monté dans le conteneur : les fichiers restent modifiables directement dans VS Code et le serveur de développement recharge les modifications Python.
+
+Consulter les logs :
+
+```bash
+docker compose logs -f web
+```
+
+`Ctrl+C` quitte le suivi des logs sans arrêter les services lancés en arrière-plan.
+
+Après une modification des dépendances ou du Dockerfile :
+
+```bash
+docker compose up -d --build web
+```
+
+Après une modification des variables d’environnement utilisées par Django :
+
+```bash
+docker compose up -d --force-recreate web
+```
+
+Les identifiants PostgreSQL servent à initialiser une base vide. Modifier leur valeur dans `.env` ne change pas automatiquement les identifiants d’une base déjà créée.
+
+### Arrêter l’environnement
+
+```bash
+docker compose down
+```
+
+Cette commande arrête et supprime les conteneurs et le réseau du projet. Les données PostgreSQL sont conservées dans le volume nommé `postgres_data`.
+
+Cette configuration utilise le serveur de développement Django ; elle est distincte de la configuration de déploiement en production.
+
+---
+
 ## MCD - Modèle Conceptuel de Données
 
 ![MCD Alinea](docs/modelisation/mcd.png)
