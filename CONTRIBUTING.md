@@ -58,19 +58,20 @@ docs: document CI checks and branch protections
 
 ## Branches
 
-| Branche durable | Rôle |
+| Branche permanente | Rôle |
 |---|---|
-| `dev` | Intégration des développements |
-| `staging` | Vérification avant livraison |
+| `dev` | Intégration des fonctionnalités et des corrections |
 | `main` | Versions validées |
 
 Crée chaque branche de travail depuis `dev` à jour. Exemples : `feat/25-homepage`, `fix/login-error` ou `docs/ci-workflow`.
 
-Le parcours d’intégration est **branche de travail → `dev` → `staging` → `main`**. Les branches de travail peuvent être supprimées après fusion. Les trois branches durables sont conservées.
+Le parcours d’intégration est **branche de travail → `dev` → `main`**. Les branches de travail peuvent être supprimées après fusion. `dev` et `main` sont conservées.
+
+Alinea est développé en solo. Deux branches permanentes suffisent pour intégrer les changements au fil du développement et conserver une version validée. La branche `staging` a été testée, mais elle répétait les mêmes contrôles sans servir à une étape de recette distincte.
 
 ## Pull requests
 
-Lorsqu’il existe des changements à intégrer, GitHub Actions ouvre une PR vers la branche suivante du parcours. Si une PR est déjà ouverte pour les mêmes branches, les nouveaux commits la mettent à jour.
+Lorsqu’il existe des changements à intégrer, GitHub Actions ouvre une PR de la branche de travail vers `dev`, ou de `dev` vers `main`. Si une PR existe déjà entre les mêmes branches, les nouveaux commits la mettent à jour.
 
 Chaque PR indique :
 
@@ -79,13 +80,15 @@ Chaque PR indique :
 - les vérifications effectuées ;
 - les éventuelles migrations ou modifications de configuration.
 
-Un ruleset GitHub protège `dev`, `staging` et `main`. Les changements sont intégrés par PR et les contrôles obligatoires doivent réussir. Avant de fusionner, relis les modifications et vérifie les critères d’acceptation. **La fusion reste manuelle.** Pour les promotions `dev → staging` et `staging → main`, utilise **Create a merge commit** et conserve la branche source.
+Un ruleset GitHub protège `dev` et `main`. Les changements sont intégrés par PR et les contrôles obligatoires doivent réussir. Avant de fusionner, relis les modifications et vérifie les critères d’acceptation.
+
+**La fusion reste manuelle.** Une PR `dev → main` peut rester ouverte jusqu’à ce qu’une version soit prête à être livrée. Pour la fusionner, utilise **Create a merge commit** et conserve `dev`.
 
 GitHub peut demander d’autoriser l’exécution des workflows sur une PR ouverte par le bot. Le bouton **Approve workflows to run** lance les contrôles de la PR. La fusion se confirme séparément.
 
 ## Intégration continue
 
-Le workflow `.github/workflows/ci.yml` lance les contrôles lors des pushs et des PR ciblant `dev`, `staging` ou `main`.
+Le workflow `.github/workflows/ci.yml` lance les contrôles lors des pushs et des PR ciblant `dev` ou `main`.
 
 | Contrôle obligatoire | Vérifications |
 |---|---|
@@ -94,7 +97,7 @@ Le workflow `.github/workflows/ci.yml` lance les contrôles lors des pushs et de
 | Build et sécurité Docker | Construction de l’image `runtime`, vérification des imports Django et psycopg, puis scan de l’image avec Trivy |
 | Sécurité du dépôt | Audit des dépendances Python avec pip-audit et scan de la configuration et des secrets avec Trivy |
 
-Trivy bloque les contrôles lorsqu’il détecte une alerte `HIGH` ou `CRITICAL`. Les rapports de tests, de couverture et de scan Docker sont accessibles dans les artefacts de l’exécution GitHub Actions.
+Trivy fait échouer le contrôle lorsqu’il détecte une alerte `HIGH` ou `CRITICAL`. Les rapports de tests, de couverture et de scan Docker sont accessibles dans les artefacts de l’exécution GitHub Actions.
 
 SonarQube Cloud analyse les PR internes et les pushs sur `main`. Il utilise le rapport de couverture produit par les tests. Sa **Quality Gate reste informative** : son résultat n’est pas exigé pour fusionner une PR.
 
