@@ -1,6 +1,6 @@
 # Conventions de développement
 
-Ce document définit les règles de développement et de gestion du code source d’Alinea.
+Ce document décrit les règles de développement et le parcours d’intégration des changements dans Alinea.
 
 ## Nommage
 
@@ -13,20 +13,18 @@ Le code et les messages de commit sont rédigés en anglais. La documentation, l
 - Variables et fonctions JavaScript : `camelCase`.
 - Classes CSS : minuscules séparées par des tirets.
 
-Les noms sont explicites et correspondent au métier de l’application, par exemple `EditorialProject` ou `WritingSubject`.
+Les noms décrivent clairement le rôle des éléments dans l’application, par exemple `EditorialProject` ou `WritingSubject`.
 
-## Formatage et contrôles
+## Formatage et tests
 
 - Encodage UTF-8 et fins de ligne LF.
 - Indentation Python : quatre espaces.
 - Indentation HTML, CSS, JavaScript, JSON et YAML : deux espaces.
-- Ruff assure le lint et le formatage Python, avec une longueur de ligne cible de 88 caractères.
-- pre-commit exécute les vérifications configurées avant les commits.
-- `.editorconfig` définit les règles communes aux éditeurs.
+- Longueur de ligne cible en Python : 88 caractères.
 
-Les configurations sont conservées dans le dépôt. Les règles de formatage et de lint de Ruff sont définies dans `pyproject.toml`.
+Le fichier `.editorconfig` définit les conventions communes aux éditeurs. Ruff vérifie le code Python et son formatage selon les règles définies dans `pyproject.toml`.
 
-Les tests utilisent pytest et pytest-django. coverage mesure leur couverture et SonarQube complète l’analyse de qualité.
+Les tests utilisent pytest et pytest-django. Dans la CI, ils s’exécutent avec une base PostgreSQL dédiée, isolée des données de développement et de production. Ils ne nécessitent ni service d’IA réel ni clé payante.
 
 ## Messages de commit
 
@@ -36,7 +34,7 @@ Les commits suivent la convention Conventional Commits :
 type(scope): description
 ```
 
-Le scope est facultatif. Les principaux types sont :
+Le scope est facultatif. Chaque commit regroupe un changement cohérent.
 
 | Type | Utilisation |
 |---|---|
@@ -44,7 +42,7 @@ Le scope est facultatif. Les principaux types sont :
 | `fix` | Correction |
 | `docs` | Documentation |
 | `test` | Tests |
-| `refactor` | Réorganisation du code |
+| `refactor` | Réorganisation du code sans changement de comportement |
 | `style` | Formatage sans changement fonctionnel |
 | `ci` | Automatisation et CI/CD |
 | `build` | Dépendances et construction des images |
@@ -55,70 +53,66 @@ Exemples :
 ```text
 feat(auth): add user registration
 fix(projects): restrict access to project owners
-docs: document architecture and technical choices
+docs: document CI checks and branch protections
 ```
-
-Chaque commit regroupe un changement cohérent.
 
 ## Branches
 
-Le projet utilise trois branches durables :
-
-| Branche | Rôle |
+| Branche durable | Rôle |
 |---|---|
 | `dev` | Intégration des développements |
 | `staging` | Vérification avant livraison |
 | `main` | Versions validées |
 
-Chaque fonctionnalité ou correction est développée dans une branche créée depuis `dev`, par exemple :
+Crée chaque branche de travail depuis `dev` à jour. Exemples : `feat/25-homepage`, `fix/login-error` ou `docs/ci-workflow`.
 
-```text
-feat/25-homepage
-fix/login-error
-docs/development-conventions
-```
+Le parcours d’intégration est **branche de travail → `dev` → `staging` → `main`**. Les branches de travail peuvent être supprimées après fusion. Les trois branches durables sont conservées.
 
-Le parcours d’intégration est :
+## Pull requests
 
-**Branche de travail → dev → staging → main**
+Lorsqu’il existe des changements à intégrer, GitHub Actions ouvre une PR vers la branche suivante du parcours. Si une PR est déjà ouverte pour les mêmes branches, les nouveaux commits la mettent à jour.
 
-Les branches de travail peuvent être supprimées après fusion. Les trois branches durables sont conservées.
+Chaque PR indique :
 
-## Pull Requests
-
-Les PR sont créées automatiquement lorsqu’il existe des changements à intégrer. Les nouveaux commits alimentent la PR ouverte sans créer de doublon.
-
-Chaque PR contient :
-
-- une description du changement ;
-- une référence aux issues concernées ;
+- le changement et son objectif ;
+- les issues concernées, s’il y en a ;
 - les vérifications effectuées ;
 - les éventuelles migrations ou modifications de configuration.
 
-Avant fusion, le code est relu, les critères d’acceptation sont vérifiés et les contrôles requis doivent réussir.
+Un ruleset GitHub protège `dev`, `staging` et `main`. Les changements sont intégrés par PR et les contrôles obligatoires doivent réussir. Avant de fusionner, relis les modifications et vérifie les critères d’acceptation. **La fusion reste manuelle.** Pour les promotions `dev → staging` et `staging → main`, utilise **Create a merge commit** et conserve la branche source.
 
-La fusion reste manuelle. Les règles de protection des branches et l’automatisation des PR sont configurées dans le cadre de CI-01.
+GitHub peut demander d’autoriser l’exécution des workflows sur une PR ouverte par le bot. Le bouton **Approve workflows to run** lance les contrôles de la PR. La fusion se confirme séparément.
+
+## Intégration continue
+
+Le workflow `.github/workflows/ci.yml` lance les contrôles lors des pushs et des PR ciblant `dev`, `staging` ou `main`.
+
+| Contrôle obligatoire | Vérifications |
+|---|---|
+| Qualité Python | Lint et formatage avec Ruff |
+| Tests et couverture | Tests Django avec pytest et génération des rapports de couverture |
+| Build et sécurité Docker | Construction de l’image `runtime`, vérification des imports Django et psycopg, puis scan de l’image avec Trivy |
+| Sécurité du dépôt | Audit des dépendances Python avec pip-audit et scan de la configuration et des secrets avec Trivy |
+
+Trivy bloque les contrôles lorsqu’il détecte une alerte `HIGH` ou `CRITICAL`. Les rapports de tests, de couverture et de scan Docker sont accessibles dans les artefacts de l’exécution GitHub Actions.
+
+SonarQube Cloud analyse les PR internes et les pushs sur `main`. Il utilise le rapport de couverture produit par les tests. Sa **Quality Gate reste informative** : son résultat n’est pas exigé pour fusionner une PR.
 
 ## VS Code
 
-Les extensions retenues sont :
+Les extensions recommandées sont indiquées dans `.vscode/extensions.json` :
 
 - **Python** et **Pylance** pour l’assistance au développement Python ;
 - **Ruff** pour le lint et le formatage ;
-- **EditorConfig** pour appliquer les conventions communes ;
+- **EditorConfig** pour les conventions communes ;
 - **WSL** pour travailler dans l’environnement Linux.
 
-Les recommandations sont enregistrées dans `.vscode/extensions.json`.
+Si le dépôt se trouve dans WSL, ouvre-le depuis le terminal Ubuntu avec `code .`. SonarQube for IDE peut être connecté au projet Alinea dans SonarQube Cloud pour consulter les alertes pendant le développement.
 
 ## Fichiers versionnés
 
 Le dépôt contient le code, les migrations, les tests, la documentation et les configurations partagées.
 
-Le `.gitignore` exclut notamment :
+Le `.gitignore` exclut notamment les secrets, les fichiers `.env` locaux, les environnements virtuels, les dépendances installées, les caches, les journaux, les rapports générés et les données locales de l’application.
 
-- les secrets et fichiers `.env` locaux ;
-- les environnements virtuels et dépendances installées ;
-- les caches, journaux et rapports générés ;
-- les données locales de l’application.
-
-Les fichiers d’exemple des variables d’environnement sont versionnés sans valeur confidentielle.
+Les fichiers d’exemple des variables d’environnement sont versionnés sans valeur confidentielle. Le jeton `SONAR_TOKEN` est enregistré dans les secrets GitHub Actions.
