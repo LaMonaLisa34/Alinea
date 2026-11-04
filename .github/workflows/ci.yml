@@ -193,9 +193,18 @@ jobs:
           scan-type: image
           image-ref: alinea:ci
           scanners: vuln
-          format: table
+          format: json
+          output: trivy-image.json
           severity: HIGH,CRITICAL
           exit-code: "1"
+
+      - name: Save Docker security report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: docker-security-report
+          path: trivy-image.json
+          retention-days: 14
 
   security:
     name: Sécurité du dépôt
