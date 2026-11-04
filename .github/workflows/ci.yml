@@ -204,15 +204,20 @@ jobs:
           docker run --rm alinea:ci python -c "import django, psycopg; print('Imports OK')"
 
       - name: Scan Docker image
-        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
-        with:
-          scan-type: image
-          image-ref: alinea:ci
-          scanners: vuln
-          format: json
-          output: trivy-image.json
-          severity: HIGH,CRITICAL
-          exit-code: "1"
+        shell: bash
+        run: |
+          docker save --output "$RUNNER_TEMP/alinea-ci.tar" alinea:ci
+
+          docker run --rm \
+            --volume "$RUNNER_TEMP/alinea-ci.tar:/scan/alinea-ci.tar:ro" \
+            --volume "$PWD:/output" \
+            aquasec/trivy:0.70.0 image \
+            --input /scan/alinea-ci.tar \
+            --scanners vuln \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --format json \
+            --output /output/trivy-image.json
 
       - name: Save Docker security report
         if: always()
@@ -245,11 +250,13 @@ jobs:
         run: python -m pip_audit -r requirements-dev.txt
 
       - name: Scan configuration and secrets
-        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
-        with:
-          scan-type: fs
-          scan-ref: .
-          scanners: misconfig,secret
-          format: table
-          severity: HIGH,CRITICAL
-          exit-code: "1"
+        shell: bash
+        run: |
+          docker run --rm \
+            --volume "$PWD:/repo:ro" \
+            aquasec/trivy:0.70.0 fs \
+            --scanners misconfig,secret \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --format table \
+            /repo
