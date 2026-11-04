@@ -1,0 +1,25 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+pythonpath = ["app"]
+testpaths = ["app/tests"]
+
+[tool.coverage.run]
+source = ["app"]
+relative_files = true
+branch = true
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "app/manage.py",
+]
