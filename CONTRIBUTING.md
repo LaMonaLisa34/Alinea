@@ -26,6 +26,18 @@ Le fichier `.editorconfig` définit les conventions communes aux éditeurs. Ruff
 
 Les tests utilisent pytest et pytest-django. Dans la CI, ils s’exécutent avec une base PostgreSQL dédiée, isolée des données de développement et de production. Ils ne nécessitent ni service d’IA réel ni clé payante.
 
+### Vérifications avant commit
+
+Lefthook lance `ruff check` et `ruff format --check` avant chaque commit qui inclut des fichiers Python. La configuration est versionnée dans `lefthook.yml`.
+
+Après avoir installé Lefthook et Ruff, active le hook à la racine du dépôt. Cette étape se fait une seule fois par clone :
+
+```bash
+lefthook install
+```
+
+Si Ruff signale un problème, le commit est bloqué. Corrige les fichiers, ajoute-les de nouveau avec `git add`, puis relance le commit. Les tests Django et les scans de sécurité s’exécutent dans GitHub Actions.
+
 ## Messages de commit
 
 Les commits suivent la convention Conventional Commits :
