@@ -1,0 +1,67 @@
+{% load static %}
+{% url 'home' as home_url %}
+{% url 'privacy' as privacy_url %}
+{% url 'legal' as legal_url %}
+{% url 'terms_of_use' as terms_of_use_url %}
+{% url 'terms_of_sale' as terms_of_sale_url %}
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__main">
+      <div class="site-footer__identity">
+        <a class="site-footer__brand" href="{{ home_url }}">
+          <img src="{% static 'img/logo-alinea.png' %}" alt="" width="30" height="32">
+          <span>Alinea</span>
+        </a>
+        <p>
+          Créez des contenus structurés avec l’IA,
+          à partir de vos sources et selon vos règles.
+        </p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Navigation de pied de page">
+        <p class="site-footer__label">Explorer Alinea</p>
+        <ul>
+          <li><a href="{{ home_url }}#fonctionnement">Fonctionnement</a></li>
+          <li><a href="{{ home_url }}#cas-usage">Cas d’usage</a></li>
+          <li>Ressources</li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>© {% now "Y" %} Alinea</span>
+
+      <ul class="site-footer__legal" aria-label="Informations légales">
+        <li>
+          {% if legal_url %}
+          <a href="{{ legal_url }}">Mentions légales</a>
+          {% else %}
+          Mentions légales
+          {% endif %}
+        </li>
+        <li>
+          {% if privacy_url %}
+          <a href="{{ privacy_url }}">Confidentialité</a>
+          {% else %}
+          Confidentialité
+          {% endif %}
+        </li>
+        <li>
+          {% if terms_of_use_url %}
+          <a href="{{ terms_of_use_url }}">Conditions générales d’utilisation</a>
+          {% else %}
+          Conditions générales d’utilisation
+          {% endif %}
+        </li>
+        <li>
+          {% if terms_of_sale_url %}
+          <a href="{{ terms_of_sale_url }}">Conditions générales de vente</a>
+          {% else %}
+          Conditions générales de vente
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

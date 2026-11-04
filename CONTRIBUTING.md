@@ -28,15 +28,25 @@ Les tests utilisent pytest et pytest-django. Dans la CI, ils s’exécutent avec
 
 ### Vérifications avant commit
 
-Lefthook lance `ruff check` et `ruff format --check` sur les fichiers Python ajoutés au commit. Il vérifie aussi que la première ligne du message suit la convention Conventional Commits, par exemple `feat(auth): add user registration`. Les messages de fusion et d’annulation générés par Git sont acceptés. La configuration est versionnée dans `lefthook.yml`.
+Lefthook exécute `ruff check` et `ruff format --check` sur les fichiers Python ajoutés au commit. Il contrôle également les templates HTML ajoutés au commit à l’aide de djLint avec le profil Django. Ces vérifications ne modifient pas les fichiers.
 
-Après avoir installé Lefthook et Ruff, active les hooks à la racine du dépôt, une fois par clone :
+Le hook `commit-msg` vérifie que la première ligne du message respecte la convention Conventional Commits, par exemple `feat(auth): add user registration`. Les messages de fusion et d’annulation générés par Git sont acceptés. La configuration des hooks est versionnée dans `lefthook.yml`.
+
+Après l’installation de Lefthook, Ruff et djLint, les hooks doivent être activés à la racine du dépôt, une fois par clone :
 
 ```bash
 lefthook install
 ```
 
-Si Ruff signale un problème, corrige les fichiers et ajoute-les de nouveau avec `git add`. Si le message est refusé, reformule-le puis relance le commit. Les tests Django et les scans de sécurité s’exécutent dans GitHub Actions.
+Pour vérifier l’ensemble des templates Django indépendamment d’un commit, exécuter la commande suivante depuis la racine du dépôt :
+
+```bash
+djlint app/templates --lint --profile=django
+```
+
+En cas d’erreur signalée par Ruff ou djLint, les fichiers concernés doivent être corrigés, puis ajoutés de nouveau avec `git add` avant de relancer le commit. Si le message de commit est refusé, il doit être reformulé conformément à la convention.
+
+Les tests Django et les analyses de sécurité sont exécutés dans GitHub Actions.
 
 ## Messages de commit
 
