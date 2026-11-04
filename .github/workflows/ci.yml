@@ -1,0 +1,262 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - dev
+      - staging
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  create-pr:
+    name: Création PR
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    concurrency:
+      group: auto-pr-${{ github.ref }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Create pull request if needed
+        if: github.event_name == 'push' && github.ref_name != 'main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          HEAD_BRANCH: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          case "$HEAD_BRANCH" in
+            dev) base="staging" ;;
+            staging) base="main" ;;
+            *) base="dev" ;;
+          esac
+
+          existing=$(gh pr list \
+            --head "$HEAD_BRANCH" \
+            --base "$base" \
+            --state open \
+            --json number \
+            --jq 'length')
+
+          if [ "$existing" -gt 0 ]; then
+            echo "Une PR existe déjà : les nouveaux commits l'alimentent."
+            exit 0
+          fi
+
+          changes=$(gh api \
+            "repos/$GH_REPO/compare/$base...$HEAD_BRANCH" \
+            --jq '.files | length')
+
+          if [ "$changes" -eq 0 ]; then
+            echo "Aucune différence à intégrer."
+            exit 0
+          fi
+
+          cat > "$RUNNER_TEMP/pr-body.md" <<'EOF'
+          PR créée automatiquement.
+
+          À compléter : objectif, issues concernées et vérifications effectuées.
+
+          La fusion reste manuelle après vérification.
+          EOF
+
+          gh pr create \
+            --head "$HEAD_BRANCH" \
+            --base "$base" \
+            --title "$HEAD_BRANCH → $base" \
+            --body-file "$RUNNER_TEMP/pr-body.md"
+
+      - name: No pull request creation required
+        if: github.event_name != 'push' || github.ref_name == 'main'
+        run: echo "Passage aux contrôles qualité."
+
+  lint:
+    name: Qualité Python
+    needs: create-pr
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Retrieve repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install Ruff
+        run: |
+          python -m pip install --only-binary=:all: ruff==0.17.3
+
+      - name: Check Python code
+        run: python -m ruff check --output-format=github app/
+
+      - name: Check Python formatting
+        run: python -m ruff format --check app/
+
+  tests:
+    name: Tests et couverture
+    needs: lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    env:
+      POSTGRES_DB: alinea_ci
+      POSTGRES_USER: alinea_ci
+      POSTGRES_PASSWORD: ci_only_password
+      POSTGRES_HOST: "127.0.0.1"
+      POSTGRES_PORT: "5432"
+      DJANGO_SECRET_KEY: "ci-only-key-not-for-production"
+
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: alinea_ci
+          POSTGRES_USER: alinea_ci
+          POSTGRES_PASSWORD: ci_only_password
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd "pg_isready -U alinea_ci -d alinea_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Retrieve repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --only-binary=:all: -r requirements-dev.txt
+
+      - name: Check Django configuration
+        run: python app/manage.py check
+
+      - name: Run tests with coverage
+        run: >
+          python -m pytest -v
+          --cov
+          --cov-report=term-missing
+          --cov-report=xml:coverage.xml
+          --cov-report=html:htmlcov
+          --junitxml=test-results.xml
+
+      - name: Save test and coverage reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-reports
+          path: |
+            coverage.xml
+            htmlcov/
+            test-results.xml
+          retention-days: 14
+
+      - name: Analyze with SonarQube Cloud
+        if: >-
+          github.actor != 'dependabot[bot]' &&
+          ((github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+           (github.event_name == 'pull_request' &&
+            github.event.pull_request.head.repo.full_name == github.repository))
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
+        env:
+          SONAR_HOST_URL: https://sonarcloud.io
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  docker:
+    name: Build et sécurité Docker
+    needs: tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Retrieve repository
+        uses: actions/checkout@v7
+
+      - name: Build Docker runtime image
+        run: docker build --pull --target runtime -t alinea:ci .
+
+      - name: Check Django and psycopg imports
+        run: |
+          docker run --rm alinea:ci python -c "import django, psycopg; print('Imports OK')"
+
+      - name: Scan Docker image
+        shell: bash
+        run: |
+          docker save --output "$RUNNER_TEMP/alinea-ci.tar" alinea:ci
+
+          docker run --rm \
+            --volume "$RUNNER_TEMP/alinea-ci.tar:/scan/alinea-ci.tar:ro" \
+            --volume "$PWD:/output" \
+            aquasec/trivy:0.70.0 image \
+            --input /scan/alinea-ci.tar \
+            --scanners vuln \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --format json \
+            --output /output/trivy-image.json
+
+      - name: Save Docker security report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: docker-security-report
+          path: trivy-image.json
+          retention-days: 14
+
+  security:
+    name: Sécurité du dépôt
+    needs: docker
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Retrieve repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install dependency audit tool
+        run: |
+          python -m pip install --only-binary=:all: pip-audit==2.10.1
+
+      - name: Audit Python dependencies
+        run: python -m pip_audit -r requirements-dev.txt
+
+      - name: Scan configuration and secrets
+        shell: bash
+        run: |
+          docker run --rm \
+            --volume "$PWD:/repo:ro" \
+            aquasec/trivy:0.70.0 fs \
+            --scanners misconfig,secret \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --format table \
+            /repo
