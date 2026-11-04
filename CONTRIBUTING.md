@@ -28,15 +28,15 @@ Les tests utilisent pytest et pytest-django. Dans la CI, ils s’exécutent avec
 
 ### Vérifications avant commit
 
-Lefthook lance `ruff check` et `ruff format --check` avant chaque commit qui inclut des fichiers Python. La configuration est versionnée dans `lefthook.yml`.
+Lefthook lance `ruff check` et `ruff format --check` sur les fichiers Python ajoutés au commit. Il vérifie aussi que la première ligne du message suit la convention Conventional Commits, par exemple `feat(auth): add user registration`. Les messages de fusion et d’annulation générés par Git sont acceptés. La configuration est versionnée dans `lefthook.yml`.
 
-Après avoir installé Lefthook et Ruff, active le hook à la racine du dépôt. Cette étape se fait une seule fois par clone :
+Après avoir installé Lefthook et Ruff, active les hooks à la racine du dépôt, une fois par clone :
 
 ```bash
 lefthook install
 ```
 
-Si Ruff signale un problème, le commit est bloqué. Corrige les fichiers, ajoute-les de nouveau avec `git add`, puis relance le commit. Les tests Django et les scans de sécurité s’exécutent dans GitHub Actions.
+Si Ruff signale un problème, corrige les fichiers et ajoute-les de nouveau avec `git add`. Si le message est refusé, reformule-le puis relance le commit. Les tests Django et les scans de sécurité s’exécutent dans GitHub Actions.
 
 ## Messages de commit
 
