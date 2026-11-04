@@ -1,0 +1,262 @@
+/* En-tête du site */
+.site-header {
+  --header-accent: #6357ff;
+  --header-accent-text: #5145e5;
+  --header-border: #e1e2f1;
+  --header-menu-background: #eeecff;
+
+  background: #fff;
+  border-bottom: 1px solid var(--header-border);
+}
+
+.site-header__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-height: 75px;
+}
+
+/* Logo et nom du site */
+.site-header__brand {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  font-family: Manrope, Inter, system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.site-header__brand img {
+  display: block;
+  width: auto;
+  height: 32px;
+}
+
+/* Navigation principale */
+.site-header__desktop {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 2rem;
+}
+
+.site-header__nav {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
+
+.site-header__nav a {
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-header__nav a:hover,
+.site-header__nav a:focus-visible {
+  text-decoration: underline;
+}
+
+/* Boutons de l’en-tête */
+.site-header__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.site-header__button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 44px;
+  padding: 0 17px;
+  border: 1px solid var(--header-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--header-accent-text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header__button--primary {
+  border-color: var(--header-accent);
+  background: var(--header-accent);
+  color: #fff;
+}
+
+/* Indicateur de focus au clavier */
+.site-header :is(a, button, summary):focus-visible {
+  outline: 2px solid var(--header-accent-text);
+  outline-offset: 3px;
+}
+
+/* Navigation sur mobile */
+.site-header__mobile {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .site-header__inner {
+    justify-content: space-between;
+    min-height: 65px;
+  }
+
+  .site-header__desktop {
+    display: none;
+  }
+
+  .site-header__mobile {
+    display: block;
+  }
+
+  .site-header__mobile summary {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--header-border);
+    border-radius: 50%;
+    background: var(--header-menu-background);
+    color: var(--header-accent-text);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  /* Masque le marqueur natif de Safari au profit de l’icône du menu. */
+  .site-header__mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .site-header__mobile[open] summary {
+    border-color: var(--header-accent);
+    background: var(--header-accent);
+    color: #fff;
+  }
+
+  /* Les deux traits extérieurs se rejoignent au centre du SVG. */
+  .site-header__menu-line {
+    transform-box: view-box;
+    transform-origin: center;
+  }
+
+  .site-header__mobile[open] .site-header__menu-line--top {
+    transform: rotate(45deg) translateY(4px);
+  }
+
+  .site-header__mobile[open] .site-header__menu-line--middle {
+    opacity: 0;
+  }
+
+  .site-header__mobile[open] .site-header__menu-line--bottom {
+    transform: rotate(-45deg) translateY(-4px);
+  }
+
+  /* Aligne le panneau sur les marges latérales de la page. */
+  .site-header__panel {
+    position: absolute;
+    z-index: 10;
+    inset: calc(100% + 8px) var(--page-gutter, 20px) auto;
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--header-border);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 28px rgb(17 24 39 / 12%);
+  }
+
+  .site-header__mobile:not([open]) .site-header__panel {
+    display: none;
+  }
+
+  .site-header__panel .site-header__nav {
+    display: grid;
+    gap: 2px;
+  }
+
+  .site-header__panel .site-header__nav a,
+  .site-header__panel .site-header__nav>span {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .site-header__panel .site-header__nav a:is(:hover, :focus-visible) {
+    background: var(--header-menu-background);
+    color: var(--header-accent-text);
+    text-decoration: none;
+  }
+
+  .site-header__panel .site-header__nav>span {
+    color: #6b7280;
+  }
+
+  .site-header__panel .site-header__actions {
+    display: grid;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--header-border);
+  }
+
+  .site-header__panel .site-header__button:disabled {
+    background: #f9fafb;
+    color: #6b7280;
+    cursor: default;
+  }
+}
+
+/* Transitions selon la préférence de mouvement */
+@media (max-width: 800px) and (prefers-reduced-motion: no-preference) {
+  .site-header__menu-line {
+    transition: transform 180ms ease, opacity 120ms ease;
+  }
+
+  .site-header__mobile[open] .site-header__panel {
+    animation: header-menu-enter 180ms ease-out;
+  }
+}
+
+@keyframes header-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Met en évidence le lien vers l’accueil. */
+.site-header__brand:is(:hover, :focus-visible) {
+  color: var(--header-accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-header__brand {
+    transition: color 180ms ease;
+  }
+
+  .site-header__brand img {
+    transition: transform 180ms ease-out;
+  }
+
+  .site-header__brand:is(:hover, :focus-visible) img {
+    transform: translateY(-2px) rotate(-5deg);
+  }
+}

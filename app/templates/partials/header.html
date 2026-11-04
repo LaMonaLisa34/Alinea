@@ -1,0 +1,29 @@
+{% load static %}
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="{% url 'home' %}">
+      <img src="{% static 'img/logo-alinea.png' %}" alt="" width="30" height="32">
+      <span>Alinea</span>
+    </a>
+
+    <div class="site-header__desktop">
+      {% include "partials/header-navigation.html" %}
+    </div>
+
+    <details class="site-header__mobile">
+      <summary aria-label="Menu principal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" aria-hidden="true">
+          <path class="site-header__menu-line site-header__menu-line--top" d="M6 8h12" />
+          <path class="site-header__menu-line site-header__menu-line--middle" d="M6 12h12" />
+          <path class="site-header__menu-line site-header__menu-line--bottom" d="M6 16h12" />
+        </svg>
+      </summary>
+
+      <div class="site-header__panel">
+        {% include "partials/header-navigation.html" %}
+      </div>
+    </details>
+  </div>
+</header>
