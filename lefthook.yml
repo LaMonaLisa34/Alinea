@@ -1,0 +1,26 @@
+pre-commit:
+  jobs:
+    - name: Ruff lint
+      glob: "*.py"
+      run: ruff check --force-exclude -- "{staged_files}"
+
+    - name: Ruff format
+      glob: "*.py"
+      run: ruff format --check --force-exclude -- "{staged_files}"
+
+commit-msg:
+  jobs:
+    - name: Conventional Commits
+      run: |
+        subject=$(head -n 1 "{1}") || exit 1
+
+        case "$subject" in
+          "Merge "*|"Revert "*) exit 0 ;;
+        esac
+
+        if ! printf '%s\n' "$subject" |
+          grep -Eq '^(feat|fix|docs|test|refactor|style|ci|build|chore)(\([[:alnum:]_./-]+\))?!?: [^[:space:]].*$'; then
+          echo 'Format attendu : type(scope): description (scope facultatif).'
+          echo 'Exemple : feat(auth): add user registration'
+          exit 1
+        fi
