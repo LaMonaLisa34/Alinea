@@ -99,7 +99,8 @@ jobs:
           python-version: "3.13"
 
       - name: Install Ruff
-        run: python -m pip install ruff==0.17.3
+        run: |
+          python -m pip install --only-binary=:all: ruff==0.17.3
 
       - name: Check Python code
         run: python -m ruff check --output-format=github app/
@@ -111,7 +112,7 @@ jobs:
     name: Tests et couverture
     needs: lint
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     env:
       POSTGRES_DB: alinea_ci
@@ -139,6 +140,8 @@ jobs:
     steps:
       - name: Retrieve repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -146,7 +149,8 @@ jobs:
           python-version: "3.13"
 
       - name: Install dependencies
-        run: python -m pip install -r requirements-dev.txt
+        run: |
+          python -m pip install --only-binary=:all: -r requirements-dev.txt
 
       - name: Check Django configuration
         run: python app/manage.py check
@@ -171,6 +175,17 @@ jobs:
             test-results.xml
           retention-days: 14
 
+      - name: Analyze with SonarQube Cloud
+        if: >-
+          github.actor != 'dependabot[bot]' &&
+          ((github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+           (github.event_name == 'pull_request' &&
+            github.event.pull_request.head.repo.full_name == github.repository))
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
+        env:
+          SONAR_HOST_URL: https://sonarcloud.io
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   docker:
     name: Build et sécurité Docker
     needs: tests
@@ -189,7 +204,7 @@ jobs:
           docker run --rm alinea:ci python -c "import django, psycopg; print('Imports OK')"
 
       - name: Scan Docker image
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: image
           image-ref: alinea:ci
@@ -223,13 +238,14 @@ jobs:
           python-version: "3.13"
 
       - name: Install dependency audit tool
-        run: python -m pip install pip-audit==2.10.1
+        run: |
+          python -m pip install --only-binary=:all: pip-audit==2.10.1
 
       - name: Audit Python dependencies
         run: python -m pip_audit -r requirements-dev.txt
 
       - name: Scan configuration and secrets
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: fs
           scan-ref: .
