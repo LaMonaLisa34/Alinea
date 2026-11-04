@@ -129,7 +129,7 @@ jobs:
           POSTGRES_USER: alinea_ci
           POSTGRES_PASSWORD: ci_only_password
         ports:
-          - 5432:5432
+          - "5432:5432"
         options: >-
           --health-cmd "pg_isready -U alinea_ci -d alinea_ci"
           --health-interval 5s
@@ -181,11 +181,12 @@ jobs:
       - name: Retrieve repository
         uses: actions/checkout@v7
 
-      - name: Build Docker image
-        run: docker build --pull -t alinea:ci .
+      - name: Build Docker runtime image
+        run: docker build --pull --target runtime -t alinea:ci .
 
-      - name: List installed Python packages
-        run: docker run --rm alinea:ci python -m pip list
+      - name: Check Django and psycopg imports
+        run: |
+          docker run --rm alinea:ci python -c "import django, psycopg; print('Imports OK')"
 
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@v0.36.0
