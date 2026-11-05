@@ -1,0 +1,245 @@
+/* Mise en page de la page Compte */
+.account-page {
+  --account-brand: #6366f1;
+  --account-action: #4f46e5;
+  --account-action-hover: #4338ca;
+  --account-text: #111827;
+  --account-muted: #4b5563;
+  --account-border: #e5e7eb;
+  --account-field-border: #9ca3af;
+  --account-surface: #fff;
+  --account-error: #991b1b;
+
+  min-height: 100vh;
+  background: #f9fafb;
+  color: var(--account-text);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.account-page main {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px;
+  max-width: 1040px;
+  margin-inline: auto;
+  padding: 64px var(--page-gutter, 24px);
+}
+
+.account-page h1 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.account-page section {
+  min-width: 0;
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid var(--account-border);
+  border-radius: 20px;
+  background: var(--account-surface);
+  box-shadow: 0 8px 24px rgb(17 24 39 / 6%);
+  scroll-margin-top: 24px;
+}
+
+.account-page section:target {
+  border-color: var(--account-brand);
+}
+
+.account-page h2 {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.account-page section > p {
+  margin: 0 0 20px;
+  color: var(--account-muted);
+  line-height: 1.55;
+}
+
+/* Champs générés par Django avec form.as_div */
+.account-page form,
+.account-page form > div {
+  display: grid;
+  gap: 8px;
+}
+
+.account-page form {
+  gap: 18px;
+}
+
+.account-page form label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.account-page form input:not([type="hidden"]):not([type="checkbox"]) {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--account-field-border);
+  border-radius: 10px;
+  background: var(--account-surface);
+  color: inherit;
+  font: inherit;
+}
+
+.account-page form input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--account-action);
+}
+
+.account-page form > div:has(input[type="checkbox"]) {
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+}
+
+.account-page form > div:has(input[type="checkbox"]) input {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.account-page form > div:has(input[type="checkbox"]) label {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.account-page form > div:has(input[type="checkbox"]) .errorlist {
+  grid-column: 1 / -1;
+}
+
+/* Aide, erreurs et confirmation */
+.account-page .helptext {
+  color: var(--account-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.account-page .helptext ul {
+  margin: 4px 0 0;
+  padding-inline-start: 20px;
+}
+
+.account-page .errorlist {
+  margin: 0;
+  padding: 10px 12px 10px 30px;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: var(--account-error);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.account-page form input[aria-invalid="true"]:not([type="checkbox"]) {
+  border-color: var(--account-error);
+}
+
+.account-page section > [role="status"] {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+/* Boutons et navigation au clavier */
+.account-page button[type="submit"] {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--account-action);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.account-page button[type="submit"]:hover {
+  background: var(--account-action-hover);
+}
+
+.account-page :is(input, button, a):focus-visible {
+  outline: 2px solid var(--account-action);
+  outline-offset: 3px;
+}
+
+/* Mise en page sur mobile */
+@media (max-width: 760px) {
+  .account-page main {
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 32px;
+  }
+}
+
+/* Carte unique de connexion et d’inscription */
+.account-page .account-shell {
+  display: block;
+  max-width: 640px;
+}
+
+.account-card h1 {
+  margin: 24px 0 10px;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+/* Choix du formulaire */
+.account-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #eef2ff;
+}
+
+.account-switch a {
+  display: grid;
+  min-height: 44px;
+  padding: 4px 8px;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--account-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.account-switch a[aria-current="page"] {
+  background: #fff;
+  color: var(--account-action);
+  box-shadow: 0 1px 4px rgb(17 24 39 / 10%);
+}
+
+/* Aide contextuelle */
+.account-help {
+  color: var(--account-muted);
+  font-size: 0.8125rem;
+}
+
+.account-help summary {
+  width: fit-content;
+  color: var(--account-action);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.account-help[open] .helptext {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.account-help summary:focus-visible {
+  outline: 2px solid var(--account-action);
+  outline-offset: 3px;
+}

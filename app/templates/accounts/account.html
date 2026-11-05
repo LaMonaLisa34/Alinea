@@ -1,0 +1,87 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Connectez-vous à Alinea ou créez votre compte.">
+  <title>Mon compte — Alinea</title>
+
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/accounts/account.css' %}">
+  <script src="{% static 'js/header.js' %}" defer></script>
+</head>
+
+<body class="account-page">
+  {% include "partials/header.html" %}
+  <main class="account-shell">
+    <section class="account-card" aria-labelledby="account-title">
+      <nav class="account-switch" aria-label="Accès au compte">
+        <a href="{% url 'accounts:account' %}?mode=login" {% if not is_registration %}aria-current="page" {% endif %}>
+          Se connecter
+        </a>
+        <a href="{% url 'accounts:account' %}?mode=register" {% if is_registration %}aria-current="page" {% endif %}>
+          Créer un compte
+        </a>
+      </nav>
+
+      {% if is_registration %}
+      <h1 id="account-title">Créer un compte</h1>
+      <p>Retrouvez vos projets et vos contenus dans votre espace Alinea.</p>
+      {% else %}
+      <h1 id="account-title">Se connecter</h1>
+      <p>Accédez à votre espace Alinea.</p>
+      {% endif %}
+
+      {% for message in messages %}
+      <p role="status">{{ message }}</p>
+      {% endfor %}
+
+      <form method="post" action="{% url 'accounts:account' %}">
+        {% csrf_token %}
+
+        {% if is_registration %}
+        <input type="hidden" name="action" value="register">
+        {% else %}
+        <input type="hidden" name="action" value="login">
+        {% endif %}
+
+        {% if form.non_field_errors %}
+        <div role="alert">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        {% for field in form %}
+        <div class="account-field">
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.errors }}
+
+          {% if field.help_text %}
+          <details class="account-help" id="{{ field.auto_id }}_helptext">
+            <summary>
+              {% if field.name == "password1" %}
+              Voir les critères du mot de passe
+              {% else %}
+              Aide pour ce champ
+              {% endif %}
+            </summary>
+            <div class="helptext">{{ field.help_text|safe }}</div>
+          </details>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit">
+          {% if is_registration %}Créer mon compte{% else %}Se connecter{% endif %}
+        </button>
+      </form>
+    </section>
+  </main>
+
+  {% include "partials/footer.html" %}
+</body>
+
+</html>
