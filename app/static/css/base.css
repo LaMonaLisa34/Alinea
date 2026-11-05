@@ -1,0 +1,86 @@
+/* Largeur du contenu et marges latérales communes */
+:root {
+  --page-max-width: 1440px;
+  --page-gutter: 48px;
+}
+
+.site-header__inner,
+.home__container,
+.site-footer__inner {
+  box-sizing: border-box;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+@media (max-width: 800px) {
+  :root {
+    --page-gutter: 20px;
+  }
+}
+
+/* Typographie de base */
+body {
+  margin: 0;
+  color: #181836;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* Polices variables hébergées localement */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Italic-VariableFont_opsz,wght.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Manrope", "Inter", system-ui, sans-serif;
+}
+
+/* Indicateur de focus pour la navigation au clavier. */
+:is(.site-header__button, .home__button, .home-showcase__controls button):focus-visible {
+  outline: 2px solid #5145e5;
+  outline-offset: 3px;
+}
+
+/* Réserve l’effet de survol aux appareils dotés d’un pointeur précis. */
+@media (hover: hover) and (pointer: fine) {
+  :is(.site-header__button, .home__button, .home-showcase__controls button):not(:disabled):hover {
+    box-shadow: 0 4px 12px rgb(24 24 54 / 14%);
+  }
+}
+
+/* Applique le mouvement uniquement si l’utilisateur l’autorise. */
+@media (prefers-reduced-motion: no-preference) {
+  :is(.site-header__button, .home__button, .home-showcase__controls button) {
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+
+  :is(.site-header__button, .home__button, .home-showcase__controls button):not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+
+  :is(.site-header__button, .home__button, .home-showcase__controls button):not(:disabled):active {
+    transform: translateY(1px);
+  }
+}
