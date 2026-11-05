@@ -1,4 +1,4 @@
-{% url 'home' as home_url %}
+{% url "home" as home_url %}
 
 <nav class="site-header__nav" aria-label="Navigation principale">
   <a href="{{ home_url }}#fonctionnement">Fonctionnement</a>
@@ -7,9 +7,18 @@
 </nav>
 
 <div class="site-header__actions">
-  <button class="site-header__button" type="button" disabled>Connexion</button>
-  <a class="site-header__button site-header__button--primary"
-     href="{{ home_url }}#decouvrir">
+  {% if user.is_authenticated %}
+  <form method="post" action="{% url "accounts:logout" %}">
+    {% csrf_token %}
+    <button class="site-header__button" type="submit">Déconnexion</button>
+  </form>
+  {% else %}
+  <a class="site-header__button" href="{% url "accounts:account" %}?mode=login">
+    Connexion
+  </a>
+  {% endif %}
+
+  <a class="site-header__button site-header__button--primary" href="{{ home_url }}#decouvrir">
     Découvrir Alinea <span aria-hidden="true">↗</span>
   </a>
 </div>

@@ -12,7 +12,8 @@ indent-style = "space"
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings"
 pythonpath = ["app"]
-testpaths = ["app/tests"]
+testpaths = ["app"]
+python_files = ["tests.py", "test_*.py", "*_test.py"]
 
 [tool.coverage.run]
 source = ["app"]
@@ -20,6 +21,8 @@ relative_files = true
 branch = true
 omit = [
     "*/tests/*",
+    "*/tests.py",
+    "*/test_*.py",
     "*/migrations/*",
     "app/manage.py",
 ]

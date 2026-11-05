@@ -1,11 +1,11 @@
 <mxfile host="65bd71144e">
     <diagram id="jbt5XvvC35_UCtw2Blqa" name="Page-1">
-        <mxGraphModel dx="2519" dy="1077" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1515" dy="724" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#0050a4;fontSize=13;align=center;" value="UTILISATEUR&#xa;────────────&#xa;Identifiant&#xa;Email&#xa;Mot de passe&#xa;Nom&#xa;Date création" vertex="1">
-                    <mxGeometry height="155" width="170" x="20" y="410" as="geometry"/>
+                <mxCell id="2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#0050a4;fontSize=13;align=center;" value="UTILISATEUR&lt;br&gt;────────────&lt;br&gt;Identifiant&lt;br&gt;Email&lt;br&gt;Mot de passe&lt;br&gt;Nom&lt;br&gt;Date création&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;Date de modification&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;Date acceptation CGU&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;Date lecture confidentialité&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;Date de suppression&lt;/span&gt;&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="180" width="170" x="20" y="385" as="geometry"/>
                 </mxCell>
                 <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#0050a4;fontSize=13;align=center;" value="PROJET EDITORIAL&lt;br&gt;────────────&lt;br&gt;Identifiant&lt;br&gt;Nom&lt;br&gt;Description&lt;br&gt;Date création&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;Consignes générales&lt;/span&gt;&lt;/div&gt;" vertex="1">
                     <mxGeometry height="135" width="170" x="490" y="227.5" as="geometry"/>
