@@ -12,5 +12,7 @@ def home(request):
 urlpatterns = [
     path("", home, name="home"),
     path("", include("accounts.urls")),
+    path("dashboard/", include("dashboard.urls")),
+    path("projets/", include("projects.urls")),
     path("admin/", admin.site.urls),
 ]

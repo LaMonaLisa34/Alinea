@@ -1,0 +1,39 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block title %}{{ project.name }} — Alinea{% endblock %}
+
+{% block layout_page_css %}
+<link rel="stylesheet" href="{% static 'css/projects/project_overview.css' %}">
+{% endblock %}
+
+{% block layout_content %}
+<main class="projects" id="main-content">
+  {% for message in messages %}
+  <output class="projects__message">{{ message }}</output>
+  {% endfor %}
+
+  <h1>{{ project.name }}</h1>
+  <p>Créé le {{ project.created_at|date:"d/m/Y à H:i" }}</p>
+
+  <section aria-labelledby="description-title">
+    <h2 id="description-title">Description</h2>
+
+    {% if project.description %}
+    {{ project.description|linebreaks }}
+    {% else %}
+    <p>Aucune description renseignée.</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="guidelines-title">
+    <h2 id="guidelines-title">Consignes générales</h2>
+
+    {% if project.editorial_guidelines %}
+    {{ project.editorial_guidelines|linebreaks }}
+    {% else %}
+    <p>Aucune consigne générale renseignée.</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

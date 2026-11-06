@@ -164,19 +164,19 @@ class AccountTests(TestCase):
         self.assertNotContains(response, f'value="{self.password}"')
         self.assertNotContains(response, 'value="Different!74"')
 
-    def test_valid_login_opens_session(self):
-        """Authentifie le compte et redirige vers la page d’accueil."""
-        response = self.client.post(self.account_url, self.login_data())
+        def test_valid_login_opens_session(self):
+            """Ouvre une session et redirige vers l’espace de rédaction."""
+            response = self.client.post(self.account_url, self.login_data())
 
-        self.assertRedirects(
-            response,
-            reverse("home"),
-            fetch_redirect_response=False,
-        )
-        self.assertEqual(
-            self.client.session[SESSION_KEY],
-            str(self.user.pk),
-        )
+            self.assertRedirects(
+                response,
+                reverse("dashboard:index"),
+                fetch_redirect_response=False,
+            )
+            self.assertEqual(
+                self.client.session[SESSION_KEY],
+                str(self.user.pk),
+            )
 
     def test_invalid_login_does_not_open_session(self):
         """Affiche une erreur générale lorsque le mot de passe est incorrect."""

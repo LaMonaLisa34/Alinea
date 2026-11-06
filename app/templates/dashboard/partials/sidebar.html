@@ -1,0 +1,48 @@
+{% url "dashboard:index" as dashboard_url %}
+{% url "projects:create" as project_create_url %}
+{% url "accounts:profile" as profile_url %}
+
+<aside class="dashboard-sidebar" aria-label="Navigation de l’espace de travail">
+  <div class="dashboard-sidebar__main">
+    <p class="dashboard-sidebar__label">Espace de rédaction</p>
+
+    <nav class="dashboard-sidebar__nav" aria-label="Navigation du tableau de bord">
+      <a class="dashboard-sidebar__link dashboard-sidebar__link--active" href="{{ dashboard_url }}" aria-current="page">
+        Vue d’ensemble
+      </a>
+
+      <a class="dashboard-sidebar__link" href="{{ project_create_url }}">
+        Nouveau projet
+      </a>
+    </nav>
+
+    <section class="dashboard-sidebar__projects" aria-labelledby="sidebar-projects-title">
+      <h2 id="sidebar-projects-title" class="dashboard-sidebar__label">
+        Mes projets
+      </h2>
+
+      {% if projects %}
+      <ul class="dashboard-sidebar__list">
+        {% for project in projects %}
+        {% url "projects:detail" pk=project.pk as project_url %}
+
+        <li>
+          <a class="dashboard-sidebar__project" href="{{ project_url }}">
+            <span class="dashboard-sidebar__initial" aria-hidden="true">
+              {{ project.name|first|upper }}
+            </span>
+            <span class="dashboard-sidebar__name">{{ project.name }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="dashboard-sidebar__empty">Aucun projet pour le moment.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  <nav class="dashboard-sidebar__bottom" aria-label="Réglages">
+    <a class="dashboard-sidebar__link" href="{{ profile_url }}">Réglages</a>
+  </nav>
+</aside>
