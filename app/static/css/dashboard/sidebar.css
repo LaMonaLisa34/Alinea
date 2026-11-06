@@ -1,0 +1,180 @@
+/* Répartition de la navigation latérale et du contenu principal. */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr);
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #f9fafb;
+}
+
+/* Structure de la navigation latérale. */
+.dashboard-sidebar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  min-width: 0;
+  padding: 28px 16px 20px;
+  border-right: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.dashboard-sidebar__label {
+  margin: 0 0 14px;
+  padding-inline: 12px;
+  color: #6b7280;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.dashboard-sidebar__nav {
+  display: grid;
+  gap: 6px;
+}
+
+/* Liens de navigation et repère de la page courante. */
+.dashboard-sidebar__link {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 7px;
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.dashboard-sidebar__link:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.dashboard-sidebar__link--active,
+.dashboard-sidebar__link--active:hover {
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.dashboard-sidebar a:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Liste des projets accessibles depuis le tableau de bord. */
+.dashboard-sidebar__projects {
+  margin-top: 32px;
+}
+
+.dashboard-sidebar__list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dashboard-sidebar__project {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 7px;
+  color: #111827;
+  text-decoration: none;
+}
+
+.dashboard-sidebar__project:hover {
+  background: #f9fafb;
+}
+
+.dashboard-sidebar__initial {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.dashboard-sidebar__name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.dashboard-sidebar__empty {
+  margin: 0;
+  padding-inline: 12px;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Accès aux paramètres en bas de la navigation. */
+.dashboard-sidebar__bottom {
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Ajustement du contenu lorsqu’il est accompagné de la sidebar. */
+.dashboard-layout > .dashboard {
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  padding: 40px 40px 56px;
+}
+
+/* Navigation au-dessus du contenu sur les petits écrans. */
+@media (max-width: 800px) {
+  .dashboard-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-sidebar {
+    gap: 16px;
+    padding: 16px 20px;
+    border-right: 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .dashboard-sidebar__nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-sidebar__projects {
+    margin-top: 20px;
+  }
+
+  .dashboard-sidebar__list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .dashboard-sidebar__bottom {
+    padding-top: 12px;
+  }
+
+  .dashboard-layout > .dashboard {
+    padding: 28px 20px 40px;
+  }
+}

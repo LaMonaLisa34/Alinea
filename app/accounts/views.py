@@ -30,10 +30,10 @@ def account(request):
         if action == "login":
             login_form = AuthenticationForm(request, data=request.POST, prefix="login")
 
-            # Ouvre une session après validation des identifiants.
-            if login_form.is_valid():
-                login(request, login_form.get_user())
-                return redirect("home")
+        # Ouvre une session après validation des identifiants.
+        if login_form.is_valid():
+            login(request, login_form.get_user())
+            return redirect("dashboard:index")
 
         elif action == "register":
             registration_form = RegistrationForm(request.POST, prefix="register")

@@ -260,3 +260,165 @@
     transform: translateY(-2px) rotate(-5deg);
   }
 }
+
+/* En-tête compact de l’espace utilisateur. */
+.site-header--authenticated .site-header__inner {
+  justify-content: space-between;
+  width: 100%;
+  max-width: none;
+  min-height: 75px;
+  padding-inline: 32px;
+}
+
+.site-header__workspace {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Outils de recherche et de notification. */
+.site-header__tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--header-accent, #6366f1);
+}
+
+.site-header__tool:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* Avatar et ouverture du menu personnel. */
+.site-header__account {
+  position: relative;
+  margin-left: 4px;
+}
+
+.site-header__account>summary {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  list-style: none;
+}
+
+.site-header__account>summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-header__avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #eeecff;
+  color: #5145e5;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.site-header__account>summary:hover .site-header__avatar,
+.site-header__account[open] .site-header__avatar {
+  background: #e0dcff;
+}
+
+/* Menu déroulant du compte. */
+.site-header__account-panel {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 10px);
+  right: 0;
+  box-sizing: border-box;
+  width: min(260px, calc(100vw - 40px));
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(17 24 39 / 10%);
+}
+
+/* Masque explicitement le panneau lorsque le menu est fermé. */
+.site-header__account:not([open]) .site-header__account-panel {
+  display: none;
+}
+
+.site-header__account-identity {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.site-header__account-identity strong {
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.site-header__account-identity span {
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.site-header__account-panel nav {
+  display: grid;
+  gap: 2px;
+  padding-block: 8px;
+}
+
+.site-header__account-panel a,
+.site-header__account-panel button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #111827;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.site-header__account-panel a:hover,
+.site-header__account-panel button:hover {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.site-header__account-panel form {
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Adaptation de l’en-tête connecté aux petits écrans. */
+@media (max-width: 800px) {
+  .site-header--authenticated .site-header__inner {
+    min-height: 65px;
+    padding-inline: 20px;
+  }
+
+  .site-header__workspace {
+    gap: 2px;
+  }
+}

@@ -12,7 +12,7 @@ urlpatterns = [
         "connexion/",
         LoginView.as_view(
             template_name="accounts/account.html",
-            next_page=reverse_lazy("home"),
+            next_page=reverse_lazy("dashboard:index"),
         ),
         name="login",
     ),

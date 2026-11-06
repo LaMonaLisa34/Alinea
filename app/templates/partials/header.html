@@ -1,12 +1,17 @@
 {% load static %}
-
-<header class="site-header">
+{% url "home" as home_url %}
+{% url "dashboard:index" as dashboard_url %}
+<header class="site-header{% if user.is_authenticated %} site-header--authenticated{% endif %}">
   <div class="site-header__inner">
-    <a class="site-header__brand" href="{% url 'home' %}">
+    <a class="site-header__brand"
+      href="{% if user.is_authenticated %}{{ dashboard_url }}{% else %}{{ home_url }}{% endif %}">
       <img src="{% static 'img/logo-alinea.png' %}" alt="" width="30" height="32">
       <span>Alinea</span>
     </a>
 
+    {% if user.is_authenticated %}
+    {% include "partials/header-navigation.html" %}
+    {% else %}
     <div class="site-header__desktop">
       {% include "partials/header-navigation.html" %}
     </div>
@@ -25,5 +30,6 @@
         {% include "partials/header-navigation.html" %}
       </div>
     </details>
+    {% endif %}
   </div>
 </header>

@@ -1,0 +1,66 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block title %}Créer un projet — Alinea{% endblock %}
+
+{% block layout_page_css %}
+  <link rel="stylesheet" href="{% static 'css/projects/project_create.css' %}">
+{% endblock %}
+
+{% block layout_content %}
+  {% url "projects:create" as create_url %}
+  {% url "dashboard:index" as dashboard_url %}
+
+  <main class="project-create" id="main-content">
+    <div class="project-create__content">
+      <a class="project-create__back" href="{{ dashboard_url }}">
+        <span aria-hidden="true">←</span>
+        Mon espace
+      </a>
+
+      <header class="project-create__heading">
+        <h1>Créer un projet éditorial</h1>
+        <p>
+          Définissez le contexte et les consignes communes à vos contenus.
+        </p>
+      </header>
+
+      <form class="project-form" method="post" action="{{ create_url }}">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {% for field in form %}
+          <div class="project-form__field">
+            <div class="project-form__label">
+              {{ field.label_tag }}
+
+              {% if not field.field.required %}
+                <span class="project-form__optional">Facultatif</span>
+              {% endif %}
+            </div>
+
+            {% if field.name == "editorial_guidelines" %}
+              <p class="project-form__help" id="guidelines-help">
+                Précisez le ton, le public visé et les règles de rédaction.
+              </p>
+            {% endif %}
+
+            {{ field }}
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+
+        <div class="project-form__actions">
+          <a class="project-form__cancel" href="{{ dashboard_url }}">
+            Annuler
+          </a>
+
+          <button class="project-form__submit" type="submit">
+            Créer le projet
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+{% endblock %}
