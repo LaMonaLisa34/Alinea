@@ -207,3 +207,163 @@ class EditorialProjectTests(TestCase):
             f"{reverse('accounts:account')}?next={self.detail_url}",
             fetch_redirect_response=False,
         )
+
+    def test_project_form_is_prefilled(self):
+        """Préremplit le formulaire avec les informations actuelles du projet."""
+        self.client.force_login(self.user)
+
+        response = self.client.get(self.detail_url)
+
+        self.assertEqual(response.status_code, 200)
+
+        form = response.context["form"]
+        self.assertFalse(form.is_bound)
+        self.assertEqual(form.instance.pk, self.project.pk)
+        self.assertEqual(form["name"].value(), self.project.name)
+        self.assertEqual(form["description"].value(), self.project.description)
+        self.assertEqual(
+            form["editorial_guidelines"].value(),
+            self.project.editorial_guidelines,
+        )
+
+    def test_owner_can_update_project(self):
+        """Enregistre les modifications sans créer de nouveau projet."""
+        self.client.force_login(self.user)
+        initial_count = EditorialProject.objects.count()
+        data = self.project_data()
+
+        response = self.client.post(
+            self.detail_url,
+            data,
+            follow=True,
+        )
+
+        self.assertRedirects(response, self.detail_url)
+        self.project.refresh_from_db()
+
+        self.assertEqual(self.project.name, data["name"])
+        self.assertEqual(self.project.description, data["description"])
+        self.assertEqual(
+            self.project.editorial_guidelines,
+            data["editorial_guidelines"],
+        )
+        self.assertEqual(self.project.owner_id, self.user.pk)
+        self.assertEqual(EditorialProject.objects.count(), initial_count)
+        self.assertContains(
+            response,
+            "Les modifications du projet ont été enregistrées.",
+        )
+
+    def test_invalid_name_prevents_update_and_preserves_values(self):
+        """Affiche les erreurs sans enregistrer les modifications invalides."""
+        self.client.force_login(self.user)
+        original_values = {
+            "name": self.project.name,
+            "description": self.project.description,
+            "editorial_guidelines": self.project.editorial_guidelines,
+        }
+
+        for name in ("", "   ", "A" * 151):
+            with self.subTest(name=name):
+                data = self.project_data(name=name)
+
+                response = self.client.post(self.detail_url, data)
+
+                self.assertEqual(response.status_code, 200)
+                form = response.context["form"]
+                self.assertIn("name", form.errors)
+                self.assertEqual(
+                    form["description"].value(),
+                    data["description"],
+                )
+                self.assertEqual(
+                    form["editorial_guidelines"].value(),
+                    data["editorial_guidelines"],
+                )
+
+                self.project.refresh_from_db()
+                for field, value in original_values.items():
+                    self.assertEqual(getattr(self.project, field), value)
+
+    def test_owner_can_clear_optional_fields(self):
+        """Permet de retirer la description et les consignes générales."""
+        self.client.force_login(self.user)
+
+        response = self.client.post(
+            self.detail_url,
+            self.project_data(
+                description="",
+                editorial_guidelines="",
+            ),
+        )
+
+        self.assertRedirects(
+            response,
+            self.detail_url,
+            fetch_redirect_response=False,
+        )
+
+        self.project.refresh_from_db()
+        self.assertFalse(self.project.description)
+        self.assertFalse(self.project.editorial_guidelines)
+
+    def test_other_user_cannot_update_project(self):
+        """Refuse une modification soumise par un autre utilisateur."""
+        self.client.force_login(self.other_user)
+        original_values = {
+            "name": self.project.name,
+            "description": self.project.description,
+            "editorial_guidelines": self.project.editorial_guidelines,
+        }
+
+        response = self.client.post(
+            self.detail_url,
+            self.project_data(),
+        )
+
+        self.assertEqual(response.status_code, 404)
+        self.project.refresh_from_db()
+
+        for field, value in original_values.items():
+            self.assertEqual(getattr(self.project, field), value)
+        self.assertEqual(self.project.owner_id, self.user.pk)
+
+    def test_anonymous_user_cannot_update_project(self):
+        """Exige une connexion avant toute modification."""
+        original_name = self.project.name
+
+        response = self.client.post(
+            self.detail_url,
+            self.project_data(),
+        )
+
+        self.assertRedirects(
+            response,
+            f"{reverse('accounts:account')}?next={self.detail_url}",
+            fetch_redirect_response=False,
+        )
+
+        self.project.refresh_from_db()
+        self.assertEqual(self.project.name, original_name)
+
+    def test_update_cannot_change_project_owner(self):
+        """Ignore les champs de propriété ajoutés à la requête."""
+        self.client.force_login(self.user)
+
+        response = self.client.post(
+            self.detail_url,
+            self.project_data(
+                owner=self.other_user.pk,
+                owner_id=self.other_user.pk,
+            ),
+        )
+
+        self.assertRedirects(
+            response,
+            self.detail_url,
+            fetch_redirect_response=False,
+        )
+
+        self.project.refresh_from_db()
+        self.assertEqual(self.project.owner_id, self.user.pk)
+        self.assertEqual(self.project.name, "Equine Encyclopedia")

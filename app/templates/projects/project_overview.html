@@ -5,6 +5,7 @@
 
 {% block layout_page_css %}
 <link rel="stylesheet" href="{% static 'css/projects/project_overview.css' %}">
+<script src="{% static 'js/projects/project_overview.js' %}" defer></script>
 {% endblock %}
 
 {% block layout_content %}
@@ -13,27 +14,64 @@
   <output class="projects__message">{{ message }}</output>
   {% endfor %}
 
-  <h1>{{ project.name }}</h1>
-  <p>Créé le {{ project.created_at|date:"d/m/Y à H:i" }}</p>
+  <header class="projects__heading">
+    <div>
+      <h1>{{ project.name }}</h1>
+      <p>Créé le {{ project.created_at|date:"d/m/Y à H:i" }}</p>
+    </div>
 
-  <section aria-labelledby="description-title">
-    <h2 id="description-title">Description</h2>
+    <button class="projects__edit" type="button" aria-controls="project-edit" hidden>
+      Modifier
+    </button>
+  </header>
 
-    {% if project.description %}
-    {{ project.description|linebreaks }}
-    {% else %}
-    <p>Aucune description renseignée.</p>
-    {% endif %}
-  </section>
+  <div id="project-read" hidden>
+    <section aria-labelledby="description-title">
+      <h2 id="description-title">Description</h2>
 
-  <section aria-labelledby="guidelines-title">
-    <h2 id="guidelines-title">Consignes générales</h2>
+      {% if project.description %}
+      {{ project.description|linebreaks }}
+      {% else %}
+      <p>Aucune description renseignée.</p>
+      {% endif %}
+    </section>
 
-    {% if project.editorial_guidelines %}
-    {{ project.editorial_guidelines|linebreaks }}
-    {% else %}
-    <p>Aucune consigne générale renseignée.</p>
-    {% endif %}
+    <section aria-labelledby="guidelines-title">
+      <h2 id="guidelines-title">Consignes générales</h2>
+
+      {% if project.editorial_guidelines %}
+      {{ project.editorial_guidelines|linebreaks }}
+      {% else %}
+      <p>Aucune consigne générale renseignée.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  <section id="project-edit" class="projects__card" aria-labelledby="edit-title"
+    data-has-errors="{{ form.errors|yesno:'true,false' }}">
+    <h2 id="edit-title" tabindex="-1">Modifier le projet</h2>
+
+    <form class="projects__form" method="post" action="{% url 'projects:detail' project.pk %}">
+      {% csrf_token %}
+
+      {{ form.non_field_errors }}
+
+      {% for field in form %}
+      <div class="projects__field">
+        {{ field.as_field_group }}
+      </div>
+      {% endfor %}
+
+      <div class="projects__actions">
+        <button class="projects__submit" type="submit">
+          Enregistrer les modifications
+        </button>
+
+        <a class="projects__cancel" href="{% url 'projects:detail' project.pk %}">
+          Annuler
+        </a>
+      </div>
+    </form>
   </section>
 </main>
 {% endblock %}
