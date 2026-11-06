@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Mon espace — Alinea{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/dashboard/sidebar.css' %}">
+  {% block layout_page_css %}{% endblock %}
+{% endblock %}
+
+{% block body_class %}dashboard-page{% endblock %}
+
+{% block content %}
+  <div class="dashboard-layout">
+    {% include "dashboard/partials/sidebar.html" %}
+
+    {% block layout_content %}{% endblock %}
+  </div>
+{% endblock %}

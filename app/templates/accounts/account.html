@@ -1,22 +1,19 @@
+{% extends "base.html" %}
 {% load static %}
-<!doctype html>
-<html lang="fr">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block title %}Mon compte — Alinea{% endblock %}
+
+{% block meta %}
   <meta name="description" content="Connectez-vous à Alinea ou créez votre compte.">
-  <title>Mon compte — Alinea</title>
+{% endblock %}
 
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  <link rel="stylesheet" href="{% static 'css/header.css' %}">
-  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% block page_css %}
   <link rel="stylesheet" href="{% static 'css/accounts/account.css' %}">
-  <script src="{% static 'js/header.js' %}" defer></script>
-</head>
+{% endblock %}
 
-<body class="account-page">
-  {% include "partials/header.html" %}
+{% block body_class %}account-page{% endblock %}
+
+{% block content %}
   <main class="account-shell">
     <section class="account-card" aria-labelledby="account-title">
       <nav class="account-switch" aria-label="Accès au compte">
@@ -37,7 +34,7 @@
       {% endif %}
 
       {% for message in messages %}
-      <p role="status">{{ message }}</p>
+      <output class="projects__message">{{ message }}</output>
       {% endfor %}
 
       <form method="post" action="{% url 'accounts:account' %}">
@@ -68,7 +65,7 @@
               Aide pour ce champ
               {% endif %}
             </summary>
-            <div class="helptext">{{ field.help_text|safe }}</div>
+            <div class="helptext">{{ field.help_text }}</div>
           </details>
           {% endif %}
         </div>
@@ -80,8 +77,4 @@
       </form>
     </section>
   </main>
-
-  {% include "partials/footer.html" %}
-</body>
-
-</html>
+{% endblock %}

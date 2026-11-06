@@ -1,24 +1,17 @@
+{% extends "base.html" %}
 {% load static %}
-{% url "accounts:profile" as profile_url %}
-{% url "accounts:delete_account" as delete_account_url %}
 
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Supprimer mon compte — Alinea</title>
+{% block title %}Supprimer mon compte — Alinea{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% block page_css %}
     <link rel="stylesheet" href="{% static 'css/accounts/profile.css' %}">
+{% endblock %}
 
-    <script src="{% static 'js/header.js' %}" defer></script>
-  </head>
+{% block body_class %}profile-page{% endblock %}
 
-  <body class="profile-page">
-    {% include "partials/header.html" %}
+{% block content %}
+    {% url "accounts:profile" as profile_url %}
+    {% url "accounts:delete_account" as delete_account_url %}
 
     <main class="profile">
       <div class="profile__content">
@@ -63,7 +56,4 @@
         </section>
       </div>
     </main>
-
-    {% include "partials/footer.html" %}
-  </body>
-</html>
+{% endblock %}

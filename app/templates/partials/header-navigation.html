@@ -2,7 +2,54 @@
 {% url "accounts:account" as account_url %}
 {% url "accounts:profile" as profile_url %}
 {% url "accounts:logout" as logout_url %}
+{% url "dashboard:index" as dashboard_url %}
 
+{% if user.is_authenticated %}
+<div class="site-header__workspace">
+  <button class="site-header__tool" type="button" aria-label="Recherche indisponible pour le moment"
+    title="Recherche — bientôt disponible" disabled>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="7" />
+      <path d="m16 16 4.5 4.5" />
+    </svg>
+  </button>
+
+  <button class="site-header__tool" type="button" aria-label="Notifications indisponibles pour le moment"
+    title="Notifications — bientôt disponibles" disabled>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+      <path d="M10 21h4" />
+    </svg>
+  </button>
+
+  <details class="site-header__account">
+    <summary aria-label="Ouvrir le menu de mon compte">
+      <span class="site-header__avatar" aria-hidden="true">
+        {{ user.name|default:user.email|first|upper }}
+      </span>
+    </summary>
+
+    <div class="site-header__account-panel">
+      <div class="site-header__account-identity">
+        <strong>{{ user.name|default:user.email }}</strong>
+        <span>{{ user.email }}</span>
+      </div>
+
+      <nav aria-label="Navigation du compte">
+        <a href="{{ dashboard_url }}">Mon espace</a>
+        <a href="{{ profile_url }}">Mon profil</a>
+      </nav>
+
+      <form method="post" action="{{ logout_url }}">
+        {% csrf_token %}
+        <button type="submit">Déconnexion</button>
+      </form>
+    </div>
+  </details>
+</div>
+{% else %}
 <nav class="site-header__nav" aria-label="Navigation principale">
   <a href="{{ home_url }}#fonctionnement">Fonctionnement</a>
   <a href="{{ home_url }}#cas-usage">Cas d’usage</a>
@@ -10,25 +57,12 @@
 </nav>
 
 <div class="site-header__actions">
-  {% if user.is_authenticated %}
-    <a class="site-header__button" href="{{ profile_url }}">
-      Mon profil
-    </a>
+  <a class="site-header__button" href="{{ account_url }}?mode=login">
+    Connexion
+  </a>
 
-    <form method="post" action="{{ logout_url }}">
-      {% csrf_token %}
-      <button class="site-header__button" type="submit">
-        Déconnexion
-      </button>
-    </form>
-  {% else %}
-    <a class="site-header__button" href="{{ account_url }}?mode=login">
-      Connexion
-    </a>
-  {% endif %}
-
-  <a class="site-header__button site-header__button--primary"
-     href="{{ home_url }}#decouvrir">
+  <a class="site-header__button site-header__button--primary" href="{{ home_url }}#decouvrir">
     Découvrir Alinea <span aria-hidden="true">↗</span>
   </a>
 </div>
+{% endif %}

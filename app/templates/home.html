@@ -1,28 +1,24 @@
+{% extends "base.html" %}
 {% load static %}
-<!doctype html>
-<html lang="fr">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block title %}Alinea — Créez des contenus structurés avec l’IA{% endblock %}
+
+{% block meta %}
   <meta name="description"
-    content="Créez des contenus structurés avec l’IA, à partir de vos sources et selon vos règles. Relisez et validez chaque résultat avec Alinea.">
+        content="Créez des contenus structurés avec l’IA, à partir de vos sources et selon vos règles. Relisez et validez chaque résultat avec Alinea.">
+{% endblock %}
 
-  <title>Alinea — Créez des contenus structurés avec l’IA</title>
-  <link rel="icon" type="image/png" href="{% static 'img/logo-alinea.png' %}">
-
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  <link rel="stylesheet" href="{% static 'css/header.css' %}">
-  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% block page_css %}
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
   <link rel="stylesheet" href="{% static 'css/animations.css' %}">
-  <script src="{% static 'js/header.js' %}" defer></script>
+{% endblock %}
+
+{% block page_js %}
   <script src="{% static 'js/home.js' %}" defer></script>
   <script src="{% static 'js/animations.js' %}" defer></script>
-</head>
-{% include "partials/header.html" %}
+{% endblock %}
 
-<body>
+{% block content %}
   <main class="home" id="decouvrir">
     <section class="home__intro" aria-labelledby="home-title">
       <div class="home__container">
@@ -44,25 +40,36 @@
             <div class="home__actions">
               <a class="home__button home__button--primary" href="#cas-usage">
                 Découvrir Alinea
-                <img class="home__icon home__icon--arrow" src="{% static 'icons/arrow-up-right.svg' %}" alt="">
+                <img class="home__icon home__icon--arrow"
+                     src="{% static 'icons/arrow-up-right.svg' %}"
+                     alt="">
               </a>
+
               <a class="home__button" href="#fonctionnement">
-                <img class="home__icon home__icon--target" src="{% static 'icons/target.svg' %}" alt="">
+                <img class="home__icon home__icon--target"
+                     src="{% static 'icons/target.svg' %}"
+                     alt="">
                 Voir le fonctionnement
               </a>
             </div>
 
             <ul class="home__promises">
               <li>
-                <img class="home__icon" src="{% static 'icons/shield-check.svg' %}" alt="">
+                <img class="home__icon"
+                     src="{% static 'icons/shield-check.svg' %}"
+                     alt="">
                 <span>Vos sources, vos références</span>
               </li>
               <li>
-                <img class="home__icon" src="{% static 'icons/shield-check.svg' %}" alt="">
+                <img class="home__icon"
+                     src="{% static 'icons/shield-check.svg' %}"
+                     alt="">
                 <span>Vos règles, votre cadre</span>
               </li>
               <li>
-                <img class="home__icon" src="{% static 'icons/shield-check.svg' %}" alt="">
+                <img class="home__icon"
+                     src="{% static 'icons/shield-check.svg' %}"
+                     alt="">
                 <span>Un contrôle à chaque étape</span>
               </li>
             </ul>
@@ -78,6 +85,7 @@
               <div class="home-preview__layout">
                 <div class="home-preview__outline" aria-hidden="true">
                   <p>Fiche de contenu</p>
+
                   <ul>
                     <li class="home-preview__current">Introduction</li>
                     <li>Morphologie</li>
@@ -86,8 +94,11 @@
                     <li>Histoire</li>
                     <li>Sources</li>
                   </ul>
+
                   <span class="home-preview__control home-preview__icon-label">
-                    <img class="home-preview__icon" src="{% static 'icons/plus.svg' %}" alt="">
+                    <img class="home-preview__icon"
+                         src="{% static 'icons/plus.svg' %}"
+                         alt="">
                     Ajouter un bloc
                   </span>
                 </div>
@@ -100,45 +111,66 @@
                     <b>B</b>
                     <i>I</i>
                     <u>U</u>
-                    <img class="home-preview__icon" src="{% static 'icons/text-align-start.svg' %}" alt="">
-                    <img class="home-preview__icon" src="{% static 'icons/arrow-up-right.svg' %}" alt="">
+
+                    <img class="home-preview__icon"
+                         src="{% static 'icons/text-align-start.svg' %}"
+                         alt="">
+                    <img class="home-preview__icon"
+                         src="{% static 'icons/arrow-up-right.svg' %}"
+                         alt="">
                   </div>
 
                   <p>
-                    Le Frison est une race de cheval originaire de Frise, aux Pays-Bas.
-                    Il est notamment connu pour sa robe noire et sa silhouette expressive.
+                    Le Frison est une race de cheval originaire de Frise,
+                    aux Pays-Bas. Il est notamment connu pour sa robe noire
+                    et sa silhouette expressive.
                   </p>
 
                   <div class="home-preview__sources">
                     <h3>Sources de l’exemple</h3>
+
                     <ul>
                       <li>
                         <span class="home-preview__icon-label">
-                          <img class="home-preview__icon" src="{% static 'icons/check.svg' %}" alt="">
-                          <span data-preview-source>Royal Friesian Studbook (KFPS)</span>
+                          <img class="home-preview__icon"
+                               src="{% static 'icons/check.svg' %}"
+                               alt="">
+                          <span data-preview-source>
+                            Royal Friesian Studbook (KFPS)
+                          </span>
                         </span>
                       </li>
                       <li>
                         <span class="home-preview__icon-label">
-                          <img class="home-preview__icon" src="{% static 'icons/check.svg' %}" alt="">
+                          <img class="home-preview__icon"
+                               src="{% static 'icons/check.svg' %}"
+                               alt="">
                           <span data-preview-source>Wikipédia : Frison</span>
                         </span>
                       </li>
                     </ul>
 
-                    <span class="home-preview__control home-preview__icon-label" aria-hidden="true">
-                      <img class="home-preview__icon" src="{% static 'icons/plus.svg' %}" alt="">
+                    <span class="home-preview__control home-preview__icon-label"
+                          aria-hidden="true">
+                      <img class="home-preview__icon"
+                           src="{% static 'icons/plus.svg' %}"
+                           alt="">
                       Ajouter une source
                     </span>
                   </div>
 
                   <div class="home-preview__actions" aria-hidden="true">
                     <span class="home-preview__icon-label">
-                      <img class="home-preview__icon" src="{% static 'icons/refresh-ccw.svg' %}" alt="">
+                      <img class="home-preview__icon"
+                           src="{% static 'icons/refresh-ccw.svg' %}"
+                           alt="">
                       Régénérer
                     </span>
+
                     <span class="home-preview__control home-preview__icon-label">
-                      <img class="home-preview__icon" src="{% static 'icons/check.svg' %}" alt="">
+                      <img class="home-preview__icon"
+                           src="{% static 'icons/check.svg' %}"
+                           alt="">
                       Valider
                     </span>
                   </div>
@@ -149,9 +181,15 @@
             <fieldset class="home-showcase__controls" hidden>
               <legend>Choisir un exemple de contenu</legend>
 
-              <button type="button" data-example="0" aria-pressed="true">Encyclopédie</button>
-              <button type="button" data-example="1" aria-pressed="false">Catalogue</button>
-              <button type="button" data-example="2" aria-pressed="false">Éditorial</button>
+              <button type="button" data-example="0" aria-pressed="true">
+                Encyclopédie
+              </button>
+              <button type="button" data-example="1" aria-pressed="false">
+                Catalogue
+              </button>
+              <button type="button" data-example="2" aria-pressed="false">
+                Éditorial
+              </button>
               <button type="button" data-example="3" aria-pressed="false">
                 Vente d’occasion
               </button>
@@ -162,7 +200,9 @@
           </div>
         </div>
 
-        <section class="home__workflow" id="fonctionnement" aria-labelledby="workflow-title">
+        <section class="home__workflow"
+                 id="fonctionnement"
+                 aria-labelledby="workflow-title">
           <h2 id="workflow-title">Comment ça fonctionne ?</h2>
 
           <ol class="home__steps">
@@ -170,21 +210,29 @@
               <span class="home__step-number" aria-hidden="true">01</span>
               <div>
                 <h3>Définir votre cadre</h3>
-                <p>Ajoutez vos sources, choisissez un modèle et posez vos règles.</p>
+                <p>
+                  Ajoutez vos sources, choisissez un modèle et posez vos règles.
+                </p>
               </div>
             </li>
             <li class="home__step">
               <span class="home__step-number" aria-hidden="true">02</span>
               <div>
                 <h3>Générer vos contenus</h3>
-                <p>Un premier contenu structuré, prêt à être relu, section par section.</p>
+                <p>
+                  Un premier contenu structuré, prêt à être relu,
+                  section par section.
+                </p>
               </div>
             </li>
             <li class="home__step">
               <span class="home__step-number" aria-hidden="true">03</span>
               <div>
                 <h3>Relire et valider</h3>
-                <p>Vous vérifiez, ajustez et décidez de ce qui mérite d’être publié.</p>
+                <p>
+                  Vous vérifiez, ajustez et décidez de ce qui mérite
+                  d’être publié.
+                </p>
               </div>
             </li>
           </ol>
@@ -192,35 +240,45 @@
       </div>
     </section>
 
-    <section class="home__use-cases home__container" id="cas-usage" aria-labelledby="use-cases-title">
+    <section class="home__use-cases home__container"
+             id="cas-usage"
+             aria-labelledby="use-cases-title">
       <div class="home__use-cases-heading">
         <h2 id="use-cases-title">Des cas d’usage concrets</h2>
+
         <a href="#liste-cas-usage">
           Voir tous les cas d’usage
-          <img class="home__icon home__icon--arrow" src="{% static 'icons/arrow-up-right.svg' %}" alt="">
+          <img class="home__icon home__icon--arrow"
+               src="{% static 'icons/arrow-up-right.svg' %}"
+               alt="">
         </a>
       </div>
 
       <p class="home__section-description">
-        Des modèles adaptés à vos besoins pour produire plus facilement des contenus
-        fiables et structurés.
+        Des modèles adaptés à vos besoins pour produire plus facilement
+        des contenus fiables et structurés.
       </p>
 
       <div class="home__cards" id="liste-cas-usage">
         <article class="home__card">
           <div>
-            <img class="home__card-icon" src="{% static 'icons/list.svg' %}" alt="">
+            <img class="home__card-icon"
+                 src="{% static 'icons/list.svg' %}"
+                 alt="">
             <h3>Fiches encyclopédiques</h3>
-            <p>Produisez des fiches structurées pour tous vos sujets de référence.</p>
+            <p>
+              Produisez des fiches structurées pour tous vos sujets de référence.
+            </p>
           </div>
+
           <div class="home__card-sheet" aria-hidden="true">
             <svg viewBox="0 0 80 82" width="100%" height="82" focusable="false">
-              <rect width="64" height="12" rx="2" fill="var(--home-brand)" />
+              <rect width="64" height="12" rx="2" fill="var(--home-brand)"/>
               <g fill="var(--home-tint)">
-                <rect y="21" width="80" height="5" rx="2" />
-                <rect y="35" width="52" height="5" rx="2" />
-                <rect y="49" width="80" height="5" rx="2" />
-                <rect y="63" width="44" height="5" rx="2" />
+                <rect y="21" width="80" height="5" rx="2"/>
+                <rect y="35" width="52" height="5" rx="2"/>
+                <rect y="49" width="80" height="5" rx="2"/>
+                <rect y="63" width="44" height="5" rx="2"/>
               </g>
             </svg>
           </div>
@@ -228,18 +286,21 @@
 
         <article class="home__card">
           <div>
-            <img class="home__card-icon" src="{% static 'icons/pencil.svg' %}" alt="">
+            <img class="home__card-icon"
+                 src="{% static 'icons/pencil.svg' %}"
+                 alt="">
             <h3>Fiches produits</h3>
             <p>Créez des fiches homogènes, adaptées à votre catalogue.</p>
           </div>
+
           <div class="home__card-sheet" aria-hidden="true">
             <svg viewBox="0 0 80 82" width="100%" height="82" focusable="false">
-              <rect width="64" height="12" rx="2" fill="var(--home-brand)" />
+              <rect width="64" height="12" rx="2" fill="var(--home-brand)"/>
               <g fill="var(--home-tint)">
-                <rect y="21" width="80" height="5" rx="2" />
-                <rect y="35" width="52" height="5" rx="2" />
-                <rect y="49" width="80" height="5" rx="2" />
-                <rect y="63" width="44" height="5" rx="2" />
+                <rect y="21" width="80" height="5" rx="2"/>
+                <rect y="35" width="52" height="5" rx="2"/>
+                <rect y="49" width="80" height="5" rx="2"/>
+                <rect y="63" width="44" height="5" rx="2"/>
               </g>
             </svg>
           </div>
@@ -247,18 +308,23 @@
 
         <article class="home__card">
           <div>
-            <img class="home__card-icon" src="{% static 'icons/file-text.svg' %}" alt="">
+            <img class="home__card-icon"
+                 src="{% static 'icons/file-text.svg' %}"
+                 alt="">
             <h3>Contenus éditoriaux</h3>
-            <p>Gardez un cadre cohérent pour vos articles et vos contenus de marque.</p>
+            <p>
+              Gardez un cadre cohérent pour vos articles et vos contenus de marque.
+            </p>
           </div>
+
           <div class="home__card-sheet" aria-hidden="true">
             <svg viewBox="0 0 80 82" width="100%" height="82" focusable="false">
-              <rect width="64" height="12" rx="2" fill="var(--home-brand)" />
+              <rect width="64" height="12" rx="2" fill="var(--home-brand)"/>
               <g fill="var(--home-tint)">
-                <rect y="21" width="80" height="5" rx="2" />
-                <rect y="35" width="52" height="5" rx="2" />
-                <rect y="49" width="80" height="5" rx="2" />
-                <rect y="63" width="44" height="5" rx="2" />
+                <rect y="21" width="80" height="5" rx="2"/>
+                <rect y="35" width="52" height="5" rx="2"/>
+                <rect y="49" width="80" height="5" rx="2"/>
+                <rect y="63" width="44" height="5" rx="2"/>
               </g>
             </svg>
           </div>
@@ -266,7 +332,4 @@
       </div>
     </section>
   </main>
-  {% include "partials/footer.html" %}
-</body>
-
-</html>
+{% endblock %}

@@ -1,0 +1,362 @@
+/* Couleurs et structure de l’espace de rédaction. */
+body:has(.dashboard) {
+  background: #f9fafb;
+  color: #111827;
+}
+
+.dashboard {
+  --dashboard-accent: #6366f1;
+  --dashboard-accent-hover: #4f46e5;
+  --dashboard-border: #e5e7eb;
+  --dashboard-muted: #6b7280;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page-max-width, 1440px);
+  min-height: 70vh;
+  margin-inline: auto;
+  padding: 40px var(--page-gutter, 48px) 64px;
+}
+
+/* Titre de page et action de création. */
+.dashboard__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.dashboard__heading>div {
+  min-width: 0;
+}
+
+.dashboard__heading h1 {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.dashboard__heading p {
+  max-width: 70ch;
+  margin: 0;
+  color: var(--dashboard-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Boutons de création et indicateurs de focus. */
+.dashboard__button {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid var(--dashboard-accent);
+  border-radius: 8px;
+  background: var(--dashboard-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Le signe accompagne le libellé sans remplacer le texte de l’action. */
+.dashboard__button::before {
+  content: "+";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.dashboard__button:hover {
+  border-color: var(--dashboard-accent-hover);
+  background: var(--dashboard-accent-hover);
+}
+
+.dashboard__button:active {
+  border-color: #4338ca;
+  background: #4338ca;
+}
+
+.dashboard a:focus-visible {
+  outline: 2px solid var(--dashboard-accent);
+  outline-offset: 4px;
+}
+
+/* Notifications liées aux actions réalisées dans l’espace utilisateur. */
+.dashboard__message {
+  margin: 0 0 24px;
+  padding: 14px 18px;
+  border: 1px solid #c7d2fe;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Panneau principal des projets. */
+.dashboard__section {
+  overflow: hidden;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.dashboard__section>h2 {
+  margin: 0;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--dashboard-border);
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+/* Liste des projets et séparation des lignes. */
+.dashboard__projects {
+  margin: 0;
+  padding: 0 24px;
+  list-style: none;
+}
+
+.dashboard__project {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 32px;
+  row-gap: 6px;
+  padding: 24px 4px;
+}
+
+.dashboard__project+.dashboard__project {
+  border-top: 1px solid var(--dashboard-border);
+}
+
+.dashboard__project h3 {
+  grid-column: 1;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.dashboard__project h3 a {
+  color: #111827;
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.dashboard__project h3 a:hover {
+  color: var(--dashboard-accent-hover);
+  text-decoration: underline;
+}
+
+.dashboard__project>p:not(.dashboard__date) {
+  grid-column: 1;
+  margin: 0;
+  color: var(--dashboard-muted);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.dashboard__project .dashboard__date {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+  color: var(--dashboard-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+/* Invitation à créer un premier projet. */
+.dashboard__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.dashboard__empty h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.dashboard__empty p {
+  max-width: 48ch;
+  margin: 0 0 24px;
+  color: var(--dashboard-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Accès aux paramètres du compte. */
+.dashboard__account {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.dashboard__account a {
+  color: var(--dashboard-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.dashboard__account a:hover {
+  color: var(--dashboard-accent-hover);
+  text-decoration: underline;
+}
+
+/* Transitions respectant les préférences de réduction des animations. */
+@media (prefers-reduced-motion: no-preference) {
+  .dashboard__button {
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .dashboard__project a,
+  .dashboard__account a {
+    transition: color 160ms ease;
+  }
+}
+
+/* Adaptation aux écrans mobiles. */
+@media (max-width: 800px) {
+  .dashboard {
+    padding: 28px var(--page-gutter, 20px) 40px;
+  }
+
+  .dashboard__heading {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .dashboard__heading .dashboard__button {
+    align-self: flex-start;
+  }
+
+  .dashboard__section>h2 {
+    padding: 18px 20px;
+  }
+
+  .dashboard__projects {
+    padding-inline: 20px;
+  }
+
+  .dashboard__project {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding-block: 20px;
+  }
+
+  .dashboard__project .dashboard__date {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 6px;
+    white-space: normal;
+  }
+
+  .dashboard__empty {
+    padding: 40px 20px;
+  }
+
+  .dashboard__empty h3 {
+    font-size: 18px;
+  }
+}
+
+/* Hiérarchie compacte du titre de l’espace utilisateur. */
+.dashboard__heading {
+  margin-bottom: 28px;
+}
+
+.dashboard__heading h1 {
+  margin-bottom: 6px;
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 700;
+}
+
+.dashboard__heading p {
+  font-size: 13px;
+}
+
+/* Invitation principale pour un espace sans projet. */
+.dashboard__welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(40px, 7vw, 80px) 24px;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 12px;
+  background: #fff;
+  text-align: center;
+}
+
+.dashboard__welcome-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  background: #eef2ff;
+  color: #6366f1;
+}
+
+.dashboard__welcome h2 {
+  margin: 0 0 12px;
+  font-size: clamp(19px, 2vw, 23px);
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.dashboard__welcome>p {
+  max-width: 48ch;
+  margin: 0 0 24px;
+  color: var(--dashboard-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.dashboard__welcome .dashboard__button {
+  min-height: 44px;
+  padding-inline: 20px;
+}
+
+.dashboard__welcome .dashboard__welcome-note {
+  max-width: 44ch;
+  margin: 16px 0 0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 800px) {
+  .dashboard__welcome {
+    padding: 40px 20px;
+  }
+
+  .dashboard__welcome>p {
+    font-size: 13px;
+  }
+}
