@@ -1,0 +1,69 @@
+{% load static %}
+{% url "accounts:profile" as profile_url %}
+{% url "accounts:delete_account" as delete_account_url %}
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Supprimer mon compte — Alinea</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/accounts/profile.css' %}">
+
+    <script src="{% static 'js/header.js' %}" defer></script>
+  </head>
+
+  <body class="profile-page">
+    {% include "partials/header.html" %}
+
+    <main class="profile">
+      <div class="profile__content">
+        <header class="profile__heading">
+          <h1>Supprimer mon compte</h1>
+          <p>Cette action est définitive.</p>
+        </header>
+
+        <section class="profile__card" aria-labelledby="deletion-title">
+          <h2 id="deletion-title">Confirmer la suppression</h2>
+
+          <p class="profile__description">
+            Votre compte et les informations personnelles de votre profil
+            seront supprimés. Vous serez déconnecté et vos identifiants
+            ne permettront plus de vous connecter à ce compte.
+          </p>
+
+          <form method="post" action="{{ delete_account_url }}">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            <div class="profile__field">
+              {{ form.current_password.as_field_group }}
+            </div>
+
+            <div class="profile__confirmation">
+              {{ form.confirm_deletion }}
+              {{ form.confirm_deletion.label_tag }}
+              {{ form.confirm_deletion.errors }}
+            </div>
+
+            <button class="profile__submit profile__submit--danger"
+                    type="submit">
+              Supprimer définitivement mon compte
+            </button>
+
+            <a class="profile__cancel" href="{{ profile_url }}">
+              Annuler et revenir au profil
+            </a>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    {% include "partials/footer.html" %}
+  </body>
+</html>

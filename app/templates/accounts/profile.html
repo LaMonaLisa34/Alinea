@@ -1,0 +1,93 @@
+{% load static %}
+{% url "accounts:profile" as profile_url %}
+{% url "accounts:delete_account" as delete_account_url %}
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Modifiez vos informations personnelles et votre mot de passe Alinea.">
+    <title>Mon profil — Alinea</title>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/accounts/profile.css' %}">
+
+    <script src="{% static 'js/header.js' %}" defer></script>
+  </head>
+
+  <body class="profile-page">
+    {% include "partials/header.html" %}
+
+    <main class="profile">
+      <div class="profile__content">
+        <header class="profile__heading">
+          <h1>Mon profil</h1>
+          <p>Vos informations personnelles et votre mot de passe.</p>
+        </header>
+
+        {% for message in messages %}
+          <p class="profile__message {{ message.tags }}" role="status">
+            {{ message }}
+          </p>
+        {% endfor %}
+
+        <section class="profile__card" aria-labelledby="profile-title">
+          <h2 id="profile-title">Mes informations</h2>
+          <p class="profile__description">
+            Les champs du nouveau mot de passe sont facultatifs.
+          </p>
+
+          <form method="post" action="{{ profile_url }}">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+              <div class="profile__field">
+                <div class="profile__label-row">
+                  {{ field.label_tag }}
+
+                  {% if field.help_text or field.name == "new_password2" %}
+                    <details class="profile__help">
+                      <summary aria-label="Aide pour {{ field.label }}">
+                        <span aria-hidden="true">?</span>
+                      </summary>
+
+                      <div class="profile__tooltip"
+                           id="{{ field.auto_id }}_helptext">
+                        {% if field.help_text %}
+                          {{ field.help_text }}
+                        {% else %}
+                          Saisissez à nouveau le nouveau mot de passe.
+                        {% endif %}
+                      </div>
+                    </details>
+                  {% endif %}
+                </div>
+
+                {{ field }}
+                {{ field.errors }}
+              </div>
+            {% endfor %}
+
+            <button class="profile__submit" type="submit">
+              Enregistrer les modifications
+            </button>
+          </form>
+        </section>
+
+        <div class="profile__danger-zone">
+          <a href="{{ delete_account_url }}">
+            Supprimer mon compte
+          </a>
+        </div>
+      </div>
+    </main>
+
+    {% include "partials/footer.html" %}
+  </body>
+</html>
