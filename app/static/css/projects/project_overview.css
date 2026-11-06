@@ -1,93 +1,275 @@
-/* Positionnement de la vue d’ensemble du projet. */
+/* Conteneur principal du projet */
 .projects {
+  --project-accent: #6366f1;
+  --project-accent-hover: #4f46e5;
+  --project-text: #111827;
+  --project-muted: #6b7280;
+  --project-border: #e5e7eb;
+
   box-sizing: border-box;
-  width: 100%;
-  max-width: var(--page-max-width, 1440px);
   min-width: 0;
-  margin-inline: auto;
-  padding: 36px var(--page-gutter, 48px) 56px;
-  color: #111827;
+  width: 100%;
+  padding: 40px;
+  color: var(--project-text);
 }
 
-.dashboard-layout>.projects {
-  max-width: none;
-  padding-inline: 40px;
-}
-
-/* Identité du projet et date de création. */
-.projects>h1 {
-  max-width: 30ch;
-  margin: 0 0 10px;
-  font-size: clamp(24px, 3vw, 30px);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.025em;
-  overflow-wrap: anywhere;
-}
-
-.projects>p:not([role="status"]) {
-  margin: 0 0 28px;
-  color: #6b7280;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-/* Confirmation de création du projet. */
-.projects>[role="status"] {
-  max-width: 840px;
-  margin: 0 0 24px;
-  padding: 12px 16px;
-  border: 1px solid #c7d2fe;
-  border-radius: 8px;
-  background: #eef2ff;
-  color: #3730a3;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-/* Panneaux de description et de consignes éditoriales. */
-.projects>section {
+.projects *,
+.projects *::before,
+.projects *::after {
   box-sizing: border-box;
-  max-width: 840px;
-  margin-bottom: 20px;
+}
+
+/* Garantit le masquage des éléments pilotés par JavaScript. */
+.projects [hidden] {
+  display: none !important;
+}
+
+/* Titre du projet et accès à la modification */
+.projects__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.projects__heading h1 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.projects__heading p {
+  margin: 10px 0 0;
+  color: var(--project-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Informations du projet en mode lecture */
+#project-read {
+  display: grid;
+  gap: 20px;
+  max-width: 1040px;
+}
+
+#project-read>section,
+.projects__card {
   padding: 24px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--project-border);
   border-radius: 12px;
   background: #fff;
 }
 
-.projects>section h2 {
-  margin: 0 0 14px;
-  font-size: 16px;
-  font-weight: 650;
-  line-height: 1.5;
+.projects h2 {
+  margin: 0 0 16px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
-.projects>section p {
+#project-read p {
   margin: 0 0 12px;
+  overflow-wrap: anywhere;
   color: #4b5563;
   font-size: 14px;
-  line-height: 1.8;
-  overflow-wrap: anywhere;
+  line-height: 1.75;
 }
 
-.projects>section p:last-child {
+#project-read p:last-child {
   margin-bottom: 0;
 }
 
-/* Adaptation aux écrans mobiles. */
-@media (max-width: 800px) {
-
-  .projects,
-  .dashboard-layout>.projects {
-    padding: 24px 20px 40px;
-  }
-
-  .projects>section {
-    padding: 20px;
-  }
-}
-
+/* Confirmation des modifications */
 .projects__message {
   display: block;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: #065f46;
+  font-size: 13px;
+  line-height: 1.6;
 }
+
+/* Formulaire de modification */
+.projects__card {
+  max-width: 1040px;
+}
+
+.projects__form {
+  display: grid;
+  gap: 22px;
+}
+
+.projects__field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.projects__field label {
+  color: var(--project-text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.projects__field input,
+.projects__field textarea,
+.projects__field select {
+  display: block;
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--project-text);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.projects__field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.projects__field input::placeholder,
+.projects__field textarea::placeholder {
+  color: #9ca3af;
+}
+
+.projects__field .helptext {
+  color: var(--project-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Indicateurs de focus et erreurs de validation */
+.projects__field :is(input, textarea, select):focus-visible {
+  border-color: var(--project-accent);
+  outline: 2px solid var(--project-accent);
+  outline-offset: 2px;
+}
+
+.projects__field [aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+.projects .errorlist {
+  margin: 0;
+  padding-left: 18px;
+  color: #b91c1c;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Actions du formulaire et bouton de modification */
+.projects__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--project-border);
+}
+
+.projects__edit,
+.projects__submit,
+.projects__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--project-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--project-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.projects__edit {
+  flex-shrink: 0;
+  color: var(--project-accent-hover);
+}
+
+.projects__submit {
+  border-color: var(--project-accent);
+  background: var(--project-accent);
+  color: #fff;
+}
+
+.projects__edit:hover,
+.projects__cancel:hover {
+  border-color: #c7d2fe;
+  background: #eef2ff;
+  color: var(--project-accent-hover);
+}
+
+.projects__submit:hover {
+  border-color: var(--project-accent-hover);
+  background: var(--project-accent-hover);
+}
+
+.projects :is(button, a):focus-visible {
+  outline: 2px solid var(--project-accent);
+  outline-offset: 3px;
+}
+
+/* Transitions respectant les préférences de mouvement */
+@media (prefers-reduced-motion: no-preference) {
+
+  .projects__edit,
+  .projects__submit,
+  .projects__cancel {
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .projects__field :is(input, textarea, select) {
+    transition: border-color 160ms ease;
+  }
+}
+
+/* Adaptation aux écrans mobiles */
+@media (max-width: 800px) {
+  .projects {
+    padding: 24px 20px;
+  }
+
+  .projects__heading {
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  #project-read>section,
+  .projects__card {
+    padding: 20px;
+  }
+
+  .projects__actions {
+    align-items: stretch;
+  }
+
+  .projects__submit,
+  .projects__cancel {
+    flex: 1 1 180px;
+  }
+}
+
