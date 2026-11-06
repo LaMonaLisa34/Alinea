@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - "**"
-  pull_request:
-    branches:
-      - dev
-      - main
 
 permissions:
   contents: read
@@ -15,6 +11,7 @@ permissions:
 jobs:
   create-pr:
     name: Création PR
+    if: github.ref_name != 'main'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
 
@@ -28,7 +25,6 @@ jobs:
 
     steps:
       - name: Create pull request if needed
-        if: github.event_name == 'push' && github.ref_name != 'main' && github.ref_name != 'staging'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -77,13 +73,8 @@ jobs:
             --title "$HEAD_BRANCH → $base" \
             --body-file "$RUNNER_TEMP/pr-body.md"
 
-      - name: No pull request creation required
-        if: github.event_name != 'push' || github.ref_name == 'main' || github.ref_name == 'staging'
-        run: echo "Passage aux contrôles qualité."
-
   lint:
     name: Qualité Python
-    needs: create-pr
     runs-on: ubuntu-24.04
     timeout-minutes: 5
 
@@ -175,11 +166,9 @@ jobs:
 
       - name: Analyze with SonarQube Cloud
         if: >-
-          github.actor != 'dependabot[bot]' &&
-          ((github.event_name == 'push' && github.ref == 'refs/heads/main') ||
-           (github.event_name == 'pull_request' &&
-            github.event.pull_request.head.repo.full_name == github.repository))
-        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
+          github.ref == 'refs/heads/main' &&
+          github.actor != 'dependabot[bot]'
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9
         env:
           SONAR_HOST_URL: https://sonarcloud.io
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
