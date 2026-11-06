@@ -382,3 +382,285 @@ class AccountAdminTests(TestCase):
 
         self.regular_user.refresh_from_db()
         self.assertEqual(self.regular_user.email, "reader@example.com")
+
+
+class ProfileTests(TestCase):
+    """Teste l’accès privé et la modification des informations personnelles."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.password = "Profil!47-Foret?92"
+        now = timezone.now()
+        common_fields = {
+            "terms_accepted_at": now,
+            "privacy_policy_accepted_at": now,
+        }
+        cls.user = User.objects.create_user(
+            email="profile@example.com",
+            password=cls.password,
+            name="Profile User",
+            **common_fields,
+        )
+        cls.other_user = User.objects.create_user(
+            email="other@example.com",
+            password=cls.password,
+            name="Other User",
+            **common_fields,
+        )
+
+    def setUp(self):
+        self.url = reverse("accounts:profile")
+
+    def test_anonymous_visitor_cannot_access_profile(self):
+        """Redirige vers la connexion sans modifier les informations."""
+        response = self.client.get(self.url)
+
+        self.assertRedirects(
+            response,
+            f"{reverse('accounts:account')}?next={self.url}",
+            fetch_redirect_response=False,
+        )
+
+    def test_authenticated_user_sees_own_information(self):
+        """Affiche les données du compte connecté."""
+        self.client.force_login(self.user)
+
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["form"]["email"].value(),
+            self.user.email,
+        )
+
+    def test_update_affects_only_authenticated_user(self):
+        """Ignore les identifiants et les privilèges ajoutés à la requête."""
+        self.client.force_login(self.user)
+
+        response = self.client.post(
+            self.url,
+            {
+                "name": "Updated User",
+                "email": "updated@example.com",
+                "current_password": self.password,
+                "id": self.other_user.pk,
+                "is_superuser": "on",
+                "is_staff": "on",
+            },
+        )
+
+        self.assertRedirects(response, self.url, fetch_redirect_response=False)
+        self.user.refresh_from_db()
+        self.other_user.refresh_from_db()
+
+        self.assertEqual(self.user.name, "Updated User")
+        self.assertEqual(self.user.email, "updated@example.com")
+        self.assertFalse(self.user.is_superuser)
+        self.assertFalse(self.user.is_staff)
+        self.assertEqual(self.other_user.email, "other@example.com")
+        self.assertEqual(self.other_user.name, "Other User")
+
+        # Confirme la persistance et la connexion avec la nouvelle adresse.
+        self.client.logout()
+        self.assertTrue(
+            self.client.login(
+                username="updated@example.com",
+                password=self.password,
+            )
+        )
+        self.assertEqual(self.client.get(self.url).status_code, 200)
+
+    def test_invalid_updates_are_rejected(self):
+        """Refuse les valeurs invalides sans enregistrer de modification."""
+        self.client.force_login(self.user)
+        cases = (
+            ("email", "invalid-email"),
+            ("email", "OTHER@example.com"),
+            ("name", ""),
+            ("current_password", "Incorrect!73"),
+        )
+
+        for field, value in cases:
+            with self.subTest(field=field, value=value):
+                data = {
+                    "name": self.user.name,
+                    "email": self.user.email,
+                    "current_password": self.password,
+                }
+                data[field] = value
+
+                response = self.client.post(self.url, data)
+
+                self.assertEqual(response.status_code, 200)
+                self.assertIn(field, response.context["form"].errors)
+                self.user.refresh_from_db()
+                self.assertEqual(self.user.email, "profile@example.com")
+                self.assertEqual(self.user.name, "Profile User")
+
+    def test_logout_prevents_profile_access_and_update(self):
+        """Exige une nouvelle connexion après la fermeture de session."""
+        self.client.force_login(self.user)
+        self.client.post(reverse("accounts:logout"))
+
+        for method in ("get", "post"):
+            with self.subTest(method=method):
+                response = getattr(self.client, method)(
+                    self.url,
+                    {
+                        "name": "Unauthorized Change",
+                        "email": "changed@example.com",
+                        "current_password": self.password,
+                    },
+                )
+                self.assertEqual(response.status_code, 302)
+
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.email, "profile@example.com")
+        self.assertEqual(self.user.name, "Profile User")
+
+
+class DeleteAccountTests(TestCase):
+    """Teste la suppression du compte et la perte des accès associés."""
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.password = "Suppression!47-Foret?92"
+        now = timezone.now()
+        common_fields = {
+            "terms_accepted_at": now,
+            "privacy_policy_accepted_at": now,
+        }
+        cls.user = User.objects.create_user(
+            email="delete@example.com",
+            password=cls.password,
+            name="Delete User",
+            **common_fields,
+        )
+        cls.other_user = User.objects.create_user(
+            email="other@example.com",
+            password=cls.password,
+            name="Other User",
+            **common_fields,
+        )
+
+    def setUp(self):
+        self.url = reverse("accounts:delete_account")
+
+    def test_valid_confirmation_deletes_only_current_user(self):
+        """Supprime le compte connecté et conserve les autres comptes."""
+        self.client.force_login(self.user)
+        user_id = self.user.pk
+
+        response = self.client.post(
+            self.url,
+            {
+                "current_password": self.password,
+                "confirm_deletion": "on",
+                # Un identifiant transmis ne doit pas choisir le compte supprimé.
+                "user_id": self.other_user.pk,
+            },
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("home"),
+            fetch_redirect_response=False,
+        )
+        self.assertFalse(User.objects.filter(pk=user_id).exists())
+        self.assertTrue(User.objects.filter(pk=self.other_user.pk).exists())
+        self.assertNotIn(SESSION_KEY, self.client.session)
+
+    def test_invalid_confirmation_preserves_account(self):
+        """Exige le bon mot de passe et une confirmation explicite."""
+        self.client.force_login(self.user)
+        cases = (
+            (
+                {
+                    "current_password": "Incorrect!73",
+                    "confirm_deletion": "on",
+                },
+                "current_password",
+            ),
+            (
+                {"current_password": self.password},
+                "confirm_deletion",
+            ),
+        )
+
+        for data, field in cases:
+            with self.subTest(field=field):
+                response = self.client.post(self.url, data)
+
+                self.assertEqual(response.status_code, 200)
+                self.assertIn(field, response.context["form"].errors)
+                self.assertTrue(User.objects.filter(pk=self.user.pk).exists())
+                self.assertIn(SESSION_KEY, self.client.session)
+
+    def test_get_does_not_delete_account(self):
+        """Affiche la confirmation sans déclencher de suppression."""
+        self.client.force_login(self.user)
+
+        response = self.client.get(self.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "accounts/delete_account.html")
+        self.assertTrue(User.objects.filter(pk=self.user.pk).exists())
+
+    def test_anonymous_user_cannot_delete_account(self):
+        """Refuse la suppression sans session authentifiée."""
+        response = self.client.post(
+            self.url,
+            {
+                "current_password": self.password,
+                "confirm_deletion": "on",
+            },
+        )
+
+        self.assertRedirects(
+            response,
+            f"{reverse('accounts:account')}?next={self.url}",
+            fetch_redirect_response=False,
+        )
+        self.assertTrue(User.objects.filter(pk=self.user.pk).exists())
+
+    def test_deleted_account_cannot_log_in_or_use_another_session(self):
+        """Refuse la reconnexion et l’accès depuis une session déjà ouverte."""
+        self.client.force_login(self.user)
+        other_session = Client()
+        other_session.force_login(self.user)
+        email = self.user.email
+
+        self.client.post(
+            self.url,
+            {
+                "current_password": self.password,
+                "confirm_deletion": "on",
+            },
+        )
+
+        self.assertFalse(self.client.login(username=email, password=self.password))
+
+        profile_url = reverse("accounts:profile")
+        response = other_session.get(profile_url)
+
+        self.assertRedirects(
+            response,
+            f"{reverse('accounts:account')}?next={profile_url}",
+            fetch_redirect_response=False,
+        )
+
+    def test_deletion_requires_csrf_token(self):
+        """Refuse une demande sans jeton CSRF valide."""
+        csrf_client = Client(enforce_csrf_checks=True)
+        csrf_client.force_login(self.user)
+
+        response = csrf_client.post(
+            self.url,
+            {
+                "current_password": self.password,
+                "confirm_deletion": "on",
+            },
+        )
+
+        self.assertEqual(response.status_code, 403)
+        self.assertTrue(User.objects.filter(pk=self.user.pk).exists())

@@ -1,0 +1,410 @@
+/* Structure générale et couleurs de la page. */
+.profile-page {
+  --profile-accent: #6366f1;
+  --profile-accent-hover: #4f46e5;
+  --profile-text: #111827;
+  --profile-muted: #6b7280;
+  --profile-border: #e5e7eb;
+  --profile-error: #b91c1c;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #f9fafb;
+  color: var(--profile-text);
+}
+
+/* Centrage du contenu entre l’en-tête et le pied de page. */
+.profile {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--page-max-width, 1440px);
+  margin-inline: auto;
+  padding: 32px var(--page-gutter, 48px);
+}
+
+.profile__content {
+  width: 100%;
+  max-width: 460px;
+  min-width: 0;
+}
+
+.profile__heading {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.profile__heading h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.profile__heading p {
+  margin: 0;
+  color: var(--profile-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Carte contenant le formulaire unique. */
+.profile__card {
+  padding: 24px;
+  border: 1px solid var(--profile-border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgb(17 24 39 / 3%);
+}
+
+.profile__card h2 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.profile__description {
+  margin: 0 0 22px;
+  color: var(--profile-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.profile__card form {
+  margin: 0;
+}
+
+/* Champs de saisie et libellés. */
+.profile__field {
+  min-width: 0;
+  margin-bottom: 16px;
+}
+
+.profile__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 24px;
+  margin-bottom: 6px;
+}
+
+.profile__label-row label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.profile__field input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--profile-text);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.profile__field input::placeholder {
+  color: var(--profile-muted);
+  opacity: 1;
+}
+
+.profile__field input:hover {
+  border-color: #9ca3af;
+}
+
+.profile__field input:focus-visible {
+  border-color: var(--profile-accent);
+  outline: 2px solid var(--profile-accent);
+  outline-offset: 2px;
+}
+
+.profile__field input[aria-invalid="true"] {
+  border-color: var(--profile-error);
+}
+
+.profile__field input[aria-invalid="true"]:focus-visible {
+  outline-color: var(--profile-error);
+}
+
+/* Séparation entre les informations personnelles et les mots de passe. */
+.profile__field:has(input[name="current_password"]) {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--profile-border);
+}
+
+/* Aides contextuelles accessibles au clic et au clavier. */
+.profile__help {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile__help summary {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.profile__help summary::-webkit-details-marker {
+  display: none;
+}
+
+.profile__help summary:hover,
+.profile__help[open] summary {
+  background: #e0e7ff;
+}
+
+.profile__help summary:focus-visible {
+  outline: 2px solid var(--profile-accent);
+  outline-offset: 3px;
+}
+
+.profile__tooltip {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  box-sizing: border-box;
+  width: min(260px, 65vw);
+  padding: 12px 14px;
+  border: 1px solid var(--profile-border);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgb(17 24 39 / 10%);
+  color: #4b5563;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.profile__tooltip ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.profile__tooltip li + li {
+  margin-top: 4px;
+}
+
+/* Erreurs de validation affichées à proximité des champs. */
+.profile__card .errorlist {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--profile-error);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile__card .errorlist li + li {
+  margin-top: 4px;
+}
+
+.profile__card form > .errorlist {
+  margin: 0 0 20px;
+  padding: 12px 14px 12px 30px;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+}
+
+/* Notifications de succès, d’information et d’erreur. */
+.profile__message {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.profile__message.success {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.profile__message.error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: var(--profile-error);
+}
+
+/* Bouton d’enregistrement et états d’interaction. */
+.profile__submit {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 10px 16px;
+  border: 1px solid var(--profile-accent);
+  border-radius: 6px;
+  background: var(--profile-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profile__submit:hover {
+  border-color: var(--profile-accent-hover);
+  background: var(--profile-accent-hover);
+}
+
+.profile__submit:active {
+  border-color: #4338ca;
+  background: #4338ca;
+}
+
+.profile__submit:focus-visible {
+  outline: 2px solid var(--profile-accent-hover);
+  outline-offset: 4px;
+}
+
+.profile__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Transitions respectant les préférences de réduction des animations. */
+@media (prefers-reduced-motion: no-preference) {
+  .profile__field input {
+    transition: border-color 160ms ease;
+  }
+
+  .profile__submit {
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .profile__help summary {
+    transition: background-color 160ms ease;
+  }
+}
+
+/* Adaptation aux petits écrans et aux interactions tactiles. */
+@media (max-width: 800px) {
+  .profile {
+    padding: 24px var(--page-gutter, 20px);
+  }
+
+  .profile__heading {
+    margin-bottom: 20px;
+  }
+
+  .profile__heading h1 {
+    font-size: 24px;
+  }
+
+  .profile__card {
+    padding: 20px;
+  }
+
+  .profile__field input {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .profile__help summary {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Confirmation explicite de la suppression du compte. */
+.profile__confirmation {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px 10px;
+  margin-block: 20px;
+}
+
+.profile__confirmation input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: #b91c1c;
+}
+
+.profile__confirmation label {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.profile__confirmation .errorlist {
+  grid-column: 1 / -1;
+}
+
+/* Actions de suppression et de retour au profil. */
+.profile__submit--danger {
+  border-color: #b91c1c;
+  background: #b91c1c;
+}
+
+.profile__submit--danger:hover,
+.profile__submit--danger:active {
+  border-color: #991b1b;
+  background: #991b1b;
+}
+
+.profile__submit--danger:focus-visible {
+  outline-color: #b91c1c;
+}
+
+.profile__cancel {
+  display: block;
+  margin-top: 16px;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  text-underline-offset: 3px;
+}
+
+.profile__danger-zone {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.profile__danger-zone a {
+  color: #b91c1c;
+  font-size: 13px;
+  text-underline-offset: 3px;
+}
+
+.profile__cancel:focus-visible,
+.profile__danger-zone a:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 4px;
+}

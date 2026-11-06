@@ -23,4 +23,10 @@ urlpatterns = [
         ),
         name="logout",
     ),
+    path("profil/", views.profile, name="profile"),
+    path(
+        "profil/suppression/",
+        views.delete_account,
+        name="delete_account",
+    ),
 ]
