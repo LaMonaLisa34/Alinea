@@ -1,4 +1,7 @@
 {% url "home" as home_url %}
+{% url "accounts:account" as account_url %}
+{% url "accounts:profile" as profile_url %}
+{% url "accounts:logout" as logout_url %}
 
 <nav class="site-header__nav" aria-label="Navigation principale">
   <a href="{{ home_url }}#fonctionnement">Fonctionnement</a>
@@ -8,17 +11,24 @@
 
 <div class="site-header__actions">
   {% if user.is_authenticated %}
-  <form method="post" action="{% url "accounts:logout" %}">
-    {% csrf_token %}
-    <button class="site-header__button" type="submit">Déconnexion</button>
-  </form>
+    <a class="site-header__button" href="{{ profile_url }}">
+      Mon profil
+    </a>
+
+    <form method="post" action="{{ logout_url }}">
+      {% csrf_token %}
+      <button class="site-header__button" type="submit">
+        Déconnexion
+      </button>
+    </form>
   {% else %}
-  <a class="site-header__button" href="{% url "accounts:account" %}?mode=login">
-    Connexion
-  </a>
+    <a class="site-header__button" href="{{ account_url }}?mode=login">
+      Connexion
+    </a>
   {% endif %}
 
-  <a class="site-header__button site-header__button--primary" href="{{ home_url }}#decouvrir">
+  <a class="site-header__button site-header__button--primary"
+     href="{{ home_url }}#decouvrir">
     Découvrir Alinea <span aria-hidden="true">↗</span>
   </a>
 </div>
