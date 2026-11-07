@@ -16,7 +16,7 @@ def project_create(request):
     )
 
     if request.method == "POST" and form.is_valid():
-        # Prépare le projet sans l’enregistrer : le propriétaire reste à définir.
+        # Le propriétaire est défini côté serveur à partir de la session.
         project = form.save(commit=False)
         project.owner = request.user
         project.save()
@@ -27,28 +27,50 @@ def project_create(request):
     return render(
         request,
         "projects/project_create.html",
-        {"form": form},
+        {
+            "form": form,
+            "projects": EditorialProject.objects.filter(
+                owner=request.user,
+            ).order_by("-created_at", "-pk"),
+        },
     )
 
 
 @login_required(login_url="accounts:account")
-@require_http_methods(["GET", "HEAD"])
+@require_http_methods(["GET", "HEAD", "POST"])
 def project_detail(request, pk):
-    """Affiche le projet demandé et les projets du compte pour la navigation."""
+    """Affiche et modifie un projet appartenant à l’utilisateur connecté."""
+    # Restreint la consultation et la modification aux projets du propriétaire.
     project = get_object_or_404(
         EditorialProject,
         pk=pk,
         owner=request.user,
     )
-    projects = EditorialProject.objects.filter(
-        owner=request.user,
-    ).order_by("-created_at", "-pk")
+
+    form = EditorialProjectForm(
+        data=request.POST if request.method == "POST" else None,
+        instance=project,
+    )
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+
+        messages.success(
+            request,
+            "Les modifications du projet ont été enregistrées.",
+        )
+
+        # Redirige vers le mode lecture et évite une nouvelle soumission.
+        return redirect("projects:detail", pk=project.pk)
 
     return render(
         request,
         "projects/project_overview.html",
         {
+            "form": form,
             "project": project,
-            "projects": projects,
+            "projects": EditorialProject.objects.filter(
+                owner=request.user,
+            ).order_by("-created_at", "-pk"),
         },
     )
