@@ -137,7 +137,7 @@
 /* Organisation des lignes : informations, date et lien d’accès. */
 .dashboard__project {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto 44px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   grid-template-rows: auto auto;
   align-items: center;
   gap: 6px 24px;
@@ -189,11 +189,50 @@
   white-space: nowrap;
 }
 
-/* Lien d’ouverture du projet, centré verticalement en fin de ligne. */
-.dashboard__project-open {
+/* Conteneur des boutons d'actions (supprimer et ouvrir). */
+.dashboard__project-actions {
   display: inline-flex;
   grid-column: 3;
   grid-row: 1 / span 2;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dashboard__project-delete-form {
+  display: contents;
+}
+
+/* Bouton de suppression du projet. */
+.dashboard__project-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 8px;
+  background: #fff;
+  color: #dc2626;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.dashboard__project-delete:hover {
+  border-color: #fecaca;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.dashboard__project-delete:active {
+  border-color: #fca5a5;
+  background: #fecaca;
+}
+
+/* Lien d'ouverture du projet, centré verticalement en fin de ligne. */
+.dashboard__project-open {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 44px;
@@ -265,7 +304,8 @@
 @media (prefers-reduced-motion: no-preference) {
 
   .dashboard__button,
-  .dashboard__project-open {
+  .dashboard__project-open,
+  .dashboard__project-delete {
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -303,7 +343,7 @@
   }
 
   .dashboard__project {
-    grid-template-columns: minmax(0, 1fr) 44px;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: auto auto auto;
     column-gap: 16px;
     padding-block: 20px;
@@ -316,7 +356,7 @@
     white-space: normal;
   }
 
-  .dashboard__project-open {
+  .dashboard__project-actions {
     grid-column: 2;
     grid-row: 1 / span 3;
   }
