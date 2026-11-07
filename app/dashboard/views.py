@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.decorators.http import require_safe
 
 from projects.models import EditorialProject
@@ -8,7 +9,7 @@ from projects.models import EditorialProject
 @login_required(login_url="accounts:account")
 @require_safe
 def dashboard(request):
-    """Présente l’espace de travail de l’utilisateur connecté."""
+    """Présente l'espace de travail de l'utilisateur connecté."""
     projects = EditorialProject.objects.filter(
         owner=request.user,
     ).order_by("-created_at", "-pk")
@@ -16,5 +17,8 @@ def dashboard(request):
     return render(
         request,
         "dashboard/dashboard.html",
-        {"projects": projects},
+        {
+            "projects": projects,
+            "project_create_url": reverse("projects:create"),
+        },
     )
