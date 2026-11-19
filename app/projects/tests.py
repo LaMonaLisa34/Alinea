@@ -367,3 +367,109 @@ class EditorialProjectTests(TestCase):
         self.project.refresh_from_db()
         self.assertEqual(self.project.owner_id, self.user.pk)
         self.assertEqual(self.project.name, "Equine Encyclopedia")
+
+
+class ProjectDeleteTests(TestCase):
+    """Teste la suppression des projets éditoriaux."""
+
+    @classmethod
+    def setUpTestData(cls):
+        now = timezone.now()
+        common_fields = {
+            "terms_accepted_at": now,
+            "privacy_policy_accepted_at": now,
+        }
+
+        cls.user = User.objects.create_user(
+            email="owner@example.com",
+            name="Project Owner",
+            **common_fields,
+        )
+        cls.other_user = User.objects.create_user(
+            email="other@example.com",
+            name="Other User",
+            **common_fields,
+        )
+        cls.project = EditorialProject.objects.create(
+            name="Project to Delete",
+            description="This project will be deleted.",
+            editorial_guidelines="Guidelines for deletion test.",
+            owner=cls.user,
+        )
+
+    def setUp(self):
+        self.delete_url = reverse(
+            "projects:delete",
+            kwargs={"pk": self.project.pk},
+        )
+        self.dashboard_url = reverse("dashboard:index")
+
+    def test_authenticated_owner_can_delete_project(self):
+        """Le propriétaire peut supprimer son projet."""
+        self.client.force_login(self.user)
+        project_id = self.project.pk
+
+        response = self.client.post(self.delete_url)
+
+        self.assertRedirects(
+            response,
+            self.dashboard_url,
+            fetch_redirect_response=False,
+        )
+
+        # Vérifier que le projet a été supprimé
+        self.assertFalse(EditorialProject.objects.filter(pk=project_id).exists())
+
+    def test_other_user_cannot_delete_project(self):
+        """Un autre utilisateur ne peut pas supprimer le projet."""
+        self.client.force_login(self.other_user)
+        project_id = self.project.pk
+
+        response = self.client.post(self.delete_url)
+
+        # Doit retourner 404
+        self.assertEqual(response.status_code, 404)
+
+        # Vérifier que le projet existe toujours
+        self.assertTrue(EditorialProject.objects.filter(pk=project_id).exists())
+
+    def test_anonymous_user_cannot_delete_project(self):
+        """Exige une connexion pour supprimer un projet."""
+        project_id = self.project.pk
+
+        response = self.client.post(self.delete_url)
+
+        self.assertRedirects(
+            response,
+            f"{reverse('accounts:account')}?next={self.delete_url}",
+            fetch_redirect_response=False,
+        )
+
+        # Vérifier que le projet existe toujours
+        self.assertTrue(EditorialProject.objects.filter(pk=project_id).exists())
+
+    def test_delete_requires_post_method(self):
+        """La suppression ne fonctionne qu'avec POST."""
+        self.client.force_login(self.user)
+        project_id = self.project.pk
+
+        # GET ne doit pas fonctionner
+        response = self.client.get(self.delete_url)
+        self.assertEqual(response.status_code, 405)
+
+        # Vérifier que le projet existe toujours
+        self.assertTrue(EditorialProject.objects.filter(pk=project_id).exists())
+
+    def test_delete_project_shows_success_message(self):
+        """Affiche un message de succès après suppression."""
+        self.client.force_login(self.user)
+
+        response = self.client.post(
+            self.delete_url,
+            follow=True,
+        )
+
+        messages = list(response.context["messages"])
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(messages[0].level_tag, "success")
+        self.assertIn("supprimé", messages[0].message.lower())

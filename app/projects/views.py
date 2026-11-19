@@ -74,3 +74,18 @@ def project_detail(request, pk):
             ).order_by("-created_at", "-pk"),
         },
     )
+
+
+@login_required(login_url="accounts:account")
+@require_http_methods(["POST"])
+def project_delete(request, pk):
+    """Supprime un projet appartenant à l’utilisateur connecté."""
+    project = get_object_or_404(
+        EditorialProject,
+        pk=pk,
+        owner=request.user,
+    )
+
+    project.delete()
+    messages.success(request, "Le projet a été supprimé.")
+    return redirect("dashboard:index")

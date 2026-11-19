@@ -22,11 +22,9 @@
         <p>Organisez vos projets et vos contenus.</p>
       </div>
 
-      {% if projects %}
       <a class="dashboard__button" href="{{ project_create_url }}">
         Nouveau projet
       </a>
-      {% endif %}
     </header>
 
     {% for message in messages %}
@@ -40,6 +38,7 @@
       <ul class="dashboard__projects">
         {% for project in projects %}
         {% url "projects:detail" pk=project.pk as project_url %}
+        {% url "projects:delete" pk=project.pk as project_delete_url %}
 
         <li class="dashboard__project">
           <h3>
@@ -53,12 +52,56 @@
           <p class="dashboard__date">
             Créé le {{ project.created_at|date:"d/m/Y" }}
           </p>
-          <a class="dashboard__project-open" href="{{ project_url }}" aria-label="Ouvrir le projet {{ project.name }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
+          <div class="dashboard__project-actions">
+            <button class="dashboard__project-delete" type="button" data-modal="delete-project-{{ project.pk }}"
+              aria-label="Supprimer le projet {{ project.name }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
+            <!-- Modal de confirmation de suppression -->
+            <dialog class="modal" id="delete-project-{{ project.pk }}">
+              <div class="modal__overlay"></div>
+              <div class="modal__content">
+                <div class="modal__header">
+                  <h2 class="modal__title">Supprimer le projet ?</h2>
+                  <button class="modal__close" type="button" aria-label="Fermer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+                <div class="modal__body">
+                  <p>Êtes-vous sûr de vouloir supprimer le projet <strong>{{ project.name }}</strong> ? Cette action est
+                    irréversible.</p>
+                </div>
+                <div class="modal__footer">
+                  <button class="modal__button modal__button--cancel" type="button" data-action="cancel">
+                    Annuler
+                  </button>
+                  <form class="modal__delete-form" method="post" action="{% url 'projects:delete' pk=project.pk %}">
+                    {% csrf_token %}
+                    <button class="modal__button modal__button--delete" type="submit">
+                      Supprimer
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+
+            <a class="dashboard__project-open" href="{{ project_url }}"
+              aria-label="Ouvrir le projet {{ project.name }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </li>
         {% endfor %}
       </ul>

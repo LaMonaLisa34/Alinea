@@ -5,11 +5,52 @@
 
 {% block layout_page_css %}
 <link rel="stylesheet" href="{% static 'css/projects/project_overview.css' %}">
+<link rel="stylesheet" href="{% static 'css/projects/stepper.css' %}">
 <script src="{% static 'js/projects/project_overview.js' %}" defer></script>
+<script src="{% static 'js/projects/stepper.js' %}" defer></script>
 {% endblock %}
 
 {% block layout_content %}
 <main class="projects" id="main-content">
+  <!-- Barre d'étapes -->
+  <nav class="stepper" aria-label="Étapes du projet">
+    <ol class="stepper__list">
+      <li class="stepper__item stepper__item--active">
+        <div class="stepper__step">
+          <span class="stepper__number">1</span>
+          <span class="stepper__label">Projet</span>
+        </div>
+      </li>
+      <li class="stepper__item">
+        <div class="stepper__step">
+          <span class="stepper__number">2</span>
+          <span class="stepper__label">Sources</span>
+        </div>
+      </li>
+      <li class="stepper__item">
+        <div class="stepper__step">
+          <span class="stepper__number">3</span>
+          <span class="stepper__label">Structure</span>
+        </div>
+      </li>
+    </ol>
+
+    <div class="stepper__navigation">
+      <button class="stepper__button stepper__button--prev" type="button" aria-label="Étape précédente" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button class="stepper__button stepper__button--next" type="button" aria-label="Étape suivante">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
   {% for message in messages %}
   <output class="projects__message">{{ message }}</output>
   {% endfor %}
