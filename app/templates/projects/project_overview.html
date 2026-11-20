@@ -4,115 +4,208 @@
 {% block title %}{{ project.name }} — Alinea{% endblock %}
 
 {% block layout_page_css %}
-<link rel="stylesheet" href="{% static 'css/projects/project_overview.css' %}">
-<link rel="stylesheet" href="{% static 'css/projects/stepper.css' %}">
-<script src="{% static 'js/projects/project_overview.js' %}" defer></script>
-<script src="{% static 'js/projects/stepper.js' %}" defer></script>
+  <link rel="stylesheet"
+        href="{% static 'css/projects/stepper.css' %}">
+  <link rel="stylesheet"
+        href="{% static 'css/projects/project_overview.css' %}">
+  <script src="{% static 'js/projects/project_overview.js' %}" defer></script>
 {% endblock %}
 
 {% block layout_content %}
-<main class="projects" id="main-content">
-  <!-- Barre d'étapes -->
-  <nav class="stepper" aria-label="Étapes du projet">
-    <ol class="stepper__list">
-      <li class="stepper__item stepper__item--active">
-        <div class="stepper__step">
-          <span class="stepper__number">1</span>
-          <span class="stepper__label">Projet</span>
-        </div>
-      </li>
-      <li class="stepper__item">
-        <div class="stepper__step">
-          <span class="stepper__number">2</span>
-          <span class="stepper__label">Sources</span>
-        </div>
-      </li>
-      <li class="stepper__item">
-        <div class="stepper__step">
-          <span class="stepper__number">3</span>
-          <span class="stepper__label">Structure</span>
-        </div>
-      </li>
-    </ol>
+  <main class="projects" id="main-content">
+    <nav class="stepper" aria-label="Étapes de préparation du projet">
+      <ol class="stepper__list">
+        <li class="stepper__item stepper__item--active">
+          <div class="stepper__step" aria-current="step">
+            <span class="stepper__number">1</span>
+            <span class="stepper__label">Projet</span>
+          </div>
+        </li>
 
-    <div class="stepper__navigation">
-      <button class="stepper__button stepper__button--prev" type="button" aria-label="Étape précédente" disabled>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button class="stepper__button stepper__button--next" type="button" aria-label="Étape suivante">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    </div>
-  </nav>
+        <li class="stepper__item">
+          <a class="stepper__step"
+             href="{% url 'projects:sources' project.pk %}">
+            <span class="stepper__number">2</span>
+            <span class="stepper__label">Sources</span>
+          </a>
+        </li>
 
-  {% for message in messages %}
-  <output class="projects__message">{{ message }}</output>
-  {% endfor %}
+        <li class="stepper__item">
+          <div class="stepper__step">
+            <span class="stepper__number">3</span>
+            <span class="stepper__label">Structure</span>
+          </div>
+        </li>
+      </ol>
 
-  <header class="projects__heading">
-    <div>
-      <h1>{{ project.name }}</h1>
-      <p>Créé le {{ project.created_at|date:"d/m/Y à H:i" }}</p>
-    </div>
-
-    <button class="projects__edit" type="button" aria-controls="project-edit" hidden>
-      Modifier
-    </button>
-  </header>
-
-  <div id="project-read" hidden>
-    <section aria-labelledby="description-title">
-      <h2 id="description-title">Description</h2>
-
-      {% if project.description %}
-      {{ project.description|linebreaks }}
-      {% else %}
-      <p>Aucune description renseignée.</p>
-      {% endif %}
-    </section>
-
-    <section aria-labelledby="guidelines-title">
-      <h2 id="guidelines-title">Consignes générales</h2>
-
-      {% if project.editorial_guidelines %}
-      {{ project.editorial_guidelines|linebreaks }}
-      {% else %}
-      <p>Aucune consigne générale renseignée.</p>
-      {% endif %}
-    </section>
-  </div>
-
-  <section id="project-edit" class="projects__card" aria-labelledby="edit-title"
-    data-has-errors="{{ form.errors|yesno:'true,false' }}">
-    <h2 id="edit-title" tabindex="-1">Modifier le projet</h2>
-
-    <form class="projects__form" method="post" action="{% url 'projects:detail' project.pk %}">
-      {% csrf_token %}
-
-      {{ form.non_field_errors }}
-
-      {% for field in form %}
-      <div class="projects__field">
-        {{ field.as_field_group }}
-      </div>
-      {% endfor %}
-
-      <div class="projects__actions">
-        <button class="projects__submit" type="submit">
-          Enregistrer les modifications
+      <div class="stepper__navigation">
+        <button class="stepper__button stepper__button--prev"
+                type="button"
+                aria-label="Étape précédente"
+                disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true">
+            <path d="M15 19l-7-7 7-7" />
+          </svg>
         </button>
 
-        <a class="projects__cancel" href="{% url 'projects:detail' project.pk %}">
-          Annuler
+        <a class="stepper__button stepper__button--next"
+           href="{% url 'projects:sources' project.pk %}"
+           aria-label="Passer aux sources du projet">
+          <svg width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true">
+            <path d="M9 5l7 7-7 7" />
+          </svg>
         </a>
       </div>
-    </form>
-  </section>
-</main>
+    </nav>
+
+    <div class="projects__content">
+      {% for message in messages %}
+        <output class="projects__message {{ message.tags }}">
+          {{ message }}
+        </output>
+      {% endfor %}
+
+      <header class="projects__heading">
+        <div>
+          <h1>{{ project.name }}</h1>
+          <p>Créé le {{ project.created_at|date:"d/m/Y à H:i" }}</p>
+        </div>
+
+        <button class="projects__edit"
+                type="button"
+                aria-controls="project-edit"
+                hidden>
+          Modifier
+        </button>
+      </header>
+
+      <div id="project-read" hidden>
+        <section class="projects__card" aria-labelledby="description-title">
+          <h2 id="description-title">Description</h2>
+
+          {% if project.description %}
+            {{ project.description|linebreaks }}
+          {% else %}
+            <p>Aucune description renseignée.</p>
+          {% endif %}
+        </section>
+
+        <section class="projects__card" aria-labelledby="guidelines-title">
+          <h2 id="guidelines-title">Consignes générales</h2>
+
+          {% if project.editorial_guidelines %}
+            {{ project.editorial_guidelines|linebreaks }}
+          {% else %}
+            <p>Aucune consigne générale renseignée.</p>
+          {% endif %}
+        </section>
+      </div>
+
+      <section id="project-edit"
+               class="projects__card"
+               aria-labelledby="edit-title"
+               data-has-errors="{{ form.errors|yesno:'true,false' }}">
+        <h2 id="edit-title" tabindex="-1">Modifier le projet</h2>
+
+        <form class="projects__form"
+              method="post"
+              action="{% url 'projects:detail' project.pk %}">
+          {% csrf_token %}
+
+          {{ form.non_field_errors }}
+
+          {% for field in form %}
+            <div class="projects__field">
+              {{ field.label_tag }}
+              {{ field }}
+
+              {% if field.help_text %}
+                <p class="helptext" id="{{ field.auto_id }}_helptext">
+                  {{ field.help_text }}
+                </p>
+              {% endif %}
+
+              {{ field.errors }}
+            </div>
+          {% endfor %}
+
+          <div class="projects__actions">
+            <button class="projects__submit" type="submit">
+              Enregistrer les modifications
+            </button>
+
+            <a class="projects__cancel"
+               href="{% url 'projects:detail' project.pk %}">
+              Annuler
+            </a>
+          </div>
+        </form>
+      </section>
+
+      <section class="projects__danger"
+               aria-labelledby="project-delete-title">
+        <div class="projects__danger-description">
+          <h2 id="project-delete-title">Supprimer le projet</h2>
+          <p>
+            Le projet et ses sources de référence seront définitivement supprimés.
+            Cette action est irréversible.
+          </p>
+        </div>
+
+        <form class="projects__delete-form"
+              method="post"
+              action="{% url 'projects:delete' project.pk %}">
+          {% csrf_token %}
+
+          <label class="projects__delete-confirmation">
+            <input type="checkbox"
+                   name="confirm_deletion"
+                   value="yes"
+                   required>
+            <span>Je confirme la suppression définitive.</span>
+          </label>
+
+          <button class="projects__delete" type="submit">
+            Supprimer le projet
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <dialog class="project-delete-dialog"
+            aria-labelledby="delete-dialog-title"
+            aria-describedby="delete-dialog-description">
+      <form method="dialog" class="project-delete-dialog__content">
+        <span class="project-delete-dialog__label">Suppression définitive</span>
+
+        <h2 id="delete-dialog-title">Supprimer ce projet ?</h2>
+
+        <p id="delete-dialog-description">
+          Le projet « {{ project.name }} » et ses sources de référence
+          seront supprimés. Vous ne pourrez pas annuler cette action.
+        </p>
+
+        <div class="project-delete-dialog__actions">
+          <button class="projects__cancel"
+                  type="submit"
+                  value="cancel"
+                  autofocus>
+            Annuler
+          </button>
+
+          <button class="projects__delete projects__delete--confirm"
+                  type="submit"
+                  value="confirm">
+            Supprimer définitivement
+          </button>
+        </div>
+      </form>
+    </dialog>
+  </main>
 {% endblock %}

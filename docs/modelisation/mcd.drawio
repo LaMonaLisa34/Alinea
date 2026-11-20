@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="jbt5XvvC35_UCtw2Blqa" name="Page-1">
-        <mxGraphModel dx="1515" dy="724" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1262" dy="670" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -10,7 +10,7 @@
                 <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#0050a4;fontSize=13;align=center;" value="PROJET EDITORIAL&lt;br&gt;────────────&lt;br&gt;Identifiant&lt;br&gt;Nom&lt;br&gt;Description&lt;br&gt;Date création&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;Consignes générales&lt;/span&gt;&lt;/div&gt;" vertex="1">
                     <mxGeometry height="135" width="170" x="490" y="227.5" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#0050a4;fontSize=13;align=center;" value="SOURCE PROJET&lt;br&gt;────────────&lt;br&gt;Identifiant&lt;br&gt;Nom&lt;br&gt;URL&lt;br&gt;Prioritaire" vertex="1">
+                <mxCell id="4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#0050a4;fontSize=13;align=center;" value="SOURCE PROJET&lt;br&gt;────────────&lt;br&gt;Identifiant&lt;br&gt;Nom&lt;div&gt;&lt;font color=&quot;#0050a4&quot;&gt;Type&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;URL&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(0, 80, 164);&quot;&gt;Texte&lt;br&gt;Prioritaire&lt;/span&gt;&lt;/div&gt;" vertex="1">
                     <mxGeometry height="135" width="170" x="994" y="-82.5" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#0050a4;fontSize=13;align=center;" value="MODELE DE CONTENU&lt;br&gt;────────────&lt;br&gt;Identifiant&lt;br&gt;Nom&lt;br&gt;Description" vertex="1">
