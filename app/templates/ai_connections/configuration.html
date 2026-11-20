@@ -1,0 +1,83 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block title %}Connexion IA — Alinea{% endblock %}
+
+{% block layout_page_css %}
+  <link rel="stylesheet"
+        href="{% static 'css/ai_connections/configuration.css' %}">
+  <script src="{% static 'js/ai_connections/configuration.js' %}" defer></script>
+{% endblock %}
+
+{% block layout_content %}
+  <main class="ai-configuration" id="main-content">
+    <header class="ai-configuration__heading">
+      <h1>Connexion IA</h1>
+      <p>Choisissez le service utilisé pour préparer vos rédactions.</p>
+    </header>
+
+    {% for message in messages %}
+      <output class="ai-configuration__message {{ message.tags }}">
+        {{ message }}
+      </output>
+    {% endfor %}
+
+    <section class="ai-configuration__card"
+             aria-labelledby="configuration-title">
+      <h2 id="configuration-title">Configuration du service</h2>
+
+      <p class="ai-configuration__description">
+        Utilisez le service Alinea ou votre propre installation Ollama.
+      </p>
+
+      <form class="ai-configuration__form"
+            method="post"
+            action="{% url 'ai_connections:configuration' %}">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <div class="ai-configuration__field">
+          {{ form.mode.as_field_group }}
+        </div>
+
+        <fieldset class="ai-configuration__personal">
+          <legend>Connexion Ollama personnelle</legend>
+
+          <p class="ai-configuration__help">
+            À renseigner uniquement pour Ollama personnel. Aucune clé d’API requise.
+          </p>
+
+          <div class="ai-configuration__fields">
+            <div class="ai-configuration__field">
+              {{ form.base_url.as_field_group }}
+            </div>
+
+            <div class="ai-configuration__field">
+              {{ form.model_name.as_field_group }}
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="ai-configuration__help" id="connection-test-help">
+          Le test peut prendre jusqu’à 30 secondes. Vos paramètres restent
+          enregistrés en cas d’échec. Le test du service Alinea n’est pas
+          encore disponible.
+        </p>
+
+        <div class="ai-configuration__actions">
+          <button class="ai-configuration__submit"
+                  type="submit"
+                  aria-describedby="connection-test-help">
+            <span class="ai-configuration__spinner" aria-hidden="true" hidden></span>
+            <span data-submit-label>Enregistrer et tester</span>
+          </button>
+
+          <output class="ai-configuration__progress"
+                  aria-live="polite"
+                  aria-atomic="true"></output>
+        </div>
+      </form>
+    </section>
+  </main>
+{% endblock %}

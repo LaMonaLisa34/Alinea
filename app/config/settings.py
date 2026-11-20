@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+# Autorise un service Ollama local explicitement désigné par le déploiement.
+AI_OLLAMA_LOCAL_ORIGIN = os.environ.get("AI_OLLAMA_LOCAL_ORIGIN", "")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "projects.apps.ProjectsConfig",
     "dashboard.apps.DashboardConfig",
+    "ai_connections.apps.AiConnectionsConfig",
 ]
 AUTH_USER_MODEL = "accounts.User"
 MIDDLEWARE = [
