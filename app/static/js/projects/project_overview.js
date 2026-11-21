@@ -9,19 +9,62 @@ if (projectRead && projectEdit && editButton) {
     editButton.hidden = isEditing;
   }
 
-  // Conserve le formulaire ouvert lorsque la validation serveur a échoué.
   const hasErrors = projectEdit.dataset.hasErrors === "true";
-  setEditing(hasErrors);
+  const editRequested =
+    new URLSearchParams(window.location.search).get("mode") === "edit";
+
+  // Conserve l’édition après une erreur ou une demande explicite dans l’URL.
+  setEditing(hasErrors || editRequested);
 
   editButton.addEventListener("click", () => {
     setEditing(true);
-
-    // Place le focus au début du formulaire pour la navigation au clavier.
     projectEdit.querySelector("#edit-title")?.focus();
   });
 
   if (hasErrors) {
-    // Dirige l’utilisateur vers le premier champ signalé comme invalide.
     projectEdit.querySelector('[aria-invalid="true"]')?.focus();
+  }
+}
+
+const deleteForm = document.querySelector(".projects__delete-form");
+const deleteDialog = document.querySelector(".project-delete-dialog");
+
+if (
+  deleteForm &&
+  deleteDialog &&
+  typeof deleteDialog.showModal === "function"
+) {
+  const confirmation = deleteForm.querySelector(
+    ".projects__delete-confirmation",
+  );
+  const checkbox = deleteForm.querySelector('[name="confirm_deletion"]');
+
+  if (confirmation && checkbox) {
+    // Remplace la case par la fenêtre de confirmation lorsque celle-ci est disponible.
+    confirmation.hidden = true;
+    checkbox.required = false;
+    checkbox.checked = false;
+
+    deleteForm.addEventListener("submit", (event) => {
+      // Autorise la soumission après confirmation dans la fenêtre.
+      if (checkbox.checked) return;
+
+      event.preventDefault();
+      deleteDialog.returnValue = "";
+      deleteDialog.showModal();
+    });
+
+    deleteDialog.addEventListener("close", () => {
+      // Annuler et la touche Échap ferment la fenêtre sans supprimer le projet.
+      if (deleteDialog.returnValue !== "confirm") return;
+
+      checkbox.checked = true;
+      deleteForm.requestSubmit();
+    });
+
+    // Réinitialise la confirmation lors d’un retour sur la page.
+    window.addEventListener("pageshow", () => {
+      checkbox.checked = false;
+    });
   }
 }

@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import EditorialProject
+from .models import EditorialProject, ProjectReferenceSource
 
 User = get_user_model()
 
@@ -86,7 +86,7 @@ class EditorialProjectTests(TestCase):
         self.assertEqual(EditorialProject.objects.count(), initial_count)
 
     def test_valid_creation_saves_project_and_redirects(self):
-        """Enregistre les champs saisis et redirige vers le projet créé."""
+        """Enregistre le projet et redirige vers la gestion de ses sources."""
         self.client.force_login(self.user)
 
         response = self.client.post(
@@ -109,7 +109,7 @@ class EditorialProjectTests(TestCase):
 
         self.assertRedirects(
             response,
-            reverse("projects:detail", kwargs={"pk": project.pk}),
+            reverse("projects:sources", kwargs={"pk": project.pk}),
         )
         self.assertContains(response, "Votre projet éditorial a été créé.")
 
@@ -473,3 +473,452 @@ class ProjectDeleteTests(TestCase):
         self.assertEqual(len(messages), 1)
         self.assertEqual(messages[0].level_tag, "success")
         self.assertIn("supprimé", messages[0].message.lower())
+
+
+class ProjectReferenceSourceTests(TestCase):
+    """Teste la gestion des sources et les restrictions d’accès aux projets."""
+
+    @classmethod
+    def setUpTestData(cls):
+        """Prépare deux comptes, trois projets et leurs sources."""
+        now = timezone.now()
+        common_fields = {
+            "terms_accepted_at": now,
+            "privacy_policy_accepted_at": now,
+        }
+
+        cls.owner = User.objects.create_user(
+            email="sources-owner@example.com",
+            name="Project Owner",
+            **common_fields,
+        )
+        cls.other_user = User.objects.create_user(
+            email="sources-other@example.com",
+            name="Other User",
+            **common_fields,
+        )
+
+        cls.project = EditorialProject.objects.create(
+            name="Equine Encyclopedia",
+            owner=cls.owner,
+        )
+        cls.second_project = EditorialProject.objects.create(
+            name="Another Owned Project",
+            owner=cls.owner,
+        )
+        cls.other_project = EditorialProject.objects.create(
+            name="Private Project",
+            owner=cls.other_user,
+        )
+
+        cls.source = ProjectReferenceSource.objects.create(
+            project=cls.project,
+            name="Reference Organisation",
+            url="https://example.org/reference",
+            is_priority=False,
+        )
+        cls.second_source = ProjectReferenceSource.objects.create(
+            project=cls.second_project,
+            name="Another Reference",
+            url="https://example.org/another",
+        )
+        cls.other_source = ProjectReferenceSource.objects.create(
+            project=cls.other_project,
+            name="Private Reference",
+            url="https://example.org/private-reference",
+        )
+
+    def setUp(self):
+        """Ouvre une session propriétaire et résout les routes à tester."""
+        self.client.force_login(self.owner)
+
+        self.sources_url = reverse(
+            "projects:sources",
+            kwargs={"pk": self.project.pk},
+        )
+        self.edit_url = reverse(
+            "projects:source_edit",
+            kwargs={
+                "pk": self.project.pk,
+                "source_pk": self.source.pk,
+            },
+        )
+        self.delete_url = reverse(
+            "projects:source_delete",
+            kwargs={
+                "pk": self.project.pk,
+                "source_pk": self.source.pk,
+            },
+        )
+
+    def source_data(self, **overrides):
+        """Construit une référence de type lien web valide."""
+        data = {
+            "name": "New Reference",
+            "source_type": "url",
+            "url": "https://example.org/new-reference",
+            "text": "",
+            "is_priority": "on",
+        }
+        data.update(overrides)
+        return data
+
+    def source_state(self):
+        """Capture les données pour vérifier l’absence de modification."""
+        return list(
+            ProjectReferenceSource.objects.order_by("pk").values_list(
+                "pk",
+                "project_id",
+                "name",
+                "url",
+                "is_priority",
+            )
+        )
+
+    def test_owner_can_list_project_sources(self):
+        """Affiche uniquement les références du projet demandé."""
+        response = self.client.get(self.sources_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "projects/project_sources.html")
+        self.assertContains(response, self.source.name)
+        self.assertNotContains(response, self.second_source.name)
+        self.assertNotContains(response, self.other_source.name)
+        self.assertEqual(
+            list(response.context["sources"]),
+            [self.source],
+        )
+
+    def test_empty_project_displays_invitation(self):
+        """Affiche un état vide lorsque le projet ne possède aucune source."""
+        self.project.reference_sources.all().delete()
+
+        response = self.client.get(self.sources_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "Aucune référence pour le moment.",
+        )
+
+    def test_owner_can_add_source(self):
+        """Enregistre la référence dans le projet et confirme son ajout."""
+        initial_count = ProjectReferenceSource.objects.count()
+
+        response = self.client.post(
+            self.sources_url,
+            self.source_data(),
+            follow=True,
+        )
+
+        self.assertRedirects(response, self.sources_url)
+        self.assertContains(
+            response,
+            "La source de référence a été ajoutée.",
+        )
+        self.assertEqual(
+            ProjectReferenceSource.objects.count(),
+            initial_count + 1,
+        )
+
+        source = self.project.reference_sources.get(name="New Reference")
+        self.assertEqual(source.url, "https://example.org/new-reference")
+        self.assertTrue(source.is_priority)
+
+    def test_submitted_project_cannot_change_source_assignment(self):
+        """Ignore les identifiants de projet ajoutés aux données du formulaire."""
+        response = self.client.post(
+            self.sources_url,
+            self.source_data(
+                project=self.other_project.pk,
+                project_id=self.other_project.pk,
+            ),
+        )
+
+        self.assertRedirects(
+            response,
+            self.sources_url,
+            fetch_redirect_response=False,
+        )
+
+        source = ProjectReferenceSource.objects.get(name="New Reference")
+        self.assertEqual(source.project_id, self.project.pk)
+
+    def test_invalid_data_prevents_creation(self):
+        """Refuse les noms et URL invalides sans créer de référence."""
+        cases = (
+            ("name", ""),
+            ("name", "   "),
+            ("name", "A" * 201),
+            ("url", ""),
+            ("url", "not-an-address"),
+            ("url", "ftp://example.org/reference"),
+            ("url", "javascript:alert(1)"),
+        )
+        initial_state = self.source_state()
+
+        for field, value in cases:
+            with self.subTest(field=field, value=value):
+                response = self.client.post(
+                    self.sources_url,
+                    self.source_data(**{field: value}),
+                )
+
+                self.assertEqual(response.status_code, 200)
+                self.assertIn(field, response.context["form"].errors)
+                self.assertEqual(self.source_state(), initial_state)
+
+    def test_edit_form_is_prefilled(self):
+        """Préremplit le formulaire avec les informations de la référence."""
+        response = self.client.get(self.edit_url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response,
+            "projects/project_sources.html",
+        )
+
+        form = response.context["form"]
+        self.assertEqual(form.instance.pk, self.source.pk)
+        self.assertEqual(form["name"].value(), self.source.name)
+        self.assertEqual(form["url"].value(), self.source.url)
+        self.assertFalse(form["is_priority"].value())
+
+    def test_owner_can_edit_source(self):
+        """Modifie les champs autorisés sans déplacer la source."""
+        initial_count = ProjectReferenceSource.objects.count()
+
+        response = self.client.post(
+            self.edit_url,
+            self.source_data(
+                project=self.other_project.pk,
+                project_id=self.other_project.pk,
+            ),
+            follow=True,
+        )
+
+        self.assertRedirects(response, self.sources_url)
+        self.assertContains(
+            response,
+            "La source de référence a été modifiée.",
+        )
+
+        self.source.refresh_from_db()
+        self.assertEqual(self.source.name, "New Reference")
+        self.assertEqual(
+            self.source.url,
+            "https://example.org/new-reference",
+        )
+        self.assertTrue(self.source.is_priority)
+        self.assertEqual(self.source.project_id, self.project.pk)
+        self.assertEqual(
+            ProjectReferenceSource.objects.count(),
+            initial_count,
+        )
+
+    def test_invalid_edit_preserves_database_and_submitted_values(self):
+        """Conserve les données enregistrées et réaffiche la saisie invalide."""
+        initial_state = self.source_state()
+
+        response = self.client.post(
+            self.edit_url,
+            self.source_data(url="invalid-address"),
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+        form = response.context["form"]
+        self.assertIn("url", form.errors)
+        self.assertEqual(form["name"].value(), "New Reference")
+        self.assertEqual(form["url"].value(), "invalid-address")
+        self.assertEqual(self.source_state(), initial_state)
+
+    def test_priority_can_be_removed_and_persists_after_reload(self):
+        """Enregistre le retrait de priorité et le retrouve au rechargement."""
+        self.source.is_priority = True
+        self.source.save(update_fields=["is_priority"])
+
+        data = self.source_data()
+        data.pop("is_priority")
+
+        response = self.client.post(self.edit_url, data)
+
+        self.assertEqual(response.status_code, 302)
+        self.source.refresh_from_db()
+        self.assertFalse(self.source.is_priority)
+
+        response = self.client.get(self.edit_url)
+        self.assertFalse(response.context["form"]["is_priority"].value())
+        self.assertEqual(
+            response.context["form"]["name"].value(),
+            "New Reference",
+        )
+
+    def test_priority_sources_are_listed_first(self):
+        """Présente les références prioritaires avant les autres."""
+        priority_source = ProjectReferenceSource.objects.create(
+            project=self.project,
+            name="Priority Reference",
+            url="https://example.org/priority",
+            is_priority=True,
+        )
+
+        response = self.client.get(self.sources_url)
+
+        self.assertEqual(
+            list(response.context["sources"]),
+            [priority_source, self.source],
+        )
+
+    def test_owner_can_delete_source_after_confirmation(self):
+        """Supprime uniquement la référence confirmée et conserve son projet."""
+        response = self.client.post(
+            self.delete_url,
+            {"confirm_deletion": "yes"},
+            follow=True,
+        )
+
+        self.assertRedirects(response, self.sources_url)
+        self.assertContains(
+            response,
+            "La source de référence a été supprimée.",
+        )
+        self.assertFalse(
+            ProjectReferenceSource.objects.filter(pk=self.source.pk).exists()
+        )
+        self.assertTrue(
+            ProjectReferenceSource.objects.filter(
+                pk=self.second_source.pk,
+            ).exists()
+        )
+        self.assertTrue(EditorialProject.objects.filter(pk=self.project.pk).exists())
+
+    def test_deletion_requires_explicit_confirmation(self):
+        """Refuse la suppression si la confirmation attendue est absente."""
+        for data in ({}, {"confirm_deletion": "no"}):
+            with self.subTest(data=data):
+                response = self.client.post(self.delete_url, data)
+
+                self.assertRedirects(
+                    response,
+                    self.sources_url,
+                    fetch_redirect_response=False,
+                )
+                self.assertTrue(
+                    ProjectReferenceSource.objects.filter(
+                        pk=self.source.pk,
+                    ).exists()
+                )
+
+    def test_get_cannot_delete_source(self):
+        """Interdit la suppression par simple ouverture de l’URL."""
+        response = self.client.get(self.delete_url)
+
+        self.assertEqual(response.status_code, 405)
+        self.assertTrue(
+            ProjectReferenceSource.objects.filter(pk=self.source.pk).exists()
+        )
+
+    def test_other_user_cannot_access_or_change_sources(self):
+        """Refuse la consultation et les écritures d’un autre compte."""
+        self.client.force_login(self.other_user)
+        initial_state = self.source_state()
+
+        cases = (
+            ("get", self.sources_url, None),
+            ("post", self.sources_url, self.source_data()),
+            ("get", self.edit_url, None),
+            ("post", self.edit_url, self.source_data()),
+            ("post", self.delete_url, {"confirm_deletion": "yes"}),
+        )
+
+        for method, url, data in cases:
+            with self.subTest(method=method, url=url):
+                if method == "get":
+                    response = self.client.get(url)
+                else:
+                    response = self.client.post(url, data)
+
+                self.assertEqual(response.status_code, 404)
+                self.assertEqual(self.source_state(), initial_state)
+
+    def test_source_must_belong_to_project_in_url(self):
+        """Refuse une source d’un autre projet, même avec le même propriétaire."""
+        initial_state = self.source_state()
+
+        edit_url = reverse(
+            "projects:source_edit",
+            kwargs={
+                "pk": self.project.pk,
+                "source_pk": self.second_source.pk,
+            },
+        )
+        delete_url = reverse(
+            "projects:source_delete",
+            kwargs={
+                "pk": self.project.pk,
+                "source_pk": self.second_source.pk,
+            },
+        )
+
+        cases = (
+            ("get", edit_url, None),
+            ("post", edit_url, self.source_data()),
+            ("post", delete_url, {"confirm_deletion": "yes"}),
+        )
+
+        for method, url, data in cases:
+            with self.subTest(method=method, url=url):
+                if method == "get":
+                    response = self.client.get(url)
+                else:
+                    response = self.client.post(url, data)
+
+                self.assertEqual(response.status_code, 404)
+                self.assertEqual(self.source_state(), initial_state)
+
+    def test_anonymous_user_cannot_access_or_change_sources(self):
+        """Exige une connexion avant consultation, ajout, modification ou suppression."""
+        self.client.logout()
+        initial_state = self.source_state()
+
+        cases = (
+            ("get", self.sources_url, None),
+            ("post", self.sources_url, self.source_data()),
+            ("get", self.edit_url, None),
+            ("post", self.edit_url, self.source_data()),
+            ("post", self.delete_url, {"confirm_deletion": "yes"}),
+        )
+
+        for method, url, data in cases:
+            with self.subTest(method=method, url=url):
+                if method == "get":
+                    response = self.client.get(url)
+                else:
+                    response = self.client.post(url, data)
+
+                self.assertRedirects(
+                    response,
+                    f"{reverse('accounts:account')}?next={url}",
+                    fetch_redirect_response=False,
+                )
+                self.assertEqual(self.source_state(), initial_state)
+
+    def test_post_operations_require_csrf_token(self):
+        """Vérifie le contrôle CSRF sur les trois opérations d’écriture."""
+        csrf_client = Client(enforce_csrf_checks=True)
+        csrf_client.force_login(self.owner)
+        initial_state = self.source_state()
+
+        cases = (
+            (self.sources_url, self.source_data()),
+            (self.edit_url, self.source_data()),
+            (self.delete_url, {"confirm_deletion": "yes"}),
+        )
+
+        for url, data in cases:
+            with self.subTest(url=url):
+                response = csrf_client.post(url, data)
+
+                self.assertEqual(response.status_code, 403)
+                self.assertEqual(self.source_state(), initial_state)
