@@ -1,16 +1,16 @@
-/* Dimensions et palette de la page de création. */
+/* Structure et palette de la page de création. */
 .project-create {
-  --project-accent: #4f46e5;
-  --project-accent-hover: #4338ca;
-  --project-text: #111827;
-  --project-muted: #6b7280;
-  --project-border: #e5e7eb;
+  --create-accent: #4f46e5;
+  --create-accent-hover: #4338ca;
+  --create-text: #111827;
+  --create-muted: #6b7280;
+  --create-border: #e5e7eb;
 
   box-sizing: border-box;
-  min-width: 0;
   width: 100%;
-  padding: 24px 40px 36px;
-  color: var(--project-text);
+  min-width: 0;
+  padding: 28px 40px 40px;
+  color: var(--create-text);
 }
 
 .project-create *,
@@ -19,70 +19,95 @@
   box-sizing: border-box;
 }
 
+.project-create svg {
+  display: block;
+  flex-shrink: 0;
+}
+
 .project-create__content {
   width: 100%;
   max-width: 1120px;
 }
 
-/* Espacement entre les étapes et le contenu principal. */
-.project-create > .stepper {
-  margin-bottom: 20px;
-}
-
-/* Navigation de retour et en-tête de page. */
+/* Navigation de retour. */
 .project-create__back {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 32px;
-  margin-bottom: 12px;
-  color: var(--project-muted);
+  min-height: 36px;
+  margin-bottom: 20px;
+  color: #4b5563;
   font-size: 13px;
+  line-height: 1.5;
   text-decoration: none;
 }
 
 .project-create__back:hover {
-  color: var(--project-accent);
+  color: var(--create-accent);
 }
 
+/* Présentation et identité visuelle du projet. */
 .project-create__heading {
-  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.project-create__heading > div {
+  min-width: 0;
+}
+
+.project-create__icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid #e0e7ff;
+  border-radius: 14px;
+  background: #eef2ff;
+  color: var(--create-accent);
 }
 
 .project-create__heading h1 {
-  margin: 0 0 6px;
-  font-size: clamp(22px, 2.5vw, 27px);
+  margin: 0 0 8px;
+  font-size: clamp(23px, 2.5vw, 28px);
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
 }
 
 .project-create__heading p {
+  max-width: 80ch;
   margin: 0;
-  color: var(--project-muted);
+  color: var(--create-muted);
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-/* Présentation compacte du formulaire. */
+/* Carte du formulaire et organisation des champs. */
 .project-form {
-  padding: 22px 24px;
-  border: 1px solid var(--project-border);
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid var(--create-border);
   border-radius: 12px;
   background: #fff;
 }
 
 .project-form__field {
-  margin-bottom: 16px;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
 }
 
 .project-form__label {
   display: flex;
-  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 4px 12px;
-  margin-bottom: 6px;
+  gap: 12px;
 }
 
 .project-form__label label {
@@ -92,62 +117,61 @@
 }
 
 .project-form__optional {
-  color: var(--project-muted);
+  flex-shrink: 0;
+  color: var(--create-muted);
   font-size: 11px;
   line-height: 1.5;
 }
 
 .project-form__help {
-  margin: 0 0 6px;
-  color: var(--project-muted);
+  margin: 0;
+  color: var(--create-muted);
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* Champs de saisie et dimensions initiales des zones de texte. */
-.project-form input,
-.project-form textarea {
+/* Dimensions communes des champs de saisie. */
+.project-form :is(input, textarea, select) {
   display: block;
   width: 100%;
-  min-width: 0;
-  padding: 8px 12px;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px 12px;
   border: 1px solid #d1d5db;
-  border-radius: 7px;
+  border-radius: 8px;
   background: #fff;
-  color: var(--project-text);
+  color: var(--create-text);
   font: inherit;
   font-size: 14px;
-  line-height: 1.5;
-}
-
-.project-form input {
-  min-height: 42px;
+  line-height: 1.6;
 }
 
 .project-form textarea {
-  height: 88px;
-  min-height: 72px;
-  overflow-y: auto;
+  height: 96px;
+  min-height: 80px;
   resize: vertical;
 }
 
-.project-form input::placeholder,
-.project-form textarea::placeholder {
-  color: var(--project-muted);
+.project-form :is(input, textarea)::placeholder {
+  color: var(--create-muted);
   opacity: 1;
 }
 
-.project-form input:hover,
-.project-form textarea:hover {
+.project-form :is(input, textarea, select):hover {
   border-color: #9ca3af;
 }
 
-/* Erreurs de validation et navigation au clavier. */
-.project-form input:focus-visible,
-.project-form textarea:focus-visible {
-  border-color: var(--project-accent);
-  outline: 2px solid var(--project-accent);
-  outline-offset: 2px;
+.project-form :is(input, textarea, select):focus-visible {
+  border-color: var(--create-accent);
+}
+
+/* Erreurs de validation côté serveur. */
+.project-form .errorlist {
+  margin: 0;
+  padding-left: 18px;
+  color: #b91c1c;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .project-form [aria-invalid="true"] {
@@ -158,32 +182,15 @@
   outline-color: #b91c1c;
 }
 
-.project-form .errorlist {
-  margin: 6px 0 0;
-  padding-left: 18px;
-  color: #b91c1c;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.project-form > .errorlist {
-  margin: 0 0 16px;
-}
-
-.project-create :is(a, button):focus-visible {
-  outline: 2px solid var(--project-accent);
-  outline-offset: 3px;
-}
-
-/* Actions de création et d’annulation. */
+/* Actions du formulaire. */
 .project-form__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
-  padding-top: 16px;
-  border-top: 1px solid var(--project-border);
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--create-border);
 }
 
 .project-form__cancel,
@@ -191,10 +198,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   min-height: 44px;
-  padding: 9px 16px;
-  border: 1px solid var(--project-border);
-  border-radius: 7px;
+  padding: 10px 18px;
+  border: 1px solid var(--create-border);
+  border-radius: 8px;
   font: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -210,49 +218,68 @@
 }
 
 .project-form__cancel:hover {
-  border-color: #d1d5db;
-  background: #f9fafb;
+  border-color: #c7d2fe;
+  background: #eef2ff;
+  color: var(--create-accent);
 }
 
 .project-form__submit {
-  border-color: var(--project-accent);
-  background: var(--project-accent);
+  border-color: var(--create-accent);
+  background: var(--create-accent);
   color: #fff;
 }
 
 .project-form__submit:hover {
-  border-color: var(--project-accent-hover);
-  background: var(--project-accent-hover);
+  border-color: var(--create-accent-hover);
+  background: var(--create-accent-hover);
 }
 
-/* Transitions conditionnées aux préférences de mouvement. */
-@media (prefers-reduced-motion: no-preference) {
-  .project-form input,
-  .project-form textarea {
-    transition: border-color 160ms ease;
-  }
+/* Indicateurs de focus pour la navigation au clavier. */
+.project-create :is(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--create-accent);
+  outline-offset: 3px;
+}
 
+/* Transitions respectant les préférences de mouvement. */
+@media (prefers-reduced-motion: no-preference) {
   .project-form__cancel,
   .project-form__submit {
     transition:
       background-color 160ms ease,
-      border-color 160ms ease;
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .project-form :is(input, textarea, select) {
+    transition: border-color 160ms ease;
   }
 }
 
-/* Adaptation du formulaire aux écrans mobiles. */
+/* Adaptation aux écrans mobiles. */
 @media (max-width: 800px) {
   .project-create {
-    padding: 20px 20px 32px;
+    padding: 24px 20px 32px;
   }
 
   .project-form {
-    padding: 18px;
+    padding: 20px;
   }
 
-  .project-form input,
-  .project-form textarea {
+  .project-form :is(input, textarea, select) {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-create__heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .project-create__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
   }
 }
 

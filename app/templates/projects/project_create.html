@@ -6,86 +6,39 @@
 {% block layout_page_css %}
   <link rel="stylesheet"
         href="{% static 'css/projects/project_create.css' %}">
-  <link rel="stylesheet"
-        href="{% static 'css/projects/stepper.css' %}">
 {% endblock %}
 
 {% block layout_content %}
   <main class="project-create" id="main-content">
-    <nav class="stepper" aria-label="Étapes de préparation du projet">
-      <ol class="stepper__list">
-        <li class="stepper__item stepper__item--active">
-          <div class="stepper__step" aria-current="step">
-            <span class="stepper__number">1</span>
-            <span class="stepper__label">Projet</span>
-          </div>
-        </li>
-
-        <li class="stepper__item">
-          <div class="stepper__step">
-            <span class="stepper__number">2</span>
-            <span class="stepper__label">Sources</span>
-          </div>
-        </li>
-
-        <li class="stepper__item">
-          <div class="stepper__step">
-            <span class="stepper__number">3</span>
-            <span class="stepper__label">Structure</span>
-          </div>
-        </li>
-      </ol>
-
-      <div class="stepper__navigation">
-        <button class="stepper__button stepper__button--prev"
-                type="button"
-                aria-label="Étape précédente"
-                disabled>
-          <svg width="20"
-               height="20"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="2"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <button class="stepper__button stepper__button--next"
-                type="submit"
-                form="project-create-form"
-                aria-label="Créer le projet et passer aux sources">
-          <svg width="20"
-               height="20"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="2"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-    </nav>
-
     <div class="project-create__content">
       <a class="project-create__back"
          href="{% url 'dashboard:index' %}">
-        <span aria-hidden="true">←</span>
+        <svg width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.7"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="m12 19-7-7 7-7M5 12h14" />
+        </svg>
         Mon espace
       </a>
 
       <header class="project-create__heading">
-        <h1>Créer un projet éditorial</h1>
-        <p>
-          Définissez le contexte et les consignes communes à vos contenus.
-          Vous pourrez ensuite ajouter vos sources de référence.
-        </p>
+        <span class="project-create__icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+            <path d="M3 11h18" />
+          </svg>
+        </span>
+
+        <div>
+          <h1>Créer un projet éditorial</h1>
+          <p>
+            Définissez le contexte et les consignes communes à vos contenus.
+            Vous pourrez les compléter à tout moment.
+          </p>
+        </div>
       </header>
 
       <form class="project-form"
@@ -106,13 +59,19 @@
               {% endif %}
             </div>
 
-            {% if field.name == "editorial_guidelines" %}
-              <p class="project-form__help" id="guidelines-help">
+            {{ field }}
+
+            {% if field.help_text %}
+              <p class="project-form__help"
+                 id="{{ field.auto_id }}_helptext">
+                {{ field.help_text }}
+              </p>
+            {% elif field.name == "editorial_guidelines" %}
+              <p class="project-form__help">
                 Précisez le ton, le public visé et les règles de rédaction.
               </p>
             {% endif %}
 
-            {{ field }}
             {{ field.errors }}
           </div>
         {% endfor %}
@@ -124,7 +83,12 @@
           </a>
 
           <button class="project-form__submit" type="submit">
-            Créer et passer aux sources
+            <svg width="16" height="16" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            Créer le projet
           </button>
         </div>
       </form>

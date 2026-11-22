@@ -4,179 +4,238 @@
 {% block title %}Sources — {{ project.name }} — Alinea{% endblock %}
 
 {% block layout_page_css %}
-  <link rel="stylesheet"
-        href="{% static 'css/projects/stepper.css' %}">
-  <link rel="stylesheet"
-        href="{% static 'css/projects/project_sources.css' %}">
-  <script src="{% static 'js/projects/project_sources.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'css/projects/project_sources.css' %}">
+<script src="{% static 'js/projects/project_sources.js' %}" defer></script>
 {% endblock %}
 
 {% block layout_content %}
-  <main class="project-sources" id="main-content">
-    <nav class="stepper" aria-label="Étapes de préparation du projet">
-      <ol class="stepper__list">
-        <li class="stepper__item">
-          <a class="stepper__step"
-             href="{% url 'projects:detail' project.pk %}">
-            <span class="stepper__number">1</span>
-            <span class="stepper__label">Projet</span>
-          </a>
-        </li>
-
-        <li class="stepper__item stepper__item--active">
-          <div class="stepper__step" aria-current="step">
-            <span class="stepper__number">2</span>
-            <span class="stepper__label">Sources</span>
-          </div>
-        </li>
-
-        <li class="stepper__item">
-          <div class="stepper__step">
-            <span class="stepper__number">3</span>
-            <span class="stepper__label">Structure</span>
-          </div>
-        </li>
-      </ol>
-
-      <div class="stepper__navigation">
-        <a class="stepper__button stepper__button--prev"
-           href="{% url 'projects:detail' project.pk %}"
-           aria-label="Revenir au projet">
-          <svg width="20"
-               height="20"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="2"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M15 19l-7-7 7-7" />
+<main class="project-sources" id="main-content">
+  <div class="project-sources__wrapper">
+    <header class="project-sources__heading">
+      <div class="project-sources__identity">
+        <span class="project-sources__project-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+            <path d="M3 11h18" />
           </svg>
-        </a>
+        </span>
 
-        <button class="stepper__button stepper__button--next"
-                type="button"
-                aria-label="Structure : étape prochainement disponible"
-                disabled>
-          <svg width="20"
-               height="20"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="2"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+        <div class="project-sources__identity-text">
+          <p class="project-sources__eyebrow">Projet éditorial</p>
+          <h1>{{ project.name }}</h1>
+
+          <p class="project-sources__created">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M16 3v4M8 3v4M3 11h18" />
+            </svg>
+            Créé le {{ project.created_at|date:"d/m/Y à H:i" }}
+          </p>
+        </div>
       </div>
-    </nav>
+    </header>
+  </div>
+
+  <nav class="project-sources__tabs" aria-label="Navigation du projet">
+    <ul class="project-sources__tabs-list">
+      <li class="project-sources__tabs-item">
+        <a class="project-sources__tabs-link" href="{% url 'projects:detail' project.pk %}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 11v6M12 7h.01" />
+          </svg>
+          Informations
+        </a>
+      </li>
+
+      <li class="project-sources__tabs-item project-sources__tabs-item--active">
+        <a class="project-sources__tabs-link" href="{% url 'projects:sources' project.pk %}" aria-current="page">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7 .1l3-3a5 5 0 0 0-7-7l-2 2" />
+            <path d="M14 11a5 5 0 0 0-7-.1l-3 3a5 5 0 0 0 7 7l2-2" />
+          </svg>
+          Sources
+        </a>
+      </li>
+
+      <li class="project-sources__tabs-item">
+        <a class="project-sources__tabs-link" href="{% url 'content_models:list' project.pk %}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+          Modèles
+        </a>
+      </li>
+      {% for content_template in templates %}
+      <li>
+        <a class="project-sources__tabs-link" href="{% url 'content_models:editor' project.pk content_template.pk %}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+            <path d="M14 2v6h6M8 13h8M8 17h5" />
+          </svg>
+          {{ content_template.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="project-sources__wrapper">
+    {% for message in messages %}
+    <output class="project-sources__message {{ message.tags }}">
+      {{ message }}
+    </output>
+    {% endfor %}
 
     <div class="project-sources__content">
-      <header class="project-sources__heading">
-        <p class="project-sources__project">{{ project.name }}</p>
-        <h1>Sources de référence</h1>
-        <p>Ajoutez des liens ou des textes pour guider les rédactions du projet.</p>
-      </header>
+      <section class="project-sources__card" aria-labelledby="sources-title">
+        <header class="project-sources__card-heading">
+          <span class="project-sources__section-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 3H20v19H6.5A2.5 2.5 0 0 1 4 19.5v-14A2.5 2.5 0 0 1 6.5 3Z" />
+              <path d="M8 7h8M8 11h6" />
+            </svg>
+          </span>
 
-      {% for message in messages %}
-        <output class="project-sources__message {{ message.tags }}">
-          {{ message }}
-        </output>
-      {% endfor %}
-
-      <section class="project-sources__card"
-               aria-labelledby="sources-title">
-        <h2 id="sources-title">Sources du projet</h2>
+          <div>
+            <h2 id="sources-title">Sources de référence</h2>
+            <p class="project-sources__section-description">
+              Les liens et les textes qui guideront les rédactions du projet.
+            </p>
+          </div>
+        </header>
 
         {% if sources %}
-          <ul class="project-sources__list">
-            {% for source in sources %}
-              <li class="project-sources__item">
-                <div class="project-sources__information">
-                  <h3>
-                    {% if source.source_type == "url" %}
-                      <a href="{{ source.url }}"
-                         target="_blank"
-                         rel="noopener noreferrer">
-                        {{ source.name }}
-                        <span class="project-sources__external">
-                          — nouvel onglet
-                        </span>
-                      </a>
-                    {% else %}
-                      {{ source.name }}
-                    {% endif %}
-                  </h3>
-
-                  {% if source.source_type == "url" %}
-                    <p class="project-sources__url">{{ source.url }}</p>
-                  {% else %}
-                    <details class="project-sources__text-preview">
-                      <summary>Consulter le texte de référence</summary>
-
-                      <div class="project-sources__text">
-                        {{ source.text|linebreaks }}
-                      </div>
-                    </details>
-                  {% endif %}
-
-                  <span class="project-sources__badge">
-                    {{ source.get_source_type_display }}
+        <ul class="project-sources__list">
+          {% for source in sources %}
+          <li class="project-sources__item">
+            <div class="project-sources__information">
+              <h3>
+                {% if source.source_type == "url" %}
+                <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">
+                  {{ source.name }}
+                  <span class="project-sources__external">
+                    — nouvel onglet
                   </span>
+                </a>
+                {% else %}
+                {{ source.name }}
+                {% endif %}
+              </h3>
 
-                  {% if source.is_priority %}
-                    <span class="project-sources__badge">Prioritaire</span>
-                  {% endif %}
+              {% if source.source_type == "url" %}
+              <p class="project-sources__url">{{ source.url }}</p>
+              {% else %}
+              <details class="project-sources__text-preview">
+                <summary>Consulter le texte de référence</summary>
+
+                <div class="project-sources__text">
+                  {{ source.text|linebreaks }}
                 </div>
+              </details>
+              {% endif %}
 
-                <div class="project-sources__actions">
-                  <a class="project-sources__button"
-                     href="{% url 'projects:source_edit' project.pk source.pk %}"
-                     aria-label="Modifier la source {{ source.name }}">
-                    Modifier
-                  </a>
+              <div class="project-sources__badges">
+                <span class="project-sources__badge">
+                  {{ source.get_source_type_display }}
+                </span>
 
-                  <form class="project-sources__delete-form"
-                        method="post"
-                        action="{% url 'projects:source_delete' project.pk source.pk %}">
-                    {% csrf_token %}
+                {% if source.is_priority %}
+                <span class="project-sources__badge project-sources__badge--priority">
+                  Prioritaire
+                </span>
+                {% endif %}
+              </div>
+            </div>
 
-                    <label class="project-sources__confirmation">
-                      <input type="checkbox"
-                             name="confirm_deletion"
-                             value="yes"
-                             required>
-                      <span>Confirmer la suppression</span>
-                    </label>
+            <div class="project-sources__actions">
+              <a class="project-sources__button" href="{% url 'projects:source_edit' project.pk source.pk %}"
+                aria-label="Modifier la source {{ source.name }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m16 3 5 5-12 12-6 1 1-6Z" />
+                  <path d="m14 5 5 5" />
+                </svg>
+                Modifier
+              </a>
 
-                    <button class="project-sources__button project-sources__button--danger"
-                            type="submit"
-                            aria-label="Supprimer la source {{ source.name }}">
-                      Supprimer
-                    </button>
-                  </form>
-                </div>
-              </li>
-            {% endfor %}
-          </ul>
+              <form class="project-sources__delete-form" method="post"
+                action="{% url 'projects:source_delete' project.pk source.pk %}">
+                {% csrf_token %}
+
+                <label class="project-sources__confirmation">
+                  <input type="checkbox" name="confirm_deletion" value="yes" required>
+                  <span>Confirmer la suppression</span>
+                </label>
+
+                <button class="project-sources__button project-sources__button--danger" type="submit"
+                  aria-label="Supprimer la source {{ source.name }}">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 6h18M9 6V4h6v2M5 6l1 15h12l1-15M10 10v7M14 10v7" />
+                  </svg>
+                  Supprimer
+                </button>
+              </form>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
         {% else %}
-          <p class="project-sources__empty">
-            Aucune référence pour le moment. Ajoutez votre première source.
-          </p>
+        <div class="project-sources__empty">
+          <p>Aucune source de référence pour le moment.</p>
+          <p>Ajoutez un lien ou un texte à l’aide du formulaire de cette page.</p>
+        </div>
         {% endif %}
       </section>
 
-      <section class="project-sources__card"
-               aria-labelledby="source-create-title">
-        <h2 id="source-create-title">Ajouter une source</h2>
+      <section class="project-sources__card" id="source-form" aria-labelledby="source-form-title">
+        <header class="project-sources__card-heading">
+          <span class="project-sources__section-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              {% if editing_source %}
+              <path d="m16 3 5 5-12 12-6 1 1-6Z" />
+              <path d="m14 5 5 5" />
+              {% else %}
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 8v8M8 12h8" />
+              {% endif %}
+            </svg>
+          </span>
 
-        <form class="project-sources__form"
-              data-source-form
-              method="post"
-              action="{% url 'projects:sources' project.pk %}">
+          <div>
+            <h2 id="source-form-title">
+              {% if editing_source %}
+              Modifier la source
+              {% else %}
+              Ajouter une source
+              {% endif %}
+            </h2>
+
+            <p class="project-sources__section-description">
+              {% if editing_source %}
+              Modifiez les informations de « {{ editing_source.name }} ».
+              {% else %}
+              Choisissez un lien web ou un texte de référence.
+              {% endif %}
+            </p>
+          </div>
+        </header>
+
+        <form class="project-sources__form" data-source-form method="post"
+          action="{% if editing_source %}{% url 'projects:source_edit' project.pk editing_source.pk %}{% else %}{% url 'projects:sources' project.pk %}{% endif %}">
           {% csrf_token %}
 
           {{ form.non_field_errors }}
@@ -187,10 +246,9 @@
               {{ form.name }}
 
               {% if form.name.help_text %}
-                <p class="project-sources__help"
-                   id="{{ form.name.auto_id }}_helptext">
-                  {{ form.name.help_text }}
-                </p>
+              <p class="project-sources__help" id="{{ form.name.auto_id }}_helptext">
+                {{ form.name.help_text }}
+              </p>
               {% endif %}
 
               {{ form.name.errors }}
@@ -201,10 +259,9 @@
               {{ form.source_type }}
 
               {% if form.source_type.help_text %}
-                <p class="project-sources__help"
-                   id="{{ form.source_type.auto_id }}_helptext">
-                  {{ form.source_type.help_text }}
-                </p>
+              <p class="project-sources__help" id="{{ form.source_type.auto_id }}_helptext">
+                {{ form.source_type.help_text }}
+              </p>
               {% endif %}
 
               {{ form.source_type.errors }}
@@ -216,10 +273,9 @@
             {{ form.url }}
 
             {% if form.url.help_text %}
-              <p class="project-sources__help"
-                 id="{{ form.url.auto_id }}_helptext">
-                {{ form.url.help_text }}
-              </p>
+            <p class="project-sources__help" id="{{ form.url.auto_id }}_helptext">
+              {{ form.url.help_text }}
+            </p>
             {% endif %}
 
             {{ form.url.errors }}
@@ -230,18 +286,13 @@
             {{ form.text }}
 
             {% if form.text.help_text %}
-              <p class="project-sources__help"
-                 id="{{ form.text.auto_id }}_helptext">
-                {{ form.text.help_text }}
-              </p>
+            <p class="project-sources__help" id="{{ form.text.auto_id }}_helptext">
+              {{ form.text.help_text }}
+            </p>
             {% endif %}
 
             {{ form.text.errors }}
           </div>
-
-          <p class="project-sources__help">
-            Renseignez uniquement le contenu correspondant au type choisi.
-          </p>
 
           <div class="project-sources__priority">
             <div class="project-sources__priority-control">
@@ -250,51 +301,56 @@
             </div>
 
             {% if form.is_priority.help_text %}
-              <p class="project-sources__help"
-                 id="{{ form.is_priority.auto_id }}_helptext">
-                {{ form.is_priority.help_text }}
-              </p>
+            <p class="project-sources__help" id="{{ form.is_priority.auto_id }}_helptext">
+              {{ form.is_priority.help_text }}
+            </p>
             {% endif %}
 
             {{ form.is_priority.errors }}
           </div>
 
           <div class="project-sources__form-actions">
-            <button class="project-sources__button project-sources__button--primary"
-                    type="submit">
+            {% if editing_source %}
+            <a class="project-sources__button" href="{% url 'projects:sources' project.pk %}">
+              Annuler
+            </a>
+            {% endif %}
+
+            <button class="project-sources__button project-sources__button--primary" type="submit">
+              {% if editing_source %}
+              Enregistrer les modifications
+              {% else %}
               Ajouter la source
+              {% endif %}
             </button>
           </div>
         </form>
       </section>
     </div>
+  </div>
 
-    <dialog class="source-delete-dialog"
-            aria-labelledby="source-delete-title"
-            aria-describedby="source-delete-description">
-      <form method="dialog" class="source-delete-dialog__content">
-        <h2 id="source-delete-title">Supprimer cette source ?</h2>
+  <dialog class="source-delete-dialog" aria-labelledby="source-delete-title"
+    aria-describedby="source-delete-description">
+    <form method="dialog" class="source-delete-dialog__content">
+      <span class="source-delete-dialog__label">Retirer une référence</span>
 
-        <p id="source-delete-description">
-          Cette référence sera retirée du projet.
-          Le site ou le document d’origine ne sera pas supprimé.
-        </p>
+      <h2 id="source-delete-title">Supprimer cette source ?</h2>
 
-        <div class="source-delete-dialog__actions">
-          <button class="project-sources__button"
-                  type="submit"
-                  value="cancel"
-                  autofocus>
-            Annuler
-          </button>
+      <p id="source-delete-description">
+        Cette référence sera retirée du projet.
+        Le site ou le document d’origine ne sera pas supprimé.
+      </p>
 
-          <button class="project-sources__button project-sources__button--danger"
-                  type="submit"
-                  value="confirm">
-            Supprimer la source
-          </button>
-        </div>
-      </form>
-    </dialog>
-  </main>
+      <div class="source-delete-dialog__actions">
+        <button class="project-sources__button" type="submit" value="cancel" autofocus>
+          Annuler
+        </button>
+
+        <button class="project-sources__button project-sources__button--danger" type="submit" value="confirm">
+          Supprimer la source
+        </button>
+      </div>
+    </form>
+  </dialog>
+</main>
 {% endblock %}

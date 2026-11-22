@@ -7,6 +7,8 @@
 
   background: #fff;
   border-bottom: 1px solid var(--header-border);
+  position: relative;
+  z-index: 100;
 }
 
 .site-header__inner {
@@ -28,6 +30,9 @@
   font-size: 24px;
   font-weight: 800;
   text-decoration: none;
+  position: relative;
+  z-index: 101;
+}
 }
 
 .site-header__brand img {
@@ -109,6 +114,16 @@
   .site-header__inner {
     justify-content: space-between;
     min-height: 65px;
+    padding: 0 20px;
+  }
+
+  .site-header__brand {
+    font-size: 20px;
+    gap: 6px;
+  }
+
+  .site-header__brand img {
+    height: 28px;
   }
 
   .site-header__desktop {
@@ -289,11 +304,33 @@
   border-radius: 50%;
   background: transparent;
   color: var(--header-accent, #6366f1);
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.site-header__tool:hover:not(:disabled) {
+  background: rgb(99 102 241 / 10%);
 }
 
 .site-header__tool:disabled {
   opacity: 0.55;
   cursor: default;
+}
+
+/* Bouton menu burger du dashboard */
+.site-header__menu-toggle {
+  display: none;
+}
+
+.site-header__menu-toggle[aria-expanded="true"] {
+  background: rgb(99 102 241 / 15%);
+  color: #6366f1;
+}
+
+@media (max-width: 800px) {
+  .site-header__menu-toggle {
+    display: inline-flex;
+  }
 }
 
 /* Avatar et ouverture du menu personnel. */

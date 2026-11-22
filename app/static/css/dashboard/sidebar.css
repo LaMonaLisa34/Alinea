@@ -4,14 +4,30 @@
   grid-template-columns: 224px minmax(0, 1fr);
   flex: 1;
   min-width: 0;
+  position: relative;
 }
 
-.dashboard-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
-  background: #f9fafb;
+.dashboard-layout[data-menu-open]::before {
+  content: '';
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(0 0 0 / 30%);
+  z-index: 997;
+  animation: fadeIn 300ms ease;
+  pointer-events: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* Structure de la navigation latérale. */
@@ -25,6 +41,9 @@
   padding: 28px 16px 20px;
   border-right: 1px solid #e5e7eb;
   background: #fff;
+  pointer-events: auto;
+  position: relative;
+  z-index: 998;
 }
 
 .dashboard-sidebar__label {
@@ -138,7 +157,7 @@
 }
 
 /* Ajustement du contenu lorsqu’il est accompagné de la sidebar. */
-.dashboard-layout > .dashboard {
+.dashboard-layout>.dashboard {
   min-width: 0;
   max-width: none;
   min-height: 0;
@@ -152,14 +171,29 @@
   }
 
   .dashboard-sidebar {
+    position: fixed;
+    left: 0;
+    top: 65px;
+    width: 280px;
+    height: calc(100dvh - 65px);
+    max-height: calc(100dvh - 65px);
     gap: 16px;
     padding: 16px 20px;
-    border-right: 0;
-    border-bottom: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 0;
+    overflow-y: auto;
+    z-index: 998;
+    transform: translateX(-100%);
+    transition: transform 300ms ease;
+    box-shadow: 2px 0 8px rgb(0 0 0 / 10%);
+  }
+
+  .dashboard-sidebar[open] {
+    transform: translateX(0);
   }
 
   .dashboard-sidebar__nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .dashboard-sidebar__projects {
@@ -167,14 +201,14 @@
   }
 
   .dashboard-sidebar__list {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .dashboard-sidebar__bottom {
     padding-top: 12px;
   }
 
-  .dashboard-layout > .dashboard {
+  .dashboard-layout>.dashboard {
     padding: 28px 20px 40px;
   }
 }

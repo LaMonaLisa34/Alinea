@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "projects.apps.ProjectsConfig",
     "dashboard.apps.DashboardConfig",
     "ai_connections.apps.AiConnectionsConfig",
+    "content_models.apps.ContentModelsConfig",
 ]
 AUTH_USER_MODEL = "accounts.User"
 MIDDLEWARE = [
