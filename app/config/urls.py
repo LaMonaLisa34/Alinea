@@ -16,4 +16,8 @@ urlpatterns = [
     path("ai-connections/", include("ai_connections.urls")),
     path("projets/", include("projects.urls")),
     path("admin/", admin.site.urls),
+    path(
+        "projets/<int:project_pk>/modeles/",
+        include("content_models.urls"),
+    ),
 ]
