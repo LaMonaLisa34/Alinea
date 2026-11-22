@@ -4,135 +4,208 @@
 {% block title %}{{ project.name }} — Alinea{% endblock %}
 
 {% block layout_page_css %}
-  <link rel="stylesheet"
-        href="{% static 'css/projects/stepper.css' %}">
-  <link rel="stylesheet"
-        href="{% static 'css/projects/project_overview.css' %}">
-  <script src="{% static 'js/projects/project_overview.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'css/projects/project_overview.css' %}">
+<script src="{% static 'js/projects/project_overview.js' %}" defer></script>
 {% endblock %}
 
 {% block layout_content %}
-  <main class="projects" id="main-content">
-    <nav class="stepper" aria-label="Étapes de préparation du projet">
-      <ol class="stepper__list">
-        <li class="stepper__item stepper__item--active">
-          <div class="stepper__step" aria-current="step">
-            <span class="stepper__number">1</span>
-            <span class="stepper__label">Projet</span>
-          </div>
-        </li>
+<main class="projects" id="main-content">
+  <div class="projects__wrapper">
+    {% for message in messages %}
+    <output class="projects__message {{ message.tags }}">
+      {{ message }}
+    </output>
+    {% endfor %}
 
-        <li class="stepper__item">
-          <a class="stepper__step"
-             href="{% url 'projects:sources' project.pk %}">
-            <span class="stepper__number">2</span>
-            <span class="stepper__label">Sources</span>
-          </a>
-        </li>
-
-        <li class="stepper__item">
-          <div class="stepper__step">
-            <span class="stepper__number">3</span>
-            <span class="stepper__label">Structure</span>
-          </div>
-        </li>
-      </ol>
-
-      <div class="stepper__navigation">
-        <button class="stepper__button stepper__button--prev"
-                type="button"
-                aria-label="Étape précédente"
-                disabled>
-          <svg width="20" height="20" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M15 19l-7-7 7-7" />
+    <header class="projects__heading">
+      <div class="projects__identity">
+        <span class="projects__project-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+            <path d="M3 11h18" />
           </svg>
-        </button>
+        </span>
 
-        <a class="stepper__button stepper__button--next"
-           href="{% url 'projects:sources' project.pk %}"
-           aria-label="Passer aux sources du projet">
-          <svg width="20" height="20" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round"
-               aria-hidden="true">
-            <path d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
-      </div>
-    </nav>
-
-    <div class="projects__content">
-      {% for message in messages %}
-        <output class="projects__message {{ message.tags }}">
-          {{ message }}
-        </output>
-      {% endfor %}
-
-      <header class="projects__heading">
-        <div>
+        <div class="projects__identity-text">
+          <p class="projects__eyebrow">Projet éditorial</p>
           <h1>{{ project.name }}</h1>
-          <p>Créé le {{ project.created_at|date:"d/m/Y à H:i" }}</p>
+
+          <p class="projects__created">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M16 3v4M8 3v4M3 11h18" />
+            </svg>
+            Créé le {{ project.created_at|date:"d/m/Y à H:i" }}
+          </p>
         </div>
+      </div>
 
-        <button class="projects__edit"
-                type="button"
-                aria-controls="project-edit"
-                hidden>
-          Modifier
-        </button>
-      </header>
+      <button class="projects__edit" type="button" aria-controls="project-edit" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m16 3 5 5-12 12-6 1 1-6Z" />
+          <path d="m14 5 5 5" />
+        </svg>
+        Modifier
+      </button>
+    </header>
+  </div>
 
+  <nav class="projects__tabs" aria-label="Navigation du projet">
+    <ul class="projects__tabs-list">
+      <li class="projects__tabs-item projects__tabs-item--active">
+        <a class="projects__tabs-link" href="{% url 'projects:detail' project.pk %}" aria-current="page">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 11v6M12 7h.01" />
+          </svg>
+          Informations
+        </a>
+      </li>
+
+      <li class="projects__tabs-item">
+        <a class="projects__tabs-link" href="{% url 'projects:sources' project.pk %}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7 .1l3-3a5 5 0 0 0-7-7l-2 2" />
+            <path d="M14 11a5 5 0 0 0-7-.1l-3 3a5 5 0 0 0 7 7l2-2" />
+          </svg>
+          Sources
+        </a>
+      </li>
+
+      <li class="projects__tabs-item">
+        <a class="projects__tabs-link" href="{% url 'content_models:list' project.pk %}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+          Modèles
+        </a>
+      </li>
+      {% for content_template in project.content_templates.all %}
+      <li>
+        <a class="projects__tabs-link" href="{% url 'content_models:editor' project.pk content_template.pk %}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+            <path d="M14 2v6h6M8 13h8M8 17h5" />
+          </svg>
+          {{ content_template.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="projects__wrapper">
+    <div class="projects__content">
       <div id="project-read" hidden>
         <section class="projects__card" aria-labelledby="description-title">
-          <h2 id="description-title">Description</h2>
+          <header class="projects__card-heading">
+            <span class="projects__section-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                <path d="M14 2v6h6M8 13h8M8 17h5" />
+              </svg>
+            </span>
 
-          {% if project.description %}
+            <div>
+              <h2 id="description-title">Description</h2>
+              <p class="projects__section-description">
+                Le contexte et l’objectif de votre projet.
+              </p>
+            </div>
+          </header>
+
+          <div class="projects__prose">
+            {% if project.description %}
             {{ project.description|linebreaks }}
-          {% else %}
-            <p>Aucune description renseignée.</p>
-          {% endif %}
+            {% else %}
+            <p class="projects__empty">Aucune description renseignée.</p>
+            {% endif %}
+          </div>
         </section>
 
         <section class="projects__card" aria-labelledby="guidelines-title">
-          <h2 id="guidelines-title">Consignes générales</h2>
+          <header class="projects__card-heading">
+            <span class="projects__section-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 6h12M9 12h12M9 18h12" />
+                <path d="m3 6 1 1 2-2M3 12h3M3 18h3" />
+              </svg>
+            </span>
 
-          {% if project.editorial_guidelines %}
+            <div>
+              <h2 id="guidelines-title">Consignes générales</h2>
+              <p class="projects__section-description">
+                Le ton, le public et les règles communs aux rédactions.
+              </p>
+            </div>
+          </header>
+
+          <div class="projects__prose">
+            {% if project.editorial_guidelines %}
             {{ project.editorial_guidelines|linebreaks }}
-          {% else %}
-            <p>Aucune consigne générale renseignée.</p>
-          {% endif %}
+            {% else %}
+            <p class="projects__empty">
+              Aucune consigne générale renseignée.
+            </p>
+            {% endif %}
+          </div>
         </section>
       </div>
 
-      <section id="project-edit"
-               class="projects__card"
-               aria-labelledby="edit-title"
-               data-has-errors="{{ form.errors|yesno:'true,false' }}">
-        <h2 id="edit-title" tabindex="-1">Modifier le projet</h2>
+      <section id="project-edit" class="projects__card" aria-labelledby="edit-title"
+        data-has-errors="{{ form.errors|yesno:'true,false' }}">
+        <header class="projects__card-heading">
+          <span class="projects__section-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m16 3 5 5-12 12-6 1 1-6Z" />
+              <path d="m14 5 5 5" />
+            </svg>
+          </span>
 
-        <form class="projects__form"
-              method="post"
-              action="{% url 'projects:detail' project.pk %}">
+          <div>
+            <h2 id="edit-title" tabindex="-1">Modifier le projet</h2>
+            <p class="projects__section-description">
+              Adaptez les informations et le cadre de rédaction.
+            </p>
+          </div>
+        </header>
+
+        <form class="projects__form" method="post" action="{% url 'projects:detail' project.pk %}">
           {% csrf_token %}
 
           {{ form.non_field_errors }}
 
           {% for field in form %}
-            <div class="projects__field">
-              {{ field.label_tag }}
-              {{ field }}
+          {% if field.is_hidden %}
+          {{ field }}
+          {{ field.errors }}
+          {% else %}
+          <div class="projects__field">
+            {{ field.label_tag }}
+            {{ field }}
 
-              {% if field.help_text %}
-                <p class="helptext" id="{{ field.auto_id }}_helptext">
-                  {{ field.help_text }}
-                </p>
-              {% endif %}
+            {% if field.help_text %}
+            <p class="helptext" id="{{ field.auto_id }}_helptext">
+              {{ field.help_text }}
+            </p>
+            {% endif %}
 
-              {{ field.errors }}
-            </div>
+            {{ field.errors }}
+          </div>
+          {% endif %}
           {% endfor %}
 
           <div class="projects__actions">
@@ -140,34 +213,37 @@
               Enregistrer les modifications
             </button>
 
-            <a class="projects__cancel"
-               href="{% url 'projects:detail' project.pk %}">
+            <a class="projects__cancel" href="{% url 'projects:detail' project.pk %}">
               Annuler
             </a>
           </div>
         </form>
       </section>
 
-      <section class="projects__danger"
-               aria-labelledby="project-delete-title">
+      <section class="projects__danger" aria-labelledby="project-delete-title">
         <div class="projects__danger-description">
-          <h2 id="project-delete-title">Supprimer le projet</h2>
-          <p>
-            Le projet et ses sources de référence seront définitivement supprimés.
-            Cette action est irréversible.
-          </p>
+          <span class="projects__danger-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6h18M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+              <path d="m5 6 1 14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1l1-14M10 10v7M14 10v7" />
+            </svg>
+          </span>
+
+          <div>
+            <h2 id="project-delete-title">Supprimer le projet</h2>
+            <p>
+              Le projet, ses sources et ses modèles de contenu seront
+              définitivement supprimés. Cette action est irréversible.
+            </p>
+          </div>
         </div>
 
-        <form class="projects__delete-form"
-              method="post"
-              action="{% url 'projects:delete' project.pk %}">
+        <form class="projects__delete-form" method="post" action="{% url 'projects:delete' project.pk %}">
           {% csrf_token %}
 
           <label class="projects__delete-confirmation">
-            <input type="checkbox"
-                   name="confirm_deletion"
-                   value="yes"
-                   required>
+            <input type="checkbox" name="confirm_deletion" value="yes" required>
             <span>Je confirme la suppression définitive.</span>
           </label>
 
@@ -177,35 +253,33 @@
         </form>
       </section>
     </div>
+  </div>
 
-    <dialog class="project-delete-dialog"
-            aria-labelledby="delete-dialog-title"
-            aria-describedby="delete-dialog-description">
-      <form method="dialog" class="project-delete-dialog__content">
-        <span class="project-delete-dialog__label">Suppression définitive</span>
+  <dialog class="project-delete-dialog" aria-labelledby="delete-dialog-title"
+    aria-describedby="delete-dialog-description">
+    <form method="dialog" class="project-delete-dialog__content">
+      <span class="project-delete-dialog__label">
+        Suppression définitive
+      </span>
 
-        <h2 id="delete-dialog-title">Supprimer ce projet ?</h2>
+      <h2 id="delete-dialog-title">Supprimer ce projet ?</h2>
 
-        <p id="delete-dialog-description">
-          Le projet « {{ project.name }} » et ses sources de référence
-          seront supprimés. Vous ne pourrez pas annuler cette action.
-        </p>
+      <p id="delete-dialog-description">
+        Le projet « {{ project.name }} », ses sources de référence
+        et ses modèles de contenu seront supprimés.
+        Vous ne pourrez pas annuler cette action.
+      </p>
 
-        <div class="project-delete-dialog__actions">
-          <button class="projects__cancel"
-                  type="submit"
-                  value="cancel"
-                  autofocus>
-            Annuler
-          </button>
+      <div class="project-delete-dialog__actions">
+        <button class="projects__cancel" type="submit" value="cancel" autofocus>
+          Annuler
+        </button>
 
-          <button class="projects__delete projects__delete--confirm"
-                  type="submit"
-                  value="confirm">
-            Supprimer définitivement
-          </button>
-        </div>
-      </form>
-    </dialog>
-  </main>
+        <button class="projects__delete projects__delete--confirm" type="submit" value="confirm">
+          Supprimer définitivement
+        </button>
+      </div>
+    </form>
+  </dialog>
+</main>
 {% endblock %}

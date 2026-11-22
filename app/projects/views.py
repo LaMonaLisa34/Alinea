@@ -69,6 +69,7 @@ def project_detail(request, pk):
         {
             "form": form,
             "project": project,
+            "templates": project.content_templates.all(),
             "projects": EditorialProject.objects.filter(
                 owner=request.user,
             ).order_by("-created_at", "-pk"),
@@ -120,6 +121,7 @@ def project_sources(request, pk):
         {
             "project": project,
             "sources": project.reference_sources.all(),
+            "templates": project.content_templates.all(),
             "form": form,
             "projects": EditorialProject.objects.filter(
                 owner=request.user,
@@ -161,6 +163,7 @@ def project_source_edit(request, pk, source_pk):
         {
             "project": project,
             "sources": project.reference_sources.all(),
+            "templates": project.content_templates.all(),
             "form": form,
             "editing_source": source,
             "projects": EditorialProject.objects.filter(

@@ -598,7 +598,7 @@ class ProjectReferenceSourceTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
-            "Aucune référence pour le moment.",
+            "Aucune source de référence pour le moment.",
         )
 
     def test_owner_can_add_source(self):
